@@ -8,11 +8,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/alex-guoba/gin-clean-template/internal/dao"
-	"github.com/alex-guoba/gin-clean-template/pkg/logger"
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
-	"github.com/alex-guoba/gin-clean-template/pkg/signals"
-	"github.com/alex-guoba/gin-clean-template/server"
+	"github.com/faawibowo/Tubes2_Gopher/internal/dao"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/logger"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/signals"
+	"github.com/faawibowo/Tubes2_Gopher/server"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-migrate/migrate/v4"

@@ -4,12 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 
-	"github.com/alex-guoba/gin-clean-template/internal/service"
-	"github.com/alex-guoba/gin-clean-template/pkg/app"
-	"github.com/alex-guoba/gin-clean-template/pkg/convert"
-	"github.com/alex-guoba/gin-clean-template/pkg/errcode"
-	"github.com/alex-guoba/gin-clean-template/pkg/logger"
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/internal/service"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/app"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/convert"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/errcode"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/logger"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
 )
 
 type Tag struct {

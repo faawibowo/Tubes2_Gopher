@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/alex-guoba/gin-clean-template/internal/dao"
-	"github.com/alex-guoba/gin-clean-template/server"
+	"github.com/faawibowo/Tubes2_Gopher/internal/dao"
+	"github.com/faawibowo/Tubes2_Gopher/server"
 
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"

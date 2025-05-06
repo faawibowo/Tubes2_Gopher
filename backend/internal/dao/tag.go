@@ -3,7 +3,7 @@ package dao
 import (
 	"gorm.io/gorm"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/app"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/app"
 )
 
 // type TagSwagger struct {

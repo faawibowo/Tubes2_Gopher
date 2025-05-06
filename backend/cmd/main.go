@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/alex-guoba/gin-clean-template/cmd/cmds"
-	_ "github.com/alex-guoba/gin-clean-template/server/docs"
+	"github.com/faawibowo/Tubes2_Gopher/cmd/cmds"
+	_ "github.com/faawibowo/Tubes2_Gopher/server/docs"
 )
 
 func main() {

@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/alex-guoba/gin-clean-template/internal/dao"
-	"github.com/alex-guoba/gin-clean-template/internal/entity"
+	"github.com/faawibowo/Tubes2_Gopher/internal/dao"
+	"github.com/faawibowo/Tubes2_Gopher/internal/entity"
 )
 
 func TestArticleDomain_countArticleByTagID(t *testing.T) {

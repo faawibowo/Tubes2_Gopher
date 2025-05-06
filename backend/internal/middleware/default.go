@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/alex-guoba/gin-clean-template/internal/middleware/ratelimit"
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/internal/middleware/ratelimit"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	swaggerfiles "github.com/swaggo/files" // swagger embed files

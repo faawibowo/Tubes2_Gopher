@@ -6,7 +6,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
 )
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {

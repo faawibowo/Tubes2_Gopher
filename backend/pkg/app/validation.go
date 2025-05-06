@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/alex-guoba/gin-clean-template/pkg/errcode"
-	"github.com/alex-guoba/gin-clean-template/pkg/logger"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/errcode"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/logger"
 
 	"github.com/gin-gonic/gin"
 )

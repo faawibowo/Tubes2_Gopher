@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/errcode"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/errcode"
 )
 
 type Response struct {

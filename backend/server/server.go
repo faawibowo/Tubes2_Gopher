@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/alex-guoba/gin-clean-template/internal/middleware"
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
-	"github.com/alex-guoba/gin-clean-template/server/api"
+	"github.com/faawibowo/Tubes2_Gopher/internal/middleware"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/server/api"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"

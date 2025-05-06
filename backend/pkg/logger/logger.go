@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"

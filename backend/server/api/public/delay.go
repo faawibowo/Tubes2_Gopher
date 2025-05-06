@@ -3,8 +3,8 @@ package public
 import (
 	"time"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/app"
-	"github.com/alex-guoba/gin-clean-template/pkg/convert"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/app"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/convert"
 
 	"github.com/gin-gonic/gin"
 )

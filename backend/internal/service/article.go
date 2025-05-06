@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/alex-guoba/gin-clean-template/internal/domain"
-	"github.com/alex-guoba/gin-clean-template/internal/entity"
-	"github.com/alex-guoba/gin-clean-template/pkg/app"
+	"github.com/faawibowo/Tubes2_Gopher/internal/domain"
+	"github.com/faawibowo/Tubes2_Gopher/internal/entity"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/app"
 
 	"gorm.io/gorm"
 )
@@ -56,12 +56,17 @@ func (svc *ArticleService) GetArticle(param *ArticleRequest) (*entity.ArticleEnt
 }
 
 func (svc *ArticleService) GetArticleList(param *ArticleListRequest, pager *app.Pager) ([]*entity.ArticleEntity, int, error) {
-	articleList, cnt, err := svc.domain.GetArticleList(param.TagID, param.State, pager.Page, pager.PageSize)
+	articles, cnt, err := svc.domain.GetArticleList(param.TagID, param.State, pager.Page, pager.PageSize)
 	if err != nil {
 		return nil, 0, err
 	}
 
-	return articleList, cnt, nil
+	articleEntities := make([]*entity.ArticleEntity, len(articles))
+	for i := 0; i < len(articles); i++ {
+		articleEntities[i] = articles[i]
+	}
+
+	return articleEntities, cnt, nil
 }
 
 func (svc *ArticleService) CreateArticle(param *CreateArticleRequest) error {

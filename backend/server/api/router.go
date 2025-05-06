@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/alex-guoba/gin-clean-template/pkg/setting"
-	"github.com/alex-guoba/gin-clean-template/server/api/public"
-	v1 "github.com/alex-guoba/gin-clean-template/server/api/v1"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/setting"
+	"github.com/faawibowo/Tubes2_Gopher/server/api/public"
+	v1 "github.com/faawibowo/Tubes2_Gopher/server/api/v1"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )

@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/alex-guoba/gin-clean-template/internal/domain"
-	"github.com/alex-guoba/gin-clean-template/internal/entity"
-	"github.com/alex-guoba/gin-clean-template/pkg/app"
+	"github.com/faawibowo/Tubes2_Gopher/internal/domain"
+	"github.com/faawibowo/Tubes2_Gopher/internal/entity"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/app"
 
 	"gorm.io/gorm"
 )

@@ -3,7 +3,7 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/alex-guoba/gin-clean-template/pkg/convert"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/convert"
 )
 
 func GetPage(c *gin.Context) int {
