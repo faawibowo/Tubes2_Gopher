@@ -11,7 +11,7 @@ type Element struct {
 	Recipes [][]string `json:"recipes"`
 }
 
-func loadRecipes(filename string) (map[string]string, error) {
+func loadRecipes(filename string) (map[string][2]string, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -24,7 +24,7 @@ func loadRecipes(filename string) (map[string]string, error) {
 		return nil, err
 	}
 
-	recipeMap := make(map[string]string)
+	recipeMap := make(map[string][2]string)
 
 	for _, elem := range elements {
 		for _, recipe := range elem.Recipes {
@@ -36,25 +36,14 @@ func loadRecipes(filename string) (map[string]string, error) {
 					first, second = second, first
 				}
 
-				key := first + "+" + second
-				recipeMap[key] = elem.Name
+				key := elem.Name
+				recipeMap[key] = [2]string{first, second}
+			} else if recipe == nil {
+				key := elem.Name
+				recipeMap[key] = [2]string{"", ""}
 			}
 		}
 	}
 
 	return recipeMap, nil
-}
-
-func findResult(recipeMap map[string]string, component1, component2 string) (string, bool) {
-	first := strings.TrimSpace(component1)
-	second := strings.TrimSpace(component2)
-
-	if first > second {
-		first, second = second, first
-	}
-
-	key := first + "+" + second
-
-	result, found := recipeMap[key]
-	return result, found
 }
