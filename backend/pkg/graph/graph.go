@@ -1,4 +1,4 @@
-package graph
+package Graph
 
 type Graph struct {
 	Element      string       // element
@@ -12,12 +12,12 @@ type GraphTuple struct {
 }
 
 // Create Map String & Graph
-func createGraphMap(scrapedMap map[string][]string) map[string]*Graph {
+func CreateGraphMap(scrapedMap map[string][]string) map[string]*Graph {
 
 	graphMap := make(map[string]*Graph)
 
 	// Create graphMap kalo nil
-	for key, elements := range scrapedMap {
+	for key, _ := range scrapedMap {
 		if graphMap[key] == nil {
 			graphMap[key] = &Graph{Element: key}
 		}
@@ -68,7 +68,6 @@ func createGraphMap(scrapedMap map[string][]string) map[string]*Graph {
 }
 
 // basic Element
-func getBasicElement(map[string]*Graph graphMap) []*Graph {
-	return graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"] // starter
+func GetBasicElement(graphMap map[string]*Graph) []*Graph {
+	return []*Graph{graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"]} // starter
 }
-
