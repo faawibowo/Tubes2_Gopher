@@ -3,9 +3,9 @@ package domain
 import (
 	"context"
 
-	"github.com/alex-guoba/gin-clean-template/internal/dao"
-	"github.com/alex-guoba/gin-clean-template/internal/entity"
-	"github.com/alex-guoba/gin-clean-template/pkg/errcode"
+	"github.com/faawibowo/Tubes2_Gopher/internal/dao"
+	"github.com/faawibowo/Tubes2_Gopher/internal/entity"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/errcode"
 
 	"gorm.io/gorm"
 )
