@@ -13,9 +13,14 @@ type Element struct {
 	ImageLink string     `json:"link"`
 }
 
+type RecipeTuple struct {
+	First  string
+	Second string
+}
+
 // Value dari map
 type Value struct {
-	Recipes   [][2]string
+	Recipes   []RecipeTuple
 	ImageLink string
 }
 
@@ -53,7 +58,7 @@ func loadRecipes(filename string) (map[string]Value, error) {
 			if !exists {
 				v = Value{ImageLink: elem.ImageLink}
 			}
-			v.Recipes = append(v.Recipes, [2]string{first, second})
+			v.Recipes = append(v.Recipes, RecipeTuple{First: first, Second: second})
 			recipeMap[key] = v
 		}
 	}
