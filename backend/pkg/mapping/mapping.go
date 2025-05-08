@@ -6,12 +6,20 @@ import (
 	"strings"
 )
 
+// Buat decode dari json
 type Element struct {
-	Name    string     `json:"name"`
-	Recipes [][]string `json:"recipes"`
+	Name      string     `json:"name"`
+	Recipes   [][]string `json:"recipes"`
+	ImageLink string     `json:"link"`
 }
 
-func loadRecipes(filename string) (map[string][2]string, error) {
+// Value dari map
+type Value struct {
+	Recipes   [2]string
+	ImageLink string
+}
+
+func loadRecipes(filename string) (map[string]Value, error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -24,7 +32,7 @@ func loadRecipes(filename string) (map[string][2]string, error) {
 		return nil, err
 	}
 
-	recipeMap := make(map[string][2]string)
+	recipeMap := make(map[string]Value)
 
 	for _, elem := range elements {
 		for _, recipe := range elem.Recipes {
