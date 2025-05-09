@@ -1,77 +1,71 @@
 package Graph
 
-type Graph struct {
-	Element      string       // element
-	Results      []*Graph     // what the element can make
-	Combinations []GraphTuple // combinations to make this element
+import "fmt"
+
+type ElementGraph struct {
+	Name    string   // element name
+	UsedIn  []Recipe // which recipes this element is a part of
+	Recipes []Recipe // the recipes of this element
 }
 
-type GraphTuple struct {
-	FirstElement  *Graph
-	SecondElement *Graph
+type Recipe struct {
+	FirstElement  *ElementGraph
+	SecondElement *ElementGraph
+	ResultElement *ElementGraph
+}
+
+func (r Recipe) String() string {
+	return fmt.Sprintf("%s + %s → %s",
+		r.FirstElement.Name,
+		r.SecondElement.Name,
+		r.ResultElement.Name)
 }
 
 // Create Map String & Graph
-func CreateGraphMap(scrapedMap map[string][]string) map[string]*Graph {
+func CreateElementGraphMap(scraped map[string][]string) map[string]*ElementGraph {
+	elementMap := make(map[string]*ElementGraph)
 
-	graphMap := make(map[string]*Graph)
-
-	// Create graphMap kalo nil
-	for key, _ := range scrapedMap {
-		if graphMap[key] == nil {
-			graphMap[key] = &Graph{Element: key}
+	for resultName, inputs := range scraped {
+		// node hasil
+		if _, ok := elementMap[resultName]; !ok {
+			elementMap[resultName] = &ElementGraph{Name: resultName}
+		}
+		// node bahan
+		for _, in := range inputs {
+			if _, ok := elementMap[in]; !ok {
+				elementMap[in] = &ElementGraph{Name: in}
+			}
 		}
 	}
 
-	// Add Combinations & Results
-	for key, values := range scrapedMap {
+	for resultName, inputs := range scraped {
+		for i := 0; i+1 < len(inputs); i += 2 {
+			first := elementMap[inputs[i]]
+			second := elementMap[inputs[i+1]]
+			result := elementMap[resultName]
 
-		if len(values) < 2 {
-			continue
-		}
+			recipe := Recipe{
+				FirstElement:  first,
+				SecondElement: second,
+				ResultElement: result,
+			}
 
-		firstKey := values[0]
-		secondKey := values[1]
-
-		// Recipe blom punya graph node -> create one
-		firstNode, ok := graphMap[firstKey]
-		if !ok {
-			firstNode = &Graph{Element: firstKey}
-			graphMap[firstKey] = firstNode
-		}
-
-		secondNode, ok := graphMap[secondKey]
-		if !ok {
-			secondNode = &Graph{Element: secondKey}
-			graphMap[secondKey] = secondNode
-		}
-
-		// Combination Tuple
-		combination := GraphTuple{
-			FirstElement:  firstNode,
-			SecondElement: secondNode,
-		}
-		// Append to Combinations
-		graphMap[key].Combinations = append(graphMap[key].Combinations, combination)
-
-		// Append Results ke Graph recipe (for bidirectional)
-		if graphMap[firstKey].Element != graphMap[key].Element {
-			graphMap[firstKey].Results = append(graphMap[firstKey].Results, graphMap[key])
-		}
-
-		if graphMap[secondKey].Element != graphMap[key].Element {
-			graphMap[secondKey].Results = append(graphMap[secondKey].Results, graphMap[key])
+			// simpan ke daftar “cara membuat” si hasil
+			result.Recipes = append(result.Recipes, recipe)
+			// simpan ke daftar “dipakai di” kedua bahan
+			first.UsedIn = append(first.UsedIn, recipe)
+			second.UsedIn = append(second.UsedIn, recipe)
 		}
 	}
 
-	return graphMap
+	return elementMap
 }
 
 // basic Element
-func GetBasicElement(graphMap map[string]*Graph) []*Graph {
-	return []*Graph{graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"]} // starter
+func GetBasicElement(graphMap map[string]*ElementGraph) []*ElementGraph {
+	return []*ElementGraph{graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"]} // starter
 }
 
-func IsLeaf(node *Graph, graphMap map[string]*Graph) bool {
+func IsLeaf(node *ElementGraph, graphMap map[string]*ElementGraph) bool {
 	return node == graphMap["Air"] || node == graphMap["Earth"] || node == graphMap["Water"] || node == graphMap["Fire"]
 }
