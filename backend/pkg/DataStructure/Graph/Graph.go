@@ -74,5 +74,5 @@ func GetBasicElement(graphMap map[string]*ElementGraph) []*ElementGraph {
 }
 
 func IsLeaf(node *ElementGraph, graphMap map[string]*ElementGraph) bool {
-	return node == graphMap["Air"] || node == graphMap["Earth"] || node == graphMap["Water"] || node == graphMap["Fire"]
+	return node.Name == "Air" || node.Name == "Earth" || node.Name == "Water" || node.Name == "Fire"
 }
