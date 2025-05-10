@@ -91,6 +91,10 @@ func dfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 			left.Parent = &recipeNode
 			right.Parent = &recipeNode
 
+			if r.FirstElement.Tier >= current.Tier || r.SecondElement.Tier >= current.Tier {
+				return
+			}
+
 			if isEqual(*pathCountPtr, maxCount) {
 				return
 			}
@@ -179,6 +183,10 @@ func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphM
 		node.Children = append(node.Children, recipeNode)
 		left.Parent = &recipeNode
 		right.Parent = &recipeNode
+
+		if recipe.FirstElement.Tier >= current.Tier || recipe.SecondElement.Tier >= current.Tier {
+			return
+		}
 
 		dfsShortest(recipe.FirstElement, left, graphMap, nodeCount, found)
 		dfsShortest(recipe.SecondElement, right, graphMap, nodeCount, found)
