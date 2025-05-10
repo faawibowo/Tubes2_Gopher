@@ -1,66 +1,285 @@
 package bfs
 
 import (
-	"sort"
+	"fmt"
+	"sync"
+	"time"
 
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Tree"
 )
 
-type branch struct {
-	graph *Graph.Graph
-	tree  *Tree.Tree
+type BFSResult struct {
+	Tree            *Tree.Tree
+	NodeCount       int
+	CompletePaths   int
+	ExecutionTimeMs int64
 }
 
-func FindAllPaths(node *Graph.Graph, graphMap map[string]*Graph.Graph) []*Tree.Tree {
-	paths := bfs(node, graphMap)
-
-	// Sort
-	sort.Slice(paths, func(i, j int) bool {
-		return Tree.CountNodes(paths[i]) < Tree.CountNodes(paths[j])
-	})
-	return paths
+// Queue structure for BFS
+type Queue struct {
+	items []*QueueItem
+	mu    sync.Mutex
 }
 
-func bfs(node *Graph.Graph, graphMap map[string]*Graph.Graph) []*Tree.Tree {
-	var result []*Tree.Tree
-	if node == nil {
-		return result
+type QueueItem struct {
+	GraphNode *Graph.ElementGraph
+	TreeNode  *Tree.TreeNodeElement
+}
+
+func NewQueue() *Queue {
+	return &Queue{
+		items: make([]*QueueItem, 0),
 	}
-
-	// Initialize branch
-	rootTree := Tree.NewTree(node)
-	var workQueue []branch
-	workQueue = append(workQueue, branch{graph: node, tree: rootTree})
-
-	// maju branch -> iterate
-	for len(workQueue) > 0 {
-		current := workQueue[0]
-		workQueue = workQueue[1:]
-
-		// If leaf -> append ke slice
-		if Graph.IsLeaf(current.graph, graphMap) {
-			result = append(result, Tree.CopyTree(current.tree))
-			continue
-		}
-
-		// Iterate semua combination dari branch level yg sama
-		for _, combi := range current.graph.Combinations {
-			branchTree := Tree.CopyTree(current.tree)
-			branchTree.FirstChild = Tree.NewTree(combi.FirstElement)
-			branchTree.SecondChild = Tree.NewTree(combi.SecondElement)
-
-			workQueue = append(workQueue, branch{graph: combi.FirstElement, tree: branchTree.FirstChild})
-			workQueue = append(workQueue, branch{graph: combi.SecondElement, tree: branchTree.SecondChild})
-		}
-	}
-
-	return result
 }
 
-func FindShortestPath(trees []*Tree.Tree) *Tree.Tree {
-	if len(trees) == 0 {
+func (q *Queue) Enqueue(item *QueueItem) {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	q.items = append(q.items, item)
+}
+
+func (q *Queue) Dequeue() *QueueItem {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	if len(q.items) == 0 {
 		return nil
 	}
-	return trees[0]
+	item := q.items[0]
+	q.items = q.items[1:]
+	return item
+}
+
+func (q *Queue) IsEmpty() bool {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	return len(q.items) == 0
+}
+
+func (q *Queue) Size() int {
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	return len(q.items)
+}
+
+func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph, maxCount int) BFSResult {
+	start := time.Now()
+
+	root := &Tree.TreeNodeElement{Name: target.Name}
+	tree := &Tree.Tree{First: root}
+
+	var nodeCount, pathCount int
+	var mu sync.Mutex
+	var wg sync.WaitGroup
+
+	bfsMultiThreading(target, root, graphMap, &nodeCount, &pathCount, maxCount, &mu, &wg)
+	wg.Wait()
+	execTimeMs := time.Since(start).Milliseconds()
+
+	removed := pruneIncompletePaths(root, graphMap)
+	fmt.Printf("Removed %d incomplete paths\n", removed)
+
+	return BFSResult{
+		Tree:            tree,
+		NodeCount:       nodeCount - removed,
+		CompletePaths:   pathCount,
+		ExecutionTimeMs: execTimeMs,
+	}
+}
+
+func bfsMultiThreading(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCountPtr *int, pathCountPtr *int, maxCount int, mu *sync.Mutex, wg *sync.WaitGroup) {
+	queue := NewQueue()
+	queue.Enqueue(&QueueItem{GraphNode: target, TreeNode: root})
+
+	for !queue.IsEmpty() {
+		mu.Lock()
+		if *pathCountPtr >= maxCount {
+			mu.Unlock()
+			break
+		}
+		mu.Unlock()
+
+		currentLevel := queue.Size()
+		for i := 0; i < currentLevel; i++ {
+			item := queue.Dequeue()
+			if item == nil {
+				continue
+			}
+
+			current := item.GraphNode
+			node := item.TreeNode
+
+			mu.Lock()
+			(*nodeCountPtr)++
+			mu.Unlock()
+
+			if Graph.IsLeaf(current, graphMap) {
+				mu.Lock()
+				if *pathCountPtr < maxCount {
+					*pathCountPtr++
+				}
+				mu.Unlock()
+				continue
+			}
+
+			mu.Lock()
+			if *pathCountPtr >= maxCount {
+				mu.Unlock()
+				continue
+			}
+			mu.Unlock()
+
+			for _, recipe := range current.Recipes {
+
+				if recipe.FirstElement.Tier > target.Tier || recipe.SecondElement.Tier > target.Tier {
+					continue
+				}
+
+				mu.Lock()
+				if *pathCountPtr >= maxCount {
+					mu.Unlock()
+					break
+				}
+				mu.Unlock()
+
+				wg.Add(1)
+				go func(r Graph.Recipe) {
+					defer wg.Done()
+
+					left := &Tree.TreeNodeElement{Name: r.FirstElement.Name}
+					right := &Tree.TreeNodeElement{Name: r.SecondElement.Name}
+
+					recipeNode := Tree.TreeNodeRecipe{
+						FirstElement:  left,
+						SecondElement: right,
+						ResultElement: node,
+					}
+
+					mu.Lock()
+					node.Children = append(node.Children, recipeNode)
+					mu.Unlock()
+
+					left.Parent = &recipeNode
+					right.Parent = &recipeNode
+
+					mu.Lock()
+					queue.Enqueue(&QueueItem{GraphNode: r.FirstElement, TreeNode: left})
+					queue.Enqueue(&QueueItem{GraphNode: r.SecondElement, TreeNode: right})
+					mu.Unlock()
+				}(recipe)
+			}
+			wg.Wait()
+		}
+	}
+}
+
+func countSubtree(node *Tree.TreeNodeElement) int {
+	if node == nil {
+		return 0
+	}
+	count := 1
+	for _, recipe := range node.Children {
+		count += countSubtree(recipe.FirstElement)
+		count += countSubtree(recipe.SecondElement)
+	}
+	return count
+}
+
+func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph) int {
+	if node == nil {
+		return 0
+	}
+
+	removed := 0
+	validRecipes := make([]Tree.TreeNodeRecipe, 0, len(node.Children))
+
+	for _, recipe := range node.Children {
+		removed += pruneIncompletePaths(recipe.FirstElement, graphMap)
+		removed += pruneIncompletePaths(recipe.SecondElement, graphMap)
+
+		if len(recipe.FirstElement.Children) == 0 && len(recipe.SecondElement.Children) == 0 {
+			leaf1, leaf2 := false, false
+			if elem, ok := graphMap[recipe.FirstElement.Name]; ok {
+				leaf1 = Graph.IsLeaf(elem, graphMap)
+			}
+			if elem, ok := graphMap[recipe.SecondElement.Name]; ok {
+				leaf2 = Graph.IsLeaf(elem, graphMap)
+			}
+
+			if leaf1 && leaf2 {
+				validRecipes = append(validRecipes, recipe)
+			} else {
+				removed += countSubtree(recipe.FirstElement)
+				removed += countSubtree(recipe.SecondElement)
+			}
+		} else {
+			validRecipes = append(validRecipes, recipe)
+		}
+	}
+	node.Children = validRecipes
+	return removed
+}
+
+func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) BFSResult {
+	start := time.Now()
+
+	root := &Tree.TreeNodeElement{Name: target.Name}
+	tree := &Tree.Tree{First: root}
+
+	var nodeCount int
+	found := false
+
+	bfsShortest(target, root, graphMap, &nodeCount, &found)
+
+	execTimeMs := time.Since(start).Milliseconds()
+
+	if !found {
+		return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 0, ExecutionTimeMs: execTimeMs}
+	}
+	return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 1, ExecutionTimeMs: execTimeMs}
+}
+
+func bfsShortest(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
+	queue := NewQueue()
+	queue.Enqueue(&QueueItem{GraphNode: target, TreeNode: root})
+
+	for !queue.IsEmpty() && !*found {
+		item := queue.Dequeue()
+		current := item.GraphNode
+		node := item.TreeNode
+
+		*nodeCount++
+
+		if Graph.IsLeaf(current, graphMap) {
+			*found = true
+			return
+		}
+
+		for _, recipe := range current.Recipes {
+			if recipe.FirstElement.Tier > target.Tier || recipe.SecondElement.Tier > target.Tier {
+				continue
+			}
+
+			left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
+			right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
+
+			recipeNode := Tree.TreeNodeRecipe{
+				FirstElement:  left,
+				SecondElement: right,
+				ResultElement: node,
+			}
+
+			node.Children = append(node.Children, recipeNode)
+			left.Parent = &recipeNode
+			right.Parent = &recipeNode
+
+			queue.Enqueue(&QueueItem{GraphNode: recipe.FirstElement, TreeNode: left})
+			queue.Enqueue(&QueueItem{GraphNode: recipe.SecondElement, TreeNode: right})
+
+			if Graph.IsLeaf(recipe.FirstElement, graphMap) && Graph.IsLeaf(recipe.SecondElement, graphMap) {
+				*found = true
+				return
+			}
+		}
+	}
 }
