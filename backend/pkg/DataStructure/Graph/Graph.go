@@ -22,10 +22,7 @@ func (r Recipe) String() string {
 		r.ResultElement.Name)
 }
 
-func CreateElementGraphMap(
-	scraped map[string][]string,
-	tierMap map[string]int,
-) map[string]*ElementGraph {
+func CreateElementGraphMap(scraped map[string][]string, tierMap map[string]int) map[string]*ElementGraph {
 
 	elementMap := make(map[string]*ElementGraph)
 

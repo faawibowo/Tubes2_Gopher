@@ -145,6 +145,7 @@ func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.Ele
 	var found bool
 
 	dfsShortest(target, root, graphMap, &nodeCount, &found)
+	pruneIncompletePaths(root, graphMap)
 
 	execTimeMs := time.Since(start).Milliseconds()
 
@@ -161,18 +162,14 @@ func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphM
 
 	(*nodeCount)++
 
-	if Graph.IsLeaf(current, graphMap) {
-		*found = true
-		return
-	}
-
 	for _, recipe := range current.Recipes {
-		if *found {
-			break
-		}
 
 		left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
 		right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
+
+		if recipe.FirstElement.Tier >= current.Tier || recipe.SecondElement.Tier >= current.Tier {
+			continue
+		}
 
 		recipeNode := Tree.TreeNodeRecipe{
 			FirstElement:  left,
@@ -184,7 +181,8 @@ func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphM
 		left.Parent = &recipeNode
 		right.Parent = &recipeNode
 
-		if recipe.FirstElement.Tier >= current.Tier || recipe.SecondElement.Tier >= current.Tier {
+		if isTreeLeaf(left, right, graphMap) {
+			*found = true
 			return
 		}
 
