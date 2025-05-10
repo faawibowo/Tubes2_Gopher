@@ -1,7 +1,6 @@
 package bfs
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -68,7 +67,8 @@ func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.Elem
 	root := &Tree.TreeNodeElement{Name: target.Name}
 	tree := &Tree.Tree{First: root}
 
-	var nodeCount, pathCount int
+	var nodeCount int = 0
+	var pathCount int = 0
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
@@ -76,26 +76,36 @@ func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.Elem
 	wg.Wait()
 	execTimeMs := time.Since(start).Milliseconds()
 
-	removed := pruneIncompletePaths(root, graphMap)
-	fmt.Printf("Removed %d incomplete paths\n", removed)
+	pruneIncompletePaths(root, graphMap)
 
 	return BFSResult{
 		Tree:            tree,
-		NodeCount:       nodeCount - removed,
+		NodeCount:       nodeCount,
 		CompletePaths:   pathCount,
 		ExecutionTimeMs: execTimeMs,
 	}
 }
 
+func isEqual(a int, b int) bool {
+	return a == b
+}
+
+func isTreeLeaf(left *Tree.TreeNodeElement, right *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph) bool {
+	return Graph.IsLeaf(graphMap[left.Name], graphMap) && Graph.IsLeaf(graphMap[right.Name], graphMap)
+}
+
 func bfsMultiThreading(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCountPtr *int, pathCountPtr *int, maxCount int, mu *sync.Mutex, wg *sync.WaitGroup) {
+	if isEqual(*pathCountPtr, maxCount) {
+		return
+	}
 	queue := NewQueue()
 	queue.Enqueue(&QueueItem{GraphNode: target, TreeNode: root})
 
 	for !queue.IsEmpty() {
 		mu.Lock()
-		if *pathCountPtr >= maxCount {
+		if isEqual(*pathCountPtr, maxCount) {
 			mu.Unlock()
-			break
+			return
 		}
 		mu.Unlock()
 
@@ -130,13 +140,16 @@ func bfsMultiThreading(target *Graph.ElementGraph, root *Tree.TreeNodeElement, g
 			mu.Unlock()
 
 			for _, recipe := range current.Recipes {
+				if isEqual(*pathCountPtr, maxCount) {
+					return
+				}
 
 				if recipe.FirstElement.Tier > target.Tier || recipe.SecondElement.Tier > target.Tier {
 					continue
 				}
 
 				mu.Lock()
-				if *pathCountPtr >= maxCount {
+				if *nodeCountPtr >= maxCount {
 					mu.Unlock()
 					break
 				}
@@ -156,16 +169,24 @@ func bfsMultiThreading(target *Graph.ElementGraph, root *Tree.TreeNodeElement, g
 					}
 
 					mu.Lock()
+					if isEqual(*pathCountPtr, maxCount) {
+						mu.Unlock()
+						return
+					}
 					node.Children = append(node.Children, recipeNode)
+					if isTreeLeaf(left, right, graphMap) {
+						(*pathCountPtr)++
+					}
 					mu.Unlock()
 
 					left.Parent = &recipeNode
 					right.Parent = &recipeNode
 
-					mu.Lock()
+					if isEqual(*pathCountPtr, maxCount) {
+						return
+					}
 					queue.Enqueue(&QueueItem{GraphNode: r.FirstElement, TreeNode: left})
 					queue.Enqueue(&QueueItem{GraphNode: r.SecondElement, TreeNode: right})
-					mu.Unlock()
 				}(recipe)
 			}
 			wg.Wait()
@@ -185,17 +206,17 @@ func countSubtree(node *Tree.TreeNodeElement) int {
 	return count
 }
 
-func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph) int {
+func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph) {
+
 	if node == nil {
-		return 0
+		return
 	}
 
-	removed := 0
 	validRecipes := make([]Tree.TreeNodeRecipe, 0, len(node.Children))
 
 	for _, recipe := range node.Children {
-		removed += pruneIncompletePaths(recipe.FirstElement, graphMap)
-		removed += pruneIncompletePaths(recipe.SecondElement, graphMap)
+		pruneIncompletePaths(recipe.FirstElement, graphMap)
+		pruneIncompletePaths(recipe.SecondElement, graphMap)
 
 		if len(recipe.FirstElement.Children) == 0 && len(recipe.SecondElement.Children) == 0 {
 			leaf1, leaf2 := false, false
@@ -208,16 +229,12 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 
 			if leaf1 && leaf2 {
 				validRecipes = append(validRecipes, recipe)
-			} else {
-				removed += countSubtree(recipe.FirstElement)
-				removed += countSubtree(recipe.SecondElement)
 			}
 		} else {
 			validRecipes = append(validRecipes, recipe)
 		}
 	}
 	node.Children = validRecipes
-	return removed
 }
 
 func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) BFSResult {
