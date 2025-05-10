@@ -1,6 +1,10 @@
 package Tree
 
-import "github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
+import (
+	"fmt"
+
+	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
+)
 
 type Tree struct {
 	First *TreeNodeElement
@@ -99,4 +103,108 @@ func copyElem(orig *TreeNodeElement, parentRecipe *TreeNodeRecipe) *TreeNodeElem
 		newNode.Children = append(newNode.Children, newRc)
 	}
 	return newNode
+}
+
+func PrintTree(node *TreeNodeElement, depth int, printName bool, prefixStack []bool) {
+	if node == nil {
+		return
+	}
+	prefix := ""
+	for _, active := range prefixStack {
+		if active {
+			prefix += "│  "
+		} else {
+			prefix += "   "
+		}
+	}
+
+	if printName {
+		fmt.Println(prefix + node.Name)
+	}
+
+	for i, recipe := range node.Children {
+		isLast := i == len(node.Children)-1
+
+		recipePrefix := prefix + "├─ Recipe:"
+		if isLast {
+			recipePrefix = prefix + "└─ Recipe:"
+		}
+		fmt.Println(recipePrefix)
+
+		childStack := append(prefixStack, !isLast)
+
+		leftPrefix := ""
+		for _, active := range childStack {
+			if active {
+				leftPrefix += "│  "
+			} else {
+				leftPrefix += "   "
+			}
+		}
+		fmt.Println(leftPrefix + "├─ " + recipe.FirstElement.Name + " (left)")
+		PrintTree(recipe.FirstElement, depth+1, false, append(childStack, true))
+
+		rightPrefix := ""
+		for _, active := range childStack {
+			if active {
+				rightPrefix += "│  "
+			} else {
+				rightPrefix += "   "
+			}
+		}
+		fmt.Println(rightPrefix + "└─ " + recipe.SecondElement.Name + " (right)")
+		PrintTree(recipe.SecondElement, depth+1, false, append(childStack, false))
+	}
+}
+
+func PruneTreeToBasicPaths(n *TreeNodeElement) bool {
+	if n == nil {
+		return false
+	}
+
+	if len(n.Children) == 0 {
+		if isBasic(n.Name) {
+			return true
+		} else {
+			return false
+		}
+	}
+
+	valid := make([]TreeNodeRecipe, 0, len(n.Children))
+
+	for _, rc := range n.Children {
+
+		leftValid := PruneTreeToBasicPaths(rc.FirstElement)
+		rightValid := PruneTreeToBasicPaths(rc.SecondElement)
+
+		if leftValid && rightValid {
+
+			valid = append(valid, rc)
+		}
+	}
+
+	n.Children = valid
+
+	return len(valid) > 0
+}
+
+func isBasic(name string) bool {
+	return name == "Air" || name == "Water" || name == "Earth" || name == "Fire"
+}
+
+func CountPaths(node *TreeNodeElement) int {
+	if node == nil {
+		return 0
+	}
+	if len(node.Children) == 0 {
+		return 1
+	}
+
+	total := 0
+	for _, recipe := range node.Children {
+		left := CountPaths(recipe.FirstElement)
+		right := CountPaths(recipe.SecondElement)
+		total += left * right
+	}
+	return total
 }

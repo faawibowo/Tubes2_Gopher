@@ -6,6 +6,7 @@ type ElementGraph struct {
 	Name    string   // element name
 	UsedIn  []Recipe // which recipes this element is a part of
 	Recipes []Recipe // the recipes of this element
+	Tier    int      // tier of this element
 }
 
 type Recipe struct {
@@ -21,19 +22,28 @@ func (r Recipe) String() string {
 		r.ResultElement.Name)
 }
 
-// Create Map String & Graph
-func CreateElementGraphMap(scraped map[string][]string) map[string]*ElementGraph {
+func CreateElementGraphMap(
+	scraped map[string][]string,
+	tierMap map[string]int,
+) map[string]*ElementGraph {
+
 	elementMap := make(map[string]*ElementGraph)
 
 	for resultName, inputs := range scraped {
 		// node hasil
 		if _, ok := elementMap[resultName]; !ok {
-			elementMap[resultName] = &ElementGraph{Name: resultName}
+			elementMap[resultName] = &ElementGraph{
+				Name: resultName,
+				Tier: tierMap[resultName],
+			}
 		}
 		// node bahan
 		for _, in := range inputs {
 			if _, ok := elementMap[in]; !ok {
-				elementMap[in] = &ElementGraph{Name: in}
+				elementMap[in] = &ElementGraph{
+					Name: in,
+					Tier: tierMap[in],
+				}
 			}
 		}
 	}
@@ -50,9 +60,7 @@ func CreateElementGraphMap(scraped map[string][]string) map[string]*ElementGraph
 				ResultElement: result,
 			}
 
-			// simpan ke daftar “cara membuat” si hasil
 			result.Recipes = append(result.Recipes, recipe)
-			// simpan ke daftar “dipakai di” kedua bahan
 			first.UsedIn = append(first.UsedIn, recipe)
 			second.UsedIn = append(second.UsedIn, recipe)
 		}
@@ -61,7 +69,6 @@ func CreateElementGraphMap(scraped map[string][]string) map[string]*ElementGraph
 	return elementMap
 }
 
-// basic Element
 func GetBasicElement(graphMap map[string]*ElementGraph) []*ElementGraph {
 	return []*ElementGraph{graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"]} // starter
 }
