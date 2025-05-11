@@ -149,63 +149,141 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 	node.Children = validRecipes
 }
 
+//================================ Find First Path ====================================
+
 func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) BFSResult {
 	start := time.Now()
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
 	tree := &Tree.Tree{First: root}
-
-	var nodeCount int
+	nodeCount := 0
 	found := false
 
-	bfsShortest(target, root, graphMap, &nodeCount, &found)
+	bfsSequential(target, root, graphMap, &nodeCount, &found)
 	pruneIncompletePaths(root, graphMap)
 
 	execTimeMs := time.Since(start).Milliseconds()
-
 	if !found {
 		return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 0, ExecutionTimeMs: execTimeMs}
 	}
 	return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 1, ExecutionTimeMs: execTimeMs}
 }
 
-func bfsShortest(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
-	q := Queue.NewQueue()
-	q.Enqueue(&Queue.QueueItem{GraphNode: target, TreeNode: root})
+// bfsSequential processes the BFS level‐by‐level without launching goroutines.
+// It expands each node’s recipes and terminates only if a complete (solved) path
+// is found—that is, when the chain of recipes ends in basic elements.
+func bfsSequential(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
+	type bfsItem struct {
+		elem *Graph.ElementGraph
+		node *Tree.TreeNodeElement
+	}
 
-	for !q.IsEmpty() {
-		item := q.Dequeue()
-		if item == nil {
-			continue
-		}
-		current := item.GraphNode
-		node := item.TreeNode
+	// Initialize queue with the target element.
+	queue := []bfsItem{{target, root}}
 
-		(*nodeCount)++
+	for len(queue) > 0 && !*found {
+		var next []bfsItem
 
-		for _, recipe := range current.Recipes {
-			if recipe.FirstElement.Tier > target.Tier || recipe.SecondElement.Tier > target.Tier {
+		// Process all items in the current level.
+		for _, itm := range queue {
+			// Increment node counter.
+			*nodeCount++
+
+			// If the element has no recipes, nothing to expand.
+			if len(itm.elem.Recipes) == 0 {
 				continue
 			}
-			left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
-			right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
-			recipeNode := Tree.TreeNodeRecipe{
-				FirstElement:  left,
-				SecondElement: right,
-				ResultElement: node,
+
+			parentTier := itm.elem.Tier
+
+			// Expand each valid recipe.
+			for _, recipe := range itm.elem.Recipes {
+				// Skip recipe if either ingredient's Tier exceeds parent's Tier.
+				if recipe.FirstElement.Tier > parentTier || recipe.SecondElement.Tier > parentTier {
+					continue
+				}
+
+				// Create new tree nodes for the recipe ingredients.
+				left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
+				right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
+				recipeNode := Tree.TreeNodeRecipe{
+					FirstElement:  left,
+					SecondElement: right,
+					ResultElement: itm.node,
+				}
+				left.Parent = &recipeNode
+				right.Parent = &recipeNode
+
+				// Append this recipe to the parent's children.
+				itm.node.Children = append(itm.node.Children, recipeNode)
+
+				// Check if the full path from this recipe upward is solved.
+				if checkFullPath(&recipeNode) {
+					*found = true
+					return
+				}
+
+				// Enqueue non-basic elements for next level expansion.
+				if !isBasic(recipe.FirstElement) {
+					next = append(next, bfsItem{recipe.FirstElement, left})
+				}
+				if !isBasic(recipe.SecondElement) {
+					next = append(next, bfsItem{recipe.SecondElement, right})
+				}
 			}
+		}
+		queue = next
+	}
+}
 
-			node.Children = append(node.Children, recipeNode)
-			left.Parent = &recipeNode
-			right.Parent = &recipeNode
+// checkFullPath traverses upward from a recipe node.
+// It returns true only if every recipe in the chain is "solved" (i.e. both children are basic or eventually solved).
+func checkFullPath(r *Tree.TreeNodeRecipe) bool {
+	curr := r
+	for curr != nil {
+		if !isRecipeSolved(curr) {
+			return false
+		}
+		// If we've reached the root (no parent), the chain is complete.
+		if curr.ResultElement.Parent == nil {
+			return true
+		}
+		curr = curr.ResultElement.Parent
+	}
+	return false
+}
 
-			if isTreeLeaf(left, right, graphMap) {
-				*found = true
-				return
-			}
+// isRecipeSolved returns true if both children of a recipe are solved.
+func isRecipeSolved(r *Tree.TreeNodeRecipe) bool {
+	return isSolvedElem(r.FirstElement) && isSolvedElem(r.SecondElement)
+}
 
-			q.Enqueue(&Queue.QueueItem{GraphNode: recipe.FirstElement, TreeNode: left})
-			q.Enqueue(&Queue.QueueItem{GraphNode: recipe.SecondElement, TreeNode: right})
+// A node is solved if it has no children and its name is one of the basic elements,
+// or if at least one of its recipe branches is solved.
+func isSolvedElem(n *Tree.TreeNodeElement) bool {
+	if len(n.Children) == 0 {
+		return IsLeafName(n.Name)
+	}
+	for _, c := range n.Children {
+		if isRecipeSolved(&c) {
+			return true
 		}
 	}
+	return false
+}
+
+// isBasic returns true if the given graph element is a basic element.
+func isBasic(e *Graph.ElementGraph) bool {
+	basic := map[string]bool{
+		"Air":   true,
+		"Water": true,
+		"Earth": true,
+		"Fire":  true,
+	}
+	return basic[e.Name]
+}
+
+// IsLeafName returns true if the provided name corresponds to a basic element.
+func IsLeafName(name string) bool {
+	return name == "Air" || name == "Earth" || name == "Water" || name == "Fire"
 }

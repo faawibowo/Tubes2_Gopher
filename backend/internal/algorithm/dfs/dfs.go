@@ -137,39 +137,31 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 
 func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) DFSResult {
 	start := time.Now()
-
 	root := &Tree.TreeNodeElement{Name: target.Name}
 	tree := &Tree.Tree{First: root}
 
 	var nodeCount int
-	var found bool
 
-	dfsShortest(target, root, graphMap, &nodeCount, &found)
+	dfsShortest(target, root, graphMap, &nodeCount)
 	pruneIncompletePaths(root, graphMap)
 
 	execTimeMs := time.Since(start).Milliseconds()
 
-	if !found {
-		return DFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 0, ExecutionTimeMs: execTimeMs}
-	}
 	return DFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 1, ExecutionTimeMs: execTimeMs}
 }
 
-func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
-	if *found {
-		return
-	}
+func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int) {
 
 	(*nodeCount)++
 
 	for _, recipe := range current.Recipes {
 
-		left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
-		right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
-
 		if recipe.FirstElement.Tier >= current.Tier || recipe.SecondElement.Tier >= current.Tier {
 			continue
 		}
+
+		left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
+		right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
 
 		recipeNode := Tree.TreeNodeRecipe{
 			FirstElement:  left,
@@ -181,17 +173,10 @@ func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphM
 		left.Parent = &recipeNode
 		right.Parent = &recipeNode
 
-		if isTreeLeaf(left, right, graphMap) {
-			*found = true
-			return
-		}
+		dfsShortest(recipe.FirstElement, left, graphMap, nodeCount)
+		dfsShortest(recipe.SecondElement, right, graphMap, nodeCount)
 
-		dfsShortest(recipe.FirstElement, left, graphMap, nodeCount, found)
-		dfsShortest(recipe.SecondElement, right, graphMap, nodeCount, found)
-
-		if !*found {
-			node.Children = node.Children[:len(node.Children)-1]
-		}
+		break
 	}
 }
 
