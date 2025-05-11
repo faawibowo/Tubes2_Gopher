@@ -50,7 +50,7 @@ export const siteConfig = {
     {
       id: "About",
       title: "About",
-      href: "/page/about",
+      href: "",
     },
   ] satisfies MainNavItem[],
 };

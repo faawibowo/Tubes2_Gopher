@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
+import type { TreantChart } from "@/lib/convertToTreant";
 interface Props {
-  data: any;
+  data: TreantChart;
 }
 
 export default function TreantDiagram({ data }: Props) {

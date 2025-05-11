@@ -18,7 +18,7 @@ import { siteMeta } from "@/config/meta";
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
-  logo: (props: IconProps) => (
+  logo: () => (
     <Image src={siteMeta.siteLogo} alt="Gopher" width={60} height={60} />
   ),
   menu: ({ ...props }: IconProps) => (

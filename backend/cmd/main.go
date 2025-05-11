@@ -8,6 +8,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/faawibowo/Tubes2_Gopher/configs"
@@ -19,8 +21,6 @@ import (
 	"github.com/gorilla/handlers"
 )
 
-const serverPort = ":8080"
-
 var graphMap map[string]*Graph.ElementGraph
 
 // ──────────────────────────────────────────────────────────────
@@ -29,11 +29,20 @@ var graphMap map[string]*Graph.ElementGraph
 type request struct {
 	Target          string `json:"target"`
 	MaxPaths        int    `json:"maxPaths"`
-	DelayMs         int    `json:"delay"`       // optional for REST; WS always sends it
-	ElementJSONPath string `json:"elementPath"` // only /api/config
+	DelayMs         int    `json:"delay"`
+	ElementJSONPath string `json:"elementPath"`
 }
 
 func main() {
+	serverPort := os.Getenv("BACKEND_PORT")
+	if serverPort == "" {
+		serverPort = "8080"
+	}
+
+	origin := os.Getenv("FRONTEND_ORIGIN")
+	if origin == "" {
+		origin = "*"
+	}
 	// ── REST routes
 	http.HandleFunc("/api/config", withCORS(configHandler))
 	http.HandleFunc("/api/bfs", withCORS(bfsHandler))
@@ -46,16 +55,15 @@ func main() {
 	http.HandleFunc("/ws/shortest/bfs", ws.HandleShortestBFS)
 	http.HandleFunc("/ws/shortest/dfs", ws.HandleShortestDFS)
 
-	// ── CORS middleware (allows your Next/React dev-server on :3000)
 	cors := handlers.CORS(
-		handlers.AllowedOrigins([]string{"http://localhost:3000"}),
+		handlers.AllowedOrigins([]string{origin}),
 		handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS"}),
 		handlers.AllowedHeaders([]string{"Content-Type"}),
 		handlers.AllowCredentials(),
 	)
 
 	log.Printf("▶ server running on http://localhost%s\n", serverPort)
-	log.Fatal(http.ListenAndServe(serverPort, cors(http.DefaultServeMux)))
+	log.Fatal(http.ListenAndServe("0.0.0.0:"+serverPort, cors(http.DefaultServeMux)))
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -103,7 +111,7 @@ func bfsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	target := graphMap[req.Target]
+	target := graphMap[normalizeName(req.Target)]
 	if target == nil {
 		http.Error(w, "target not found / graph not loaded", http.StatusBadRequest)
 		return
@@ -128,7 +136,7 @@ func dfsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	target := graphMap[req.Target]
+	target := graphMap[normalizeName(req.Target)]
 	if target == nil {
 		http.Error(w, "target not found / graph not loaded", http.StatusBadRequest)
 		return
@@ -154,7 +162,7 @@ func shortestBFSHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	target := graphMap[req.Target]
+	target := graphMap[normalizeName(req.Target)]
 	if target == nil {
 		http.Error(w, "target not found / graph not loaded", http.StatusBadRequest)
 		return
@@ -177,7 +185,7 @@ func shortestDFSHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	target := graphMap[req.Target]
+	target := graphMap[normalizeName(req.Target)]
 	if target == nil {
 		http.Error(w, "target not found / graph not loaded", http.StatusBadRequest)
 		return
@@ -205,7 +213,11 @@ func respondJSON(w http.ResponseWriter, data any) {
 // tiny helper
 func withCORS(h http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		origin := os.Getenv("FRONTEND_ORIGIN")
+		if origin == "" {
+			origin = "*" // fallback (not safe for production)
+		}
+		w.Header().Set("Access-Control-Allow-Origin", origin)
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -215,4 +227,12 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
 		}
 		h(w, r)
 	}
+}
+
+func normalizeName(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+	s = strings.ToLower(s)
+	return strings.ToUpper(s[:1]) + s[1:]
 }

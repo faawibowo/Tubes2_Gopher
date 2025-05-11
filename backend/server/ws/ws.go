@@ -3,6 +3,7 @@ package ws
 import (
 	"log"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -50,7 +51,7 @@ func decodeRequest(conn *websocket.Conn) (Request, *Graph.ElementGraph, bool) {
 		return req, nil, false
 	}
 
-	target := graphMap[req.Target]
+	target := graphMap[normalizeName(req.Target)]
 	if target == nil {
 		log.Println("Sending JSON error: Target not found")
 
@@ -110,7 +111,7 @@ func HandleBFS(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if updates != nil {
-		log.Println("Multithread BFS trying for the last update: ", req.Target)
+		log.Println("Multithread BFS trying for the last update: ", normalizeName(req.Target))
 		time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)
 		updates <- result
 	}
@@ -163,7 +164,7 @@ func HandleDFS(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if updates != nil {
-		log.Println("Multithread DFS trying for the last update: ", req.Target)
+		log.Println("Multithread DFS trying for the last update: ", normalizeName(req.Target))
 		time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)
 		updates <- result
 	}
@@ -213,7 +214,7 @@ func HandleShortestBFS(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if updates != nil {
-		log.Println("Shortest BFS trying for the last update: ", req.Target)
+		log.Println("Shortest BFS trying for the last update: ", normalizeName(req.Target))
 		time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)
 		updates <- result
 	}
@@ -264,7 +265,7 @@ func HandleShortestDFS(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if updates != nil {
-		log.Println("Shortest DFS trying for the last update: ", req.Target)
+		log.Println("Shortest DFS trying for the last update: ", normalizeName(req.Target))
 		time.Sleep(time.Duration(req.DelayMs) * time.Millisecond)
 		updates <- result
 	}
@@ -289,4 +290,12 @@ func upgradeAndCheck(w http.ResponseWriter, r *http.Request) (*websocket.Conn, b
 		return nil, false
 	}
 	return conn, true
+}
+
+func normalizeName(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+	s = strings.ToLower(s)
+	return strings.ToUpper(s[:1]) + s[1:]
 }

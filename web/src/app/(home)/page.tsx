@@ -1,7 +1,8 @@
 "use client";
-
+import { env } from "@/env";
 import { useEffect, useState } from "react";
 import Shell from "@/components/shell/shell";
+import type { TreantChart } from "@/lib/convertToTreant";
 import {
   PageHeader,
   PageHeaderHeading,
@@ -13,17 +14,21 @@ import { convertToTreant } from "@/lib/convertToTreant";
 import { toast } from "@/hooks/use-toast";
 
 export default function Home() {
-  const [treeData, setTreeData] = useState<any>(null);
+  const [treeData, setTreeData] = useState<TreantChart | null>(null);
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState("");
   const [maxPaths, setMaxPaths] = useState(1);
-  const [searchType, setSearchType] = useState("bfs");
-  const [liveUpdate, setLiveUpdate] = useState(true);
-  const [delay, setDelay] = useState(500); // default to 500ms
+  const [searchType, setSearchType] = useState("shortest/dfs");
+  const [liveUpdate, setLiveUpdate] = useState(false);
+  const [delay, setDelay] = useState(100);
+  const [stats, setStats] = useState({
+    nodeCount: 0,
+    completePaths: 0,
+    executionTimeMs: 0,
+  });
 
-  // Load config once
   useEffect(() => {
-    fetch("http://localhost:8080/api/config", {
+    fetch(`${env.NEXT_PUBLIC_BACKEND_HTTP}/api/config`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ elementPath: "configs/elements.json" }),
@@ -47,15 +52,18 @@ export default function Home() {
 
   const loadTreeAPI = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/${searchType}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          target,
-          maxPaths,
-          delay: 0, // optional, but the server supports this param
-        }),
-      });
+      const res = await fetch(
+        `${env.NEXT_PUBLIC_BACKEND_HTTP}/api/${searchType}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            target,
+            maxPaths,
+            delay: 0,
+          }),
+        }
+      );
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -70,6 +78,21 @@ export default function Home() {
       const data = await res.json();
       const converted = convertToTreant(data.tree);
       setTreeData(converted);
+
+      if (data.nodeCount !== undefined) {
+        setStats((prev) => ({ ...prev, nodeCount: data.nodeCount }));
+      }
+
+      if (data.completePaths !== undefined) {
+        setStats((prev) => ({ ...prev, completePaths: data.completePaths }));
+      }
+
+      if (data.executionTimeMs !== undefined) {
+        setStats((prev) => ({
+          ...prev,
+          executionTimeMs: data.executionTimeMs,
+        }));
+      }
 
       toast({
         title: "Success",
@@ -88,7 +111,9 @@ export default function Home() {
 
   const loadTreeWS = async () => {
     try {
-      const ws = new WebSocket(`ws://localhost:8080/ws/${searchType}`);
+      const ws = new WebSocket(
+        `${env.NEXT_PUBLIC_BACKEND_WS}/ws/${searchType}`
+      );
 
       ws.onopen = () => {
         console.log("WebSocket connection opened");
@@ -106,7 +131,7 @@ export default function Home() {
 
         try {
           msg = JSON.parse(event.data);
-        } catch (err) {
+        } catch {
           console.error("Invalid JSON received:", event.data);
           toast({
             title: "Error",
@@ -124,6 +149,21 @@ export default function Home() {
             title: "Error",
             description: msg.error,
           });
+        }
+
+        if (msg.nodeCount !== undefined) {
+          setStats((prev) => ({ ...prev, nodeCount: msg.nodeCount }));
+        }
+
+        if (msg.completePaths !== undefined) {
+          setStats((prev) => ({ ...prev, completePaths: msg.completePaths }));
+        }
+
+        if (msg.executionTimeMs !== undefined) {
+          setStats((prev) => ({
+            ...prev,
+            executionTimeMs: msg.executionTimeMs,
+          }));
         }
 
         if (msg.tree) {
@@ -167,7 +207,11 @@ export default function Home() {
   const handleGenerate = async () => {
     setLoading(true);
     setTreeData(null);
-    liveUpdate ? loadTreeWS() : loadTreeAPI();
+    if (liveUpdate) {
+      loadTreeWS();
+    } else {
+      loadTreeAPI();
+    }
   };
 
   return (
@@ -244,6 +288,20 @@ export default function Home() {
             />
           )}
         </div>
+
+        {treeData && (
+          <div className="mt-4 text-sm text-gray-600">
+            <p>
+              🧠 Nodes Explored: <strong>{stats.nodeCount}</strong>
+            </p>
+            <p>
+              🌱 Complete Paths: <strong>{stats.completePaths}</strong>
+            </p>
+            <p>
+              ⏱️ Execution Time: <strong>{stats.executionTimeMs} ms</strong>
+            </p>
+          </div>
+        )}
 
         {treeData ? (
           <TreantDiagram data={treeData} />

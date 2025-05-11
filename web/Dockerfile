@@ -19,6 +19,13 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+ARG NEXT_PUBLIC_BACKEND_HTTP
+ARG NEXT_PUBLIC_BACKEND_WS
+
+ENV NEXT_PUBLIC_BACKEND_HTTP=$NEXT_PUBLIC_BACKEND_HTTP
+ENV NEXT_PUBLIC_BACKEND_WS=$NEXT_PUBLIC_BACKEND_WS
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 COPY --from=deps /app/.env.example ./.env
@@ -53,7 +60,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # MOVE to builder stage
-COPY --from=builder --chown=nextjs:nodejs /app/.env.example ./.env
 
 USER nextjs
 

@@ -1,20 +1,4 @@
 services:
-  mdb:
-    image: mysql:8.0
-    container_name: mdb
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DBNAME}
-      MYSQL_TCP_PORT: ${MYSQL_PORT}
-      TZ: ${TZ}
-    ports:
-      - ${MYSQL_PORT}:${MYSQL_PORT}
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${MYSQL_PASSWORD}"]
-      interval: 5s
-      timeout: 3s
-      retries: 2
-      start_period: 0s
   app-backend:
     container_name: app-backend
     image: app-backend:1.0.0
@@ -22,23 +6,22 @@ services:
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     environment:
-      DATABASE_USERNAME: root
-      DATABASE_HOST: mdb:${MYSQL_PORT}
-      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      DATABASE_DBNAME: ${MYSQL_DBNAME}
-      SERVER_HTTPPORT: ${BACKEND_PORT}
+      BACKEND_PORT: ${BACKEND_PORT}
       TZ: ${TZ}
-    depends_on:
-      mdb:
-        condition: service_healthy
   app-web:
     container_name: app-web
     image: app-web:1.0.0
-    build: ./web
+    build:
+      context: ./web
+      args:
+        NEXT_PUBLIC_BACKEND_HTTP: http://localhost:${BACKEND_PORT}
+        NEXT_PUBLIC_BACKEND_WS: ws://localhost:${BACKEND_PORT}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
       TZ: ${TZ}
       PORT: ${WEB_PORT}
       BACKEND_URL: http://app-backend:${BACKEND_PORT}
+      NEXT_PUBLIC_BACKEND_HTTP: http://localhost:${BACKEND_PORT}
+      NEXT_PUBLIC_BACKEND_WS: ws://localhost:${BACKEND_PORT}
       SITE_URL: http://localhost:${WEB_PORT}
