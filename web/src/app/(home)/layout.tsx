@@ -1,6 +1,6 @@
 import React from "react";
 import { SiteHeader } from "@/components/layouts/site-header";
-import { SiteFooter } from "@/components/layouts/site-footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function LobyLayout({
   children,
@@ -11,9 +11,11 @@ export default async function LobyLayout({
     <div className="relative flex min-h-screen flex-col leading-relaxed">
       <SiteHeader />
       <main>
-        <div className="relative flex min-h-[80vh] flex-col">{children}</div>
+        <div className="relative flex min-h-[80vh] flex-col">
+          {children}
+          <Toaster></Toaster>
+        </div>
       </main>
-      <SiteFooter />
     </div>
   );
 }

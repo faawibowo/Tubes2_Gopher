@@ -9,13 +9,20 @@ import (
 )
 
 type DFSResult struct {
-	Tree            *Tree.Tree
-	NodeCount       int
-	CompletePaths   int
-	ExecutionTimeMs int64
+	Tree            *Tree.Tree `json:"tree"`
+	NodeCount       int        `json:"nodeCount"`
+	CompletePaths   int        `json:"completePaths"`
+	ExecutionTimeMs int64      `json:"executionTimeMs"`
+	Done            bool       `json:"done"`
 }
 
-func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph, maxCount int) DFSResult {
+func BuildRecipeTree(
+	target *Graph.ElementGraph,
+	graphMap map[string]*Graph.ElementGraph,
+	maxCount int,
+	delay time.Duration,
+	updates chan<- DFSResult,
+) DFSResult {
 	start := time.Now()
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
@@ -26,17 +33,18 @@ func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.Elem
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	dfsMultiThreading(target, root, graphMap, &nodeCount, &pathCount, maxCount, &mu, &wg)
+	dfsMultiThreading(target, root, graphMap, &nodeCount, &pathCount, maxCount, delay, updates, &mu, &wg, tree, start)
 	wg.Wait()
-	execTimeMs := time.Since(start).Milliseconds()
 
 	pruneIncompletePaths(root, graphMap)
+	wg.Wait()
 
 	return DFSResult{
 		Tree:            tree,
 		NodeCount:       nodeCount,
 		CompletePaths:   pathCount,
-		ExecutionTimeMs: execTimeMs,
+		ExecutionTimeMs: time.Since(start).Milliseconds(),
+		Done:            true,
 	}
 }
 
@@ -48,8 +56,20 @@ func isTreeLeaf(left *Tree.TreeNodeElement, right *Tree.TreeNodeElement, graphMa
 	return Graph.IsLeaf(graphMap[left.Name], graphMap) && Graph.IsLeaf(graphMap[right.Name], graphMap)
 }
 
-func dfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCountPtr *int, pathCountPtr *int, maxCount int, mu *sync.Mutex, wg *sync.WaitGroup) {
-
+func dfsMultiThreading(
+	current *Graph.ElementGraph,
+	node *Tree.TreeNodeElement,
+	graphMap map[string]*Graph.ElementGraph,
+	nodeCountPtr *int,
+	pathCountPtr *int,
+	maxCount int,
+	delay time.Duration,
+	updates chan<- DFSResult,
+	mu *sync.Mutex,
+	wg *sync.WaitGroup,
+	tree *Tree.Tree,
+	start time.Time,
+) {
 	if isEqual(*pathCountPtr, maxCount) {
 		return
 	}
@@ -59,18 +79,17 @@ func dfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 	mu.Unlock()
 
 	for _, recipe := range current.Recipes {
-
 		if isEqual(*pathCountPtr, maxCount) {
 			return
 		}
 
 		wg.Add(1)
+		time.Sleep(delay)
 		go func(r Graph.Recipe) {
 			defer wg.Done()
 
 			left := &Tree.TreeNodeElement{Name: r.FirstElement.Name}
 			right := &Tree.TreeNodeElement{Name: r.SecondElement.Name}
-
 			recipeNode := Tree.TreeNodeRecipe{
 				FirstElement:  left,
 				SecondElement: right,
@@ -91,6 +110,18 @@ func dfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 			left.Parent = &recipeNode
 			right.Parent = &recipeNode
 
+			// ✨ Send update
+			if updates != nil {
+				cloned := Tree.CopyTree(tree)
+				updates <- DFSResult{
+					Tree:            cloned,
+					NodeCount:       *nodeCountPtr,
+					CompletePaths:   *pathCountPtr,
+					ExecutionTimeMs: time.Since(start).Milliseconds(),
+					Done:            false,
+				}
+			}
+
 			if r.FirstElement.Tier >= current.Tier || r.SecondElement.Tier >= current.Tier {
 				return
 			}
@@ -98,8 +129,8 @@ func dfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 			if isEqual(*pathCountPtr, maxCount) {
 				return
 			}
-			dfsMultiThreading(r.FirstElement, left, graphMap, nodeCountPtr, pathCountPtr, maxCount, mu, wg)
-			dfsMultiThreading(r.SecondElement, right, graphMap, nodeCountPtr, pathCountPtr, maxCount, mu, wg)
+			dfsMultiThreading(r.FirstElement, left, graphMap, nodeCountPtr, pathCountPtr, maxCount, delay, updates, mu, wg, tree, start)
+			dfsMultiThreading(r.SecondElement, right, graphMap, nodeCountPtr, pathCountPtr, maxCount, delay, updates, mu, wg, tree, start)
 		}(recipe)
 	}
 }
@@ -135,7 +166,12 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 	node.Children = validRecipes
 }
 
-func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) DFSResult {
+func FindShortestPath(
+	target *Graph.ElementGraph,
+	graphMap map[string]*Graph.ElementGraph,
+	delay time.Duration,
+	updates chan<- DFSResult,
+) DFSResult {
 	start := time.Now()
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
@@ -144,32 +180,36 @@ func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.Ele
 	var nodeCount int
 	var found bool
 
-	dfsShortest(target, root, graphMap, &nodeCount, &found)
-	pruneIncompletePaths(root, graphMap)
+	dfsShortest(target, root, graphMap, &nodeCount, delay, updates, tree, start) //  &mu
 
-	execTimeMs := time.Since(start).Milliseconds()
-
-	if !found {
-		return DFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 0, ExecutionTimeMs: execTimeMs}
+	return DFSResult{
+		Tree:            tree,
+		NodeCount:       nodeCount,
+		CompletePaths:   boolToInt(found),
+		ExecutionTimeMs: time.Since(start).Milliseconds(),
+		Done:            true,
 	}
-	return DFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 1, ExecutionTimeMs: execTimeMs}
 }
 
-func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
-	if *found {
-		return
-	}
-
+func dfsShortest(
+	current *Graph.ElementGraph,
+	node *Tree.TreeNodeElement,
+	graphMap map[string]*Graph.ElementGraph,
+	nodeCount *int,
+	delay time.Duration,
+	updates chan<- DFSResult,
+	tree *Tree.Tree,
+	start time.Time,
+) {
 	(*nodeCount)++
 
 	for _, recipe := range current.Recipes {
-
-		left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
-		right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
-
 		if recipe.FirstElement.Tier >= current.Tier || recipe.SecondElement.Tier >= current.Tier {
 			continue
 		}
+
+		left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
+		right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
 
 		recipeNode := Tree.TreeNodeRecipe{
 			FirstElement:  left,
@@ -181,18 +221,31 @@ func dfsShortest(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphM
 		left.Parent = &recipeNode
 		right.Parent = &recipeNode
 
-		if isTreeLeaf(left, right, graphMap) {
-			*found = true
-			return
+		time.Sleep(delay)
+
+		if updates != nil {
+			cloned := Tree.CopyTree(tree)
+			updates <- DFSResult{
+				Tree:            cloned,
+				NodeCount:       *nodeCount,
+				CompletePaths:   0,
+				ExecutionTimeMs: time.Since(start).Milliseconds(),
+				Done:            false,
+			}
 		}
 
-		dfsShortest(recipe.FirstElement, left, graphMap, nodeCount, found)
-		dfsShortest(recipe.SecondElement, right, graphMap, nodeCount, found)
+		dfsShortest(recipe.FirstElement, left, graphMap, nodeCount, delay, updates, tree, start)
+		dfsShortest(recipe.SecondElement, right, graphMap, nodeCount, delay, updates, tree, start)
 
-		if !*found {
-			node.Children = node.Children[:len(node.Children)-1]
-		}
+		break
 	}
+}
+
+func boolToInt(b bool) int {
+	if b {
+		return 1
+	}
+	return 0
 }
 
 // usable -> BuildRecipeTree(), FindShortestPath()

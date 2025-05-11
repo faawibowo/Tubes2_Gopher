@@ -42,7 +42,10 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <Analytics></Analytics>
+        <Analytics />
+        <link rel="stylesheet" href="/treant/Treant.css" />
+        <script src="/treant/vendor/raphael.js" defer />
+        <script src="/treant/Treant.min.js" defer />
       </head>
       <body
         className={cn(
@@ -52,10 +55,10 @@ export default function RootLayout({
           fontSerif.variable
         )}
       >
-        <TailwindIndicator />
+        {/* <TailwindIndicator /> */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

@@ -10,13 +10,20 @@ import (
 )
 
 type BFSResult struct {
-	Tree            *Tree.Tree
-	NodeCount       int
-	CompletePaths   int
-	ExecutionTimeMs int64
+	Tree            *Tree.Tree `json:"tree"`
+	NodeCount       int        `json:"nodeCount"`
+	CompletePaths   int        `json:"completePaths"`
+	ExecutionTimeMs int64      `json:"executionTimeMs"`
+	Done            bool       `json:"done"`
 }
 
-func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph, maxCount int) BFSResult {
+func BuildRecipeTree(
+	target *Graph.ElementGraph,
+	graphMap map[string]*Graph.ElementGraph,
+	maxCount int,
+	delay time.Duration,
+	updates chan<- BFSResult,
+) BFSResult {
 	start := time.Now()
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
@@ -27,9 +34,8 @@ func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.Elem
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	bfsMultiThreading(target, root, graphMap, &nodeCount, &pathCount, maxCount, &mu, &wg)
+	bfsMultiThreading(target, root, graphMap, &nodeCount, &pathCount, maxCount, delay, updates, &mu, &wg, tree, start)
 	wg.Wait()
-	execTimeMs := time.Since(start).Milliseconds()
 
 	pruneIncompletePaths(root, graphMap)
 
@@ -37,7 +43,8 @@ func BuildRecipeTree(target *Graph.ElementGraph, graphMap map[string]*Graph.Elem
 		Tree:            tree,
 		NodeCount:       nodeCount,
 		CompletePaths:   pathCount,
-		ExecutionTimeMs: execTimeMs,
+		ExecutionTimeMs: time.Since(start).Milliseconds(),
+		Done:            true,
 	}
 }
 
@@ -49,8 +56,20 @@ func isTreeLeaf(left *Tree.TreeNodeElement, right *Tree.TreeNodeElement, graphMa
 	return Graph.IsLeaf(graphMap[left.Name], graphMap) && Graph.IsLeaf(graphMap[right.Name], graphMap)
 }
 
-func bfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCountPtr *int, pathCountPtr *int, maxCount int, mu *sync.Mutex, wg *sync.WaitGroup) {
-
+func bfsMultiThreading(
+	current *Graph.ElementGraph,
+	node *Tree.TreeNodeElement,
+	graphMap map[string]*Graph.ElementGraph,
+	nodeCountPtr *int,
+	pathCountPtr *int,
+	maxCount int,
+	delay time.Duration,
+	updates chan<- BFSResult,
+	mu *sync.Mutex,
+	wg *sync.WaitGroup,
+	tree *Tree.Tree,
+	start time.Time,
+) {
 	if isEqual(*pathCountPtr, maxCount) {
 		return
 	}
@@ -74,12 +93,12 @@ func bfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 			mu.Unlock()
 
 			for _, recipe := range current.Recipes {
-
 				if recipe.FirstElement.Tier > current.Tier || recipe.SecondElement.Tier > current.Tier {
 					continue
 				}
 
 				wg.Add(1)
+				time.Sleep(delay)
 				go func(r Graph.Recipe, parent *Tree.TreeNodeElement) {
 					defer wg.Done()
 
@@ -94,21 +113,32 @@ func bfsMultiThreading(current *Graph.ElementGraph, node *Tree.TreeNodeElement, 
 					right.Parent = &recipeNode
 
 					mu.Lock()
+					defer mu.Unlock()
+
+					if *pathCountPtr >= maxCount {
+						return
+					}
+
 					if isTreeLeaf(left, right, graphMap) {
 						(*pathCountPtr)++
 					}
-					if *pathCountPtr > maxCount {
-						(*pathCountPtr)--
-						mu.Unlock()
-						return
-					}
+
 					parent.Children = append(parent.Children, recipeNode)
 
-					if isEqual(*pathCountPtr, maxCount) {
-						mu.Unlock()
+					if updates != nil {
+						cloned := Tree.CopyTree(tree)
+						updates <- BFSResult{
+							Tree:            cloned,
+							NodeCount:       *nodeCountPtr,
+							CompletePaths:   *pathCountPtr,
+							ExecutionTimeMs: time.Since(start).Milliseconds(),
+							Done:            false,
+						}
+					}
+
+					if *pathCountPtr >= maxCount {
 						return
 					}
-					mu.Unlock()
 
 					q.Enqueue(&Queue.QueueItem{GraphNode: r.FirstElement, TreeNode: left})
 					q.Enqueue(&Queue.QueueItem{GraphNode: r.SecondElement, TreeNode: right})
@@ -149,7 +179,12 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 	node.Children = validRecipes
 }
 
-func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.ElementGraph) BFSResult {
+func FindShortestPath(
+	target *Graph.ElementGraph,
+	graphMap map[string]*Graph.ElementGraph,
+	delay time.Duration,
+	updates chan<- BFSResult,
+) BFSResult {
 	start := time.Now()
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
@@ -158,22 +193,37 @@ func FindShortestPath(target *Graph.ElementGraph, graphMap map[string]*Graph.Ele
 	var nodeCount int
 	found := false
 
-	bfsShortest(target, root, graphMap, &nodeCount, &found)
+	bfsShortest(target, root, graphMap, &nodeCount, &found, delay, updates, tree)
 	pruneIncompletePaths(root, graphMap)
-
-	execTimeMs := time.Since(start).Milliseconds()
-
-	if !found {
-		return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 0, ExecutionTimeMs: execTimeMs}
+	result := BFSResult{
+		Tree:            tree,
+		NodeCount:       nodeCount,
+		CompletePaths:   1,
+		ExecutionTimeMs: time.Since(start).Milliseconds(),
+		Done:            true,
 	}
-	return BFSResult{Tree: tree, NodeCount: nodeCount, CompletePaths: 1, ExecutionTimeMs: execTimeMs}
+	if !found {
+		result.CompletePaths = 0
+	}
+	return result
 }
 
-func bfsShortest(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMap map[string]*Graph.ElementGraph, nodeCount *int, found *bool) {
+func bfsShortest(
+	target *Graph.ElementGraph,
+	root *Tree.TreeNodeElement,
+	graphMap map[string]*Graph.ElementGraph,
+	nodeCount *int,
+	found *bool,
+	delay time.Duration,
+	updates chan<- BFSResult,
+	tree *Tree.Tree,
+) {
 	q := Queue.NewQueue()
 	q.Enqueue(&Queue.QueueItem{GraphNode: target, TreeNode: root})
 
-	for !q.IsEmpty() {
+	start := time.Now()
+
+	for !q.IsEmpty() && !*found {
 		item := q.Dequeue()
 		if item == nil {
 			continue
@@ -187,19 +237,34 @@ func bfsShortest(target *Graph.ElementGraph, root *Tree.TreeNodeElement, graphMa
 			if recipe.FirstElement.Tier > target.Tier || recipe.SecondElement.Tier > target.Tier {
 				continue
 			}
+
 			left := &Tree.TreeNodeElement{Name: recipe.FirstElement.Name}
 			right := &Tree.TreeNodeElement{Name: recipe.SecondElement.Name}
-			recipeNode := Tree.TreeNodeRecipe{
+			step := Tree.TreeNodeRecipe{
 				FirstElement:  left,
 				SecondElement: right,
 				ResultElement: node,
 			}
 
-			node.Children = append(node.Children, recipeNode)
-			left.Parent = &recipeNode
-			right.Parent = &recipeNode
+			left.Parent = &step
+			right.Parent = &step
+			node.Children = append(node.Children, step)
 
-			if isTreeLeaf(left, right, graphMap) {
+			time.Sleep(delay)
+
+			// ✨ Stream result snapshot
+			if updates != nil {
+				cloned := Tree.CopyTree(tree)
+				updates <- BFSResult{
+					Tree:            cloned,
+					NodeCount:       *nodeCount,
+					CompletePaths:   0,
+					ExecutionTimeMs: time.Since(start).Milliseconds(),
+					Done:            false,
+				}
+			}
+
+			if Graph.IsLeaf(graphMap[left.Name], graphMap) && Graph.IsLeaf(graphMap[right.Name], graphMap) {
 				*found = true
 				return
 			}

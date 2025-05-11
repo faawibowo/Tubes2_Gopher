@@ -9,6 +9,11 @@ import (
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Tree"
 )
 
+type TreeUpdate struct {
+	Done bool       `json:"done"`
+	Tree *Tree.Tree `json:"tree"`
+}
+
 var basic = map[string]bool{
 	"Air": true, "Water": true, "Earth": true, "Fire": true,
 }
@@ -19,8 +24,8 @@ func BuildRecipeTreeBFSConcurrent(
 	target *Graph.ElementGraph,
 	maxPaths int,
 	delay time.Duration,
-	onStep func(*Tree.TreeNodeRecipe),
-	_ map[string]*Graph.ElementGraph, // graphMap kept in signature, but unused
+	updates chan<- *TreeUpdate, // NEW: channel-based streaming
+	_ map[string]*Graph.ElementGraph,
 ) *Tree.Tree {
 
 	root := &Tree.TreeNodeElement{Name: target.Name}
@@ -37,25 +42,23 @@ func BuildRecipeTreeBFSConcurrent(
 		wg        sync.WaitGroup
 		mu        sync.Mutex
 		pathCount int
-		done      bool // ★ new : global stop-flag
+		done      bool
 	)
 
-	checkFullPath := func(r *Tree.TreeNodeRecipe) bool { // ★ new
-		// walk upward until root; every step must be solved
+	checkFullPath := func(r *Tree.TreeNodeRecipe) bool {
 		curr := r
 		for curr != nil {
 			if !isRecipeSolved(curr) {
 				return false
 			}
 			if curr.ResultElement.Parent == nil {
-				return true // reached root; whole path solved
+				return true
 			}
 			curr = curr.ResultElement.Parent
 		}
 		return false
 	}
 
-	//------------------------------------------------------------------
 	queue := []bfsItem{{target, root}}
 
 	for len(queue) > 0 && !done {
@@ -68,7 +71,6 @@ func BuildRecipeTreeBFSConcurrent(
 			}
 
 			for _, recipe := range itm.elem.Recipes {
-				// Check if done already
 				mu.Lock()
 				if done {
 					mu.Unlock()
@@ -76,12 +78,10 @@ func BuildRecipeTreeBFSConcurrent(
 				}
 				mu.Unlock()
 
-				// ─── Tier gate ──────────────────────────────────────────
 				if recipe.FirstElement.Tier > parentTier ||
 					recipe.SecondElement.Tier > parentTier {
 					continue
 				}
-				// ────────────────────────────────────────────────────────
 
 				wg.Add(1)
 				go func(rc Graph.Recipe, parent *Tree.TreeNodeElement) {
@@ -95,7 +95,6 @@ func BuildRecipeTreeBFSConcurrent(
 						ResultElement: parent,
 					}
 
-					// ★ link upward
 					left.Parent = &step
 					right.Parent = &step
 
@@ -110,8 +109,13 @@ func BuildRecipeTreeBFSConcurrent(
 
 					parent.Children = append(parent.Children, step)
 
-					if onStep != nil {
-						onStep(&step)
+					// ✨ Send the step live over the channel
+					if updates != nil {
+						cloned := Tree.CopyTree(tree)
+						updates <- &TreeUpdate{
+							Done: false,
+							Tree: cloned, // if needed
+						}
 					}
 
 					if !isBasic(rc.FirstElement) {

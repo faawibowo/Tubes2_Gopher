@@ -7,19 +7,19 @@ import (
 )
 
 type Tree struct {
-	First *TreeNodeElement
+	First *TreeNodeElement `json:"first"`
 }
 
 type TreeNodeElement struct {
-	Name     string
-	Parent   *TreeNodeRecipe
-	Children []TreeNodeRecipe
+	Name     string           `json:"name"`
+	Children []TreeNodeRecipe `json:"children"`
+	Parent   *TreeNodeRecipe  `json:"-"` // ← ini JANGAN ikut json biar gak circular
 }
 
 type TreeNodeRecipe struct {
-	FirstElement  *TreeNodeElement
-	SecondElement *TreeNodeElement
-	ResultElement *TreeNodeElement
+	FirstElement  *TreeNodeElement `json:"firstElement"`
+	SecondElement *TreeNodeElement `json:"secondElement"`
+	ResultElement *TreeNodeElement `json:"-"` // remove from JSON!
 }
 
 // NewTree : buat pohon dengan satu root

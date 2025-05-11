@@ -70,3 +70,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.Treant .recipeNode {
+  background-color: #e2e8f0; /* tailwind slate-200 */
+  border: 1px dashed #94a3b8; /* slate-400 */
+}

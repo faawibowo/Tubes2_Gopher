@@ -29,7 +29,7 @@ export function MainNav({ items }: MainNavProps) {
         <span className="hidden font-bold lg:inline-block">
           {siteMeta.name}
         </span>
-        <span className="sr-only">Home</span>
+        <span className="sr-only">Main Tree Service</span>
       </Link>
 
       <NavigationMenu>
