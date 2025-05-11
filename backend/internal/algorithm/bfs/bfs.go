@@ -154,25 +154,12 @@ func pruneIncompletePaths(node *Tree.TreeNodeElement, graphMap map[string]*Graph
 		return
 	}
 
-	validRecipes := make([]Tree.TreeNodeRecipe, 0, len(node.Children))
-
+	var validRecipes []Tree.TreeNodeRecipe
 	for _, recipe := range node.Children {
 		pruneIncompletePaths(recipe.FirstElement, graphMap)
 		pruneIncompletePaths(recipe.SecondElement, graphMap)
 
-		if len(recipe.FirstElement.Children) == 0 && len(recipe.SecondElement.Children) == 0 {
-			leaf1, leaf2 := false, false
-			if elem, ok := graphMap[recipe.FirstElement.Name]; ok {
-				leaf1 = Graph.IsLeaf(elem, graphMap)
-			}
-			if elem, ok := graphMap[recipe.SecondElement.Name]; ok {
-				leaf2 = Graph.IsLeaf(elem, graphMap)
-			}
-
-			if leaf1 && leaf2 {
-				validRecipes = append(validRecipes, recipe)
-			}
-		} else {
+		if isRecipeSolved(&recipe) {
 			validRecipes = append(validRecipes, recipe)
 		}
 	}
