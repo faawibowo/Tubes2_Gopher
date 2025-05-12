@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"sort"
+
+	"github.com/faawibowo/Tubes2_Gopher/pkg/scraping"
 )
 
 /* ──────────── Public Types ──────────── */
@@ -36,14 +37,12 @@ func LoadElementsJSON(path string) ([]ElementJSON, error) {
 
 /* ──────────── Scraping + Tier helper ──────────── */
 
-func ToScrapedMapWithTiers(elems []ElementJSON) map[string]ScrapedData {
+func ToScrapedMapWithTiers(elems []scraping.Element) map[string]ScrapedData {
 	// convert to the lightweight struct used by ComputeTiers
-	simple := make([]Element, len(elems))
+	simple := make([]scraping.Element, len(elems))
 	for i, e := range elems {
-		simple[i] = Element{Name: e.Name, Recipes: e.Recipes}
+		simple[i] = scraping.Element{Name: e.Name, Recipes: e.Recipes, Tier: e.Tier}
 	}
-
-	tierMap, _ := ComputeTiers(simple)
 
 	out := make(map[string]ScrapedData)
 	for _, e := range elems {
@@ -55,7 +54,7 @@ func ToScrapedMapWithTiers(elems []ElementJSON) map[string]ScrapedData {
 		}
 		out[e.Name] = ScrapedData{
 			Ingredients: ing,
-			Tier:        tierMap[e.Name], // if absent ⇒ 0
+			Tier:        e.Tier, // if absent ⇒ 0
 		}
 	}
 	return out
@@ -63,10 +62,10 @@ func ToScrapedMapWithTiers(elems []ElementJSON) map[string]ScrapedData {
 
 /* ──────────── Internal helper types ──────────── */
 
-type Element struct {
-	Name    string
-	Recipes [][]string
-}
+// type Element struct {
+// 	Name    string
+// 	Recipes [][]string
+// }
 
 /* ──────────── Tier computation ──────────── */
 
@@ -76,60 +75,60 @@ type Element struct {
 //	Tier-n  →  smallest n such that a recipe exists whose every ingredient tier < n
 //
 // Returns: (tier map, list of unreachable / cyclic names)
-func ComputeTiers(elems []Element) (map[string]int, []string) {
-	// 1. prepare recipe lookup
-	recipes := make(map[string][][]string, len(elems))
-	for _, el := range elems {
-		recipes[el.Name] = el.Recipes
-	}
+// func ComputeTiers(elems []Element) (map[string]int, []string) {
+// 	// 1. prepare recipe lookup
+// 	recipes := make(map[string][][]string, len(elems))
+// 	for _, el := range elems {
+// 		recipes[el.Name] = el.Recipes
+// 	}
 
-	// 2. Tier-0 seeds
-	basics := map[string]struct{}{
-		"Air": {}, "Earth": {}, "Water": {}, "Fire": {},
-	}
+// 	// 2. Tier-0 seeds
+// 	basics := map[string]struct{}{
+// 		"Air": {}, "Earth": {}, "Water": {}, "Fire": {},
+// 	}
 
-	tier := make(map[string]int, len(elems))
-	remaining := make(map[string]struct{}, len(elems))
+// 	tier := make(map[string]int, len(elems))
+// 	remaining := make(map[string]struct{}, len(elems))
 
-	for _, el := range elems {
-		if _, ok := basics[el.Name]; ok {
-			tier[el.Name] = 0
-		} else {
-			remaining[el.Name] = struct{}{}
-		}
-	}
+// 	for _, el := range elems {
+// 		if _, ok := basics[el.Name]; ok {
+// 			tier[el.Name] = 0
+// 		} else {
+// 			remaining[el.Name] = struct{}{}
+// 		}
+// 	}
 
-	// 3. iterative relaxation (BFS on tiers)
-	for changed := true; changed; {
-		changed = false
-		for name := range remaining {
-			for _, r := range recipes[name] {
-				ok, maxDep := true, -1
-				for _, ing := range r {
-					t, has := tier[ing]
-					if !has {
-						ok = false
-						break
-					}
-					if t > maxDep {
-						maxDep = t
-					}
-				}
-				if ok { // all ingredients already have tiers
-					tier[name] = maxDep + 1
-					delete(remaining, name)
-					changed = true
-					break
-				}
-			}
-		}
-	}
+// 	// 3. iterative relaxation (BFS on tiers)
+// 	for changed := true; changed; {
+// 		changed = false
+// 		for name := range remaining {
+// 			for _, r := range recipes[name] {
+// 				ok, maxDep := true, -1
+// 				for _, ing := range r {
+// 					t, has := tier[ing]
+// 					if !has {
+// 						ok = false
+// 						break
+// 					}
+// 					if t > maxDep {
+// 						maxDep = t
+// 					}
+// 				}
+// 				if ok { // all ingredients already have tiers
+// 					tier[name] = maxDep + 1
+// 					delete(remaining, name)
+// 					changed = true
+// 					break
+// 				}
+// 			}
+// 		}
+// 	}
 
-	// 4. whatever’s left is cyclic / unreachable
-	cycles := make([]string, 0, len(remaining))
-	for n := range remaining {
-		cycles = append(cycles, n)
-	}
-	sort.Strings(cycles)
-	return tier, cycles
-}
+// 	// 4. whatever’s left is cyclic / unreachable
+// 	cycles := make([]string, 0, len(remaining))
+// 	for n := range remaining {
+// 		cycles = append(cycles, n)
+// 	}
+// 	sort.Strings(cycles)
+// 	return tier, cycles
+// }

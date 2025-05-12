@@ -16,8 +16,8 @@ import (
 	"github.com/faawibowo/Tubes2_Gopher/internal/algorithm/bfs"
 	"github.com/faawibowo/Tubes2_Gopher/internal/algorithm/dfs"
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
+	"github.com/faawibowo/Tubes2_Gopher/pkg/scraping"
 	"github.com/faawibowo/Tubes2_Gopher/server/ws"
-
 	"github.com/gorilla/handlers"
 )
 
@@ -64,6 +64,7 @@ func main() {
 
 	log.Printf("▶ server running on http://localhost%s\n", serverPort)
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+serverPort, cors(http.DefaultServeMux)))
+
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -79,7 +80,7 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	elements, err := configs.LoadElementsJSON(req.ElementJSONPath)
+	elements, err := scraping.ScrapeDatafromWeb()
 	if err != nil {
 		http.Error(w, "failed to load elements: "+err.Error(), http.StatusInternalServerError)
 		return
