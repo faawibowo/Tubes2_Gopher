@@ -117,12 +117,12 @@ func bfsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := bfs.BuildRecipeTree(
+	result := bfs.FindMultiplePath(
 		target,
-		graphMap,
 		req.MaxPaths,
 		time.Duration(req.DelayMs)*time.Millisecond,
-		nil, // no WebSocket streaming
+		nil,
+		graphMap,
 	)
 	respondJSON(w, result)
 }
@@ -142,12 +142,12 @@ func dfsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := dfs.BuildRecipeTree(
+	result := dfs.FindMultiplePathDree(
 		target,
-		graphMap,
 		req.MaxPaths,
+		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
-		nil,
+		// nil,
 	)
 
 	respondJSON(w, result)
@@ -168,9 +168,8 @@ func shortestBFSHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := bfs.FindShortestPath(
+	result := bfs.FindFirstPath(
 		target,
-		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
 		nil, // no WebSocket streaming
 	)

@@ -66,10 +66,16 @@ func CreateElementGraphMap(scraped map[string][]string, tierMap map[string]int) 
 	return elementMap
 }
 
-func GetBasicElement(graphMap map[string]*ElementGraph) []*ElementGraph {
-	return []*ElementGraph{graphMap["Air"], graphMap["Earth"], graphMap["Water"], graphMap["Fire"]} // starter
+func IsLeafNode(e *ElementGraph) bool {
+	basic := map[string]bool{
+		"Air":   true,
+		"Water": true,
+		"Earth": true,
+		"Fire":  true,
+	}
+	return basic[e.Name]
 }
 
-func IsLeaf(node *ElementGraph, graphMap map[string]*ElementGraph) bool {
-	return node.Name == "Air" || node.Name == "Earth" || node.Name == "Water" || node.Name == "Fire"
+func IsLeafName(name string) bool {
+	return name == "Air" || name == "Earth" || name == "Water" || name == "Fire"
 }

@@ -102,12 +102,20 @@ func HandleBFS(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	result := bfs.BuildRecipeTree(
+	// 	func FindMultiplePath(
+	// 	target *Graph.ElementGraph,
+	// 	maxPaths int,
+	// 	delay time.Duration,
+	// 	updates chan<- *BFSResult,
+	// 	_ map[string]*Graph.ElementGraph,
+	// )
+
+	result := bfs.FindMultiplePath(
 		target,
-		graphMap,
 		req.MaxPaths,
 		time.Duration(req.DelayMs)*time.Millisecond,
 		updates,
+		graphMap,
 	)
 
 	if updates != nil {
@@ -133,7 +141,7 @@ func HandleDFS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	updates := make(chan dfs.DFSResult, 1)
+	updates := make(chan *dfs.DFSResult, 1)
 	done := make(chan struct{})
 	var wg sync.WaitGroup
 
@@ -155,12 +163,12 @@ func HandleDFS(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	// streaming build
-	result := dfs.BuildRecipeTree(
+	result := dfs.FindMultiplePathDree(
 		target,
-		graphMap,
 		req.MaxPaths,
+		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
-		updates,
+		// updates,
 	)
 
 	if updates != nil {
@@ -206,9 +214,8 @@ func HandleShortestBFS(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	result := bfs.FindShortestPath(
+	result := bfs.FindFirstPath(
 		target,
-		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
 		updates,
 	)

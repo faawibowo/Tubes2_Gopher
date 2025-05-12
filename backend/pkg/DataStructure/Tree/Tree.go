@@ -163,7 +163,7 @@ func PruneTreeToBasicPaths(n *TreeNodeElement) bool {
 	}
 
 	if len(n.Children) == 0 {
-		if isBasic(n.Name) {
+		if IsBasic(n.Name) {
 			return true
 		} else {
 			return false
@@ -188,7 +188,7 @@ func PruneTreeToBasicPaths(n *TreeNodeElement) bool {
 	return len(valid) > 0
 }
 
-func isBasic(name string) bool {
+func IsBasic(name string) bool {
 	return name == "Air" || name == "Water" || name == "Earth" || name == "Fire"
 }
 
