@@ -6,11 +6,13 @@
         "Fire",
         "Mist"
       ]
-    ]
+    ],
+    "tier": 0
   },
   {
     "name": "Earth",
-    "recipes": null
+    "recipes": null,
+    "tier": 0
   },
   {
     "name": "Fire",
@@ -23,7 +25,8 @@
         "Fire",
         "Coal"
       ]
-    ]
+    ],
+    "tier": 0
   },
   {
     "name": "Water",
@@ -36,11 +39,8 @@
         "Heat",
         "Snow"
       ]
-    ]
-  },
-  {
-    "name": "Time",
-    "recipes": null
+    ],
+    "tier": 0
   },
   {
     "name": "Dust",
@@ -57,7 +57,8 @@
         "Land",
         "Air"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Energy",
@@ -78,7 +79,8 @@
         "Heat",
         "Science"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Land",
@@ -103,7 +105,8 @@
         "Earth",
         "Stone"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Lava",
@@ -120,7 +123,8 @@
         "Earth",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Mist",
@@ -137,7 +141,8 @@
         "Air",
         "Rain"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Mud",
@@ -150,7 +155,8 @@
         "Water",
         "Soil"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Pressure",
@@ -175,7 +181,8 @@
         "Ocean",
         "Ocean"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Puddle",
@@ -188,7 +195,8 @@
         "Pond",
         "Small"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Smoke",
@@ -229,7 +237,8 @@
         "Fire",
         "Air"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Steam",
@@ -250,7 +259,8 @@
         "Water",
         "Gas"
       ]
-    ]
+    ],
+    "tier": 1
   },
   {
     "name": "Brick",
@@ -275,7 +285,8 @@
         "Clay",
         "Stone"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Continent",
@@ -296,7 +307,8 @@
         "Mountain range",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Earthquake",
@@ -313,7 +325,8 @@
         "Continent",
         "Motion"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Eruption",
@@ -330,7 +343,8 @@
         "Volcano",
         "Time"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Geyser",
@@ -351,7 +365,8 @@
         "Steam",
         "Pressure"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Granite",
@@ -368,7 +383,8 @@
         "Pressure",
         "Rock"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Gunpowder",
@@ -393,7 +409,8 @@
         "Energy",
         "Dust"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Heat",
@@ -414,7 +431,8 @@
         "Air",
         "Energy"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Obsidian",
@@ -431,7 +449,8 @@
         "Lava",
         "Glass"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Pond",
@@ -452,7 +471,8 @@
         "Lake",
         "Small"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Stone",
@@ -469,7 +489,8 @@
         "Air",
         "Lava"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Volcano",
@@ -506,7 +527,8 @@
         "Pressure",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Wind",
@@ -523,7 +545,8 @@
         "Air",
         "Pressure"
       ]
-    ]
+    ],
+    "tier": 2
   },
   {
     "name": "Chimney",
@@ -556,7 +579,8 @@
         "Fireplace",
         "Stone"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Clay",
@@ -589,7 +613,8 @@
         "Rock",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Explosion",
@@ -634,7 +659,8 @@
         "Volcano",
         "Petroleum"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Lake",
@@ -655,7 +681,8 @@
         "Sea",
         "Small"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Metal",
@@ -680,7 +707,8 @@
         "Ore",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Mountain",
@@ -709,7 +737,8 @@
         "Earth",
         "Big"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Planet",
@@ -734,7 +763,8 @@
         "Earth",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Plasma",
@@ -755,7 +785,8 @@
         "Heat",
         "Pressure"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Sand",
@@ -788,7 +819,8 @@
         "Pebble",
         "Small"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Tornado",
@@ -817,7 +849,8 @@
         "Wind",
         "Motion"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Wall",
@@ -834,7 +867,8 @@
         "Stone",
         "Stone"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Warmth",
@@ -847,7 +881,8 @@
         "Heat",
         "Human"
       ]
-    ]
+    ],
+    "tier": 3
   },
   {
     "name": "Atmosphere",
@@ -860,7 +895,8 @@
         "Air",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Atomic bomb",
@@ -877,7 +913,8 @@
         "Explosion",
         "Big"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Avalanche",
@@ -934,7 +971,8 @@
         "Gun",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Beach",
@@ -959,7 +997,8 @@
         "Sand",
         "Wave"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Blade",
@@ -980,7 +1019,8 @@
         "Rock",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Boiler",
@@ -1005,7 +1045,8 @@
         "Steam",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Bullet",
@@ -1026,7 +1067,8 @@
         "Gunpowder",
         "Container"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Dam",
@@ -1067,7 +1109,8 @@
         "Beaver",
         "Water"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Desert",
@@ -1092,7 +1135,8 @@
         "Sand",
         "Vulture"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Dune",
@@ -1117,7 +1161,8 @@
         "Sandstorm",
         "Desert"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Firewall",
@@ -1126,7 +1171,8 @@
         "Fire",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Glass",
@@ -1147,7 +1193,8 @@
         "Sand",
         "Electricity"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Gold",
@@ -1199,20 +1246,9 @@
       [
         "Steel",
         "Alchemist"
-      ],
-      [
-        "Metal",
-        "Philosopher's stone"
-      ],
-      [
-        "Steel",
-        "Philosopher's stone"
-      ],
-      [
-        "Quicksilver",
-        "Philosopher's stone"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Grenade",
@@ -1229,7 +1265,8 @@
         "Explosion",
         "Warrior"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "House",
@@ -1254,7 +1291,8 @@
         "Family",
         "Container"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Mercury",
@@ -1267,7 +1305,8 @@
         "Planet",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Moon",
@@ -1308,7 +1347,8 @@
         "Night",
         "Cheese"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Mountain range",
@@ -1321,7 +1361,8 @@
         "Mountain",
         "Continent"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Plow",
@@ -1354,7 +1395,8 @@
         "Field",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "River",
@@ -1379,7 +1421,8 @@
         "Rain",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Rust",
@@ -1400,7 +1443,8 @@
         "Steel",
         "Oxygen"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Sandstone",
@@ -1417,7 +1461,8 @@
         "Sand",
         "Earth"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Sandstorm",
@@ -1450,7 +1495,8 @@
         "Desert",
         "Wind"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Sea",
@@ -1471,7 +1517,8 @@
         "Ocean",
         "Small"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Solar system",
@@ -1512,7 +1559,8 @@
         "Saturn",
         "Container"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Sun",
@@ -1545,7 +1593,8 @@
         "Planet",
         "Light"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Venus",
@@ -1562,7 +1611,8 @@
         "Planet",
         "Volcano"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Waterfall",
@@ -1591,7 +1641,8 @@
         "Lake",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Wave",
@@ -1632,7 +1683,8 @@
         "Lake",
         "Hurricane"
       ]
-    ]
+    ],
+    "tier": 4
   },
   {
     "name": "Aquarium",
@@ -1661,7 +1713,8 @@
         "Small",
         "Swimming pool"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Aurora",
@@ -1694,7 +1747,8 @@
         "Sun",
         "Atmosphere"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Bank",
@@ -1743,7 +1797,8 @@
         "House",
         "Vault"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Black hole",
@@ -1764,7 +1819,8 @@
         "Darkness",
         "Sun"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Blender",
@@ -1789,7 +1845,8 @@
         "Blade",
         "Motion"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Bridge",
@@ -1818,7 +1875,8 @@
         "Stream",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Cloud",
@@ -1839,7 +1897,8 @@
         "Sky",
         "Water"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Current",
@@ -1876,7 +1935,8 @@
         "Sea",
         "Science"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Eclipse",
@@ -1885,7 +1945,8 @@
         "Sun",
         "Moon"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Factory",
@@ -1898,7 +1959,8 @@
         "House",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Field",
@@ -1939,7 +2001,8 @@
         "Plow",
         "Soil"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Fireworks",
@@ -1952,7 +2015,8 @@
         "Explosion",
         "Atmosphere"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Flood",
@@ -1993,7 +2057,8 @@
         "Tsunami",
         "City"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Galaxy",
@@ -2034,7 +2099,8 @@
         "Supernova",
         "Container"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Glasses",
@@ -2063,7 +2129,8 @@
         "Lens",
         "Lens"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Gun",
@@ -2096,7 +2163,8 @@
         "Bow",
         "Gunpowder"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Hourglass",
@@ -2121,7 +2189,8 @@
         "Time",
         "Container"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Hurricane",
@@ -2142,7 +2211,8 @@
         "Sea",
         "Storm"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Island",
@@ -2154,16 +2224,9 @@
       [
         "Volcano",
         "Ocean"
-      ],
-      [
-        "Maui's fishhook",
-        "Ocean"
-      ],
-      [
-        "Maui's fishhook",
-        "Sea"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Katana",
@@ -2188,7 +2251,8 @@
         "Sword",
         "Ninja"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Mars",
@@ -2201,7 +2265,8 @@
         "Planet",
         "Desert"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Meteoroid",
@@ -2242,7 +2307,8 @@
         "Sun",
         "Boulder"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Mirror",
@@ -2259,7 +2325,8 @@
         "Glass",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Oasis",
@@ -2296,7 +2363,8 @@
         "Desert",
         "Palm"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Ocean",
@@ -2317,7 +2385,8 @@
         "Tide",
         "Container"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Primordial soup",
@@ -2346,7 +2415,8 @@
         "Earth",
         "Sea"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Pyramid",
@@ -2378,12 +2448,9 @@
       [
         "Mummy",
         "Container"
-      ],
-      [
-        "Container",
-        "Book of the dead"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Rainbow",
@@ -2416,7 +2483,8 @@
         "Prism",
         "Light"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Rocket",
@@ -2457,7 +2525,8 @@
         "Atmosphere",
         "Pirate ship"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Safe",
@@ -2486,7 +2555,8 @@
         "Container",
         "Gold"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Salt",
@@ -2515,7 +2585,8 @@
         "Ocean",
         "Mineral"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Scissors",
@@ -2540,7 +2611,8 @@
         "Sword",
         "Paper"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Sky",
@@ -2561,7 +2633,8 @@
         "Cloud",
         "Atmosphere"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Solar cell",
@@ -2586,7 +2659,8 @@
         "Tool",
         "Light"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Sound",
@@ -2607,7 +2681,8 @@
         "Wave",
         "Wolf"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Space station",
@@ -2636,7 +2711,8 @@
         "Atmosphere",
         "Village"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Supernova",
@@ -2657,7 +2733,8 @@
         "Explosion",
         "Space"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Swimming pool",
@@ -2674,7 +2751,8 @@
         "Aquarium",
         "Big"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Sword",
@@ -2691,7 +2769,8 @@
         "Blade",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Telescope",
@@ -2752,7 +2831,8 @@
         "Glass",
         "Supernova"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Tide",
@@ -2773,7 +2853,8 @@
         "Sea",
         "Time"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Tsunami",
@@ -2802,7 +2883,8 @@
         "Ocean",
         "Meteor"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Village",
@@ -2827,7 +2909,8 @@
         "Bakery",
         "Container"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Windmill",
@@ -2852,7 +2935,8 @@
         "Wheel",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 5
   },
   {
     "name": "Acid rain",
@@ -2885,7 +2969,8 @@
         "Cloud",
         "Sickness"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Archipelago",
@@ -2902,7 +2987,8 @@
         "Island",
         "Ocean"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Barn",
@@ -2936,10 +3022,6 @@
         "Goat"
       ],
       [
-        "House",
-        "Babe the blue ox"
-      ],
-      [
         "Container",
         "Livestock"
       ],
@@ -2970,12 +3052,9 @@
       [
         "Container",
         "Goat"
-      ],
-      [
-        "Container",
-        "Babe the blue ox"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Bayonet",
@@ -2992,7 +3071,8 @@
         "Gun",
         "Axe"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Bell",
@@ -3017,7 +3097,8 @@
         "Steel",
         "Hammer"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Binoculars",
@@ -3030,7 +3111,8 @@
         "Glasses",
         "Glasses"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "City",
@@ -3071,7 +3153,8 @@
         "Bank",
         "Post office"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Day",
@@ -3092,7 +3175,8 @@
         "Time",
         "Dawn"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Double rainbow!",
@@ -3101,7 +3185,8 @@
         "Rainbow",
         "Rainbow"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Electricity",
@@ -3146,7 +3231,8 @@
         "Solar cell",
         "Star"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Excalibur",
@@ -3175,7 +3261,8 @@
         "Sword",
         "Fairy tale"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Fence",
@@ -3204,7 +3291,8 @@
         "Garden",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Flamethrower",
@@ -3221,7 +3309,8 @@
         "Gun",
         "Volcano"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Fog",
@@ -3250,7 +3339,8 @@
         "Cloud",
         "Forest"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Galaxy cluster",
@@ -3263,7 +3353,8 @@
         "Galaxy",
         "Container"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Hangar",
@@ -3348,7 +3439,8 @@
         "Spaceship",
         "Barn"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Horizon",
@@ -3377,7 +3469,8 @@
         "Sea",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Jupiter",
@@ -3399,14 +3492,11 @@
         "Gas"
       ],
       [
-        "Planet",
-        "Zeus"
-      ],
-      [
         "Saturn",
         "Big"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Life",
@@ -3459,7 +3549,8 @@
         "Lightning",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Light sword",
@@ -3484,7 +3575,8 @@
         "Sword",
         "Force knight"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Lightning",
@@ -3516,16 +3608,9 @@
       [
         "Land",
         "Storm"
-      ],
-      [
-        "Zeus",
-        "Tool"
-      ],
-      [
-        "Cyclops",
-        "Tool"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Meteor",
@@ -3550,7 +3635,8 @@
         "Meteoroid",
         "Day"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Night",
@@ -3571,7 +3657,8 @@
         "Time",
         "Twilight"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Paint",
@@ -3616,7 +3703,8 @@
         "Liquid",
         "Pencil"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Park",
@@ -3653,7 +3741,8 @@
         "Village",
         "Field"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Prism",
@@ -3674,7 +3763,8 @@
         "Crystal ball",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Rain",
@@ -3691,7 +3781,8 @@
         "Cloud",
         "Water"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Ruins",
@@ -3724,7 +3815,8 @@
         "Time",
         "Farm"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Safety glasses",
@@ -3749,7 +3841,8 @@
         "Glasses",
         "Armor"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Skyscraper",
@@ -3770,7 +3863,8 @@
         "Village",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Space",
@@ -3795,7 +3889,8 @@
         "Solar system",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Storm",
@@ -3816,7 +3911,8 @@
         "Rain",
         "Wind"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Stun gun",
@@ -3841,7 +3937,8 @@
         "Bow",
         "Energy"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Sunglasses",
@@ -3866,7 +3963,8 @@
         "Glasses",
         "Light"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Swim goggles",
@@ -3911,7 +4009,8 @@
         "Sunglasses",
         "River"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Water gun",
@@ -3928,7 +4027,8 @@
         "Gun",
         "Puddle"
       ]
-    ]
+    ],
+    "tier": 6
   },
   {
     "name": "Alien",
@@ -3969,7 +4069,8 @@
         "Life",
         "Jupiter"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Animal",
@@ -3998,7 +4099,8 @@
         "Life",
         "Desert"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Bacteria",
@@ -4015,7 +4117,8 @@
         "Life",
         "Mud"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Clock",
@@ -4060,7 +4163,8 @@
         "Watch",
         "Big"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Darkness",
@@ -4073,7 +4177,8 @@
         "Sky",
         "Twilight"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Dawn",
@@ -4086,7 +4191,8 @@
         "Time",
         "Night"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Death",
@@ -4111,7 +4217,8 @@
         "Graveyard",
         "Philosophy"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Farm",
@@ -4136,7 +4243,8 @@
         "House",
         "Tractor"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Human",
@@ -4161,7 +4269,8 @@
         "Tool",
         "Monkey"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Light bulb",
@@ -4178,7 +4287,8 @@
         "Light",
         "Container"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Magic",
@@ -4199,7 +4309,8 @@
         "Energy",
         "Wizard"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Ozone",
@@ -4220,7 +4331,8 @@
         "Electricity",
         "Air"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Phoenix",
@@ -4241,7 +4353,8 @@
         "Fire",
         "Egg"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Plankton",
@@ -4270,7 +4383,8 @@
         "Bacteria",
         "Sea"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Robot",
@@ -4299,7 +4413,8 @@
         "Golem",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Smog",
@@ -4324,7 +4439,8 @@
         "City",
         "Air"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Snow",
@@ -4345,7 +4461,8 @@
         "Steam",
         "Cold"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Soil",
@@ -4366,7 +4483,8 @@
         "Land",
         "Organic matter"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Spaceship",
@@ -4403,7 +4521,8 @@
         "Astronaut",
         "Container"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Star",
@@ -4432,7 +4551,8 @@
         "Sun",
         "Space"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Twilight",
@@ -4445,7 +4565,8 @@
         "Day",
         "Time"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Universe",
@@ -4461,12 +4582,9 @@
       [
         "Galaxy cluster",
         "Container"
-      ],
-      [
-        "Primordial soup",
-        "Cosmic egg"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Wind turbine",
@@ -4487,7 +4605,8 @@
         "Wind",
         "Electricity"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Wire",
@@ -4512,7 +4631,8 @@
         "Electricity",
         "Rope"
       ]
-    ]
+    ],
+    "tier": 7
   },
   {
     "name": "Alarm clock",
@@ -4541,7 +4661,8 @@
         "Watch",
         "Bell"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Alchemist",
@@ -4554,7 +4675,8 @@
         "Gold",
         "Philosophy"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Allergy",
@@ -4567,7 +4689,8 @@
         "Human",
         "Pollen"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Antarctica",
@@ -4588,7 +4711,8 @@
         "Continent",
         "Ice"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Archeologist",
@@ -4601,7 +4725,8 @@
         "Ruins",
         "Science"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Astronaut",
@@ -4654,7 +4779,8 @@
         "Human",
         "Moon rover"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Astronomer",
@@ -4663,7 +4789,8 @@
         "Human",
         "Telescope"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Beaver",
@@ -4684,7 +4811,8 @@
         "Animal",
         "Stream"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Bird",
@@ -4721,7 +4849,8 @@
         "Time",
         "Pterodactyl"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Blizzard",
@@ -4750,7 +4879,8 @@
         "Snow",
         "Big"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Blood",
@@ -4763,7 +4893,8 @@
         "Warrior",
         "Sword"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Butterfly",
@@ -4784,7 +4915,8 @@
         "Animal",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Cable car",
@@ -4813,7 +4945,8 @@
         "Mountain range",
         "Rope"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Camel",
@@ -4870,7 +5003,8 @@
         "Dune",
         "Cow"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Cat",
@@ -4887,7 +5021,8 @@
         "Animal",
         "Night"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Chain",
@@ -4908,7 +5043,8 @@
         "Wire",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Cold",
@@ -4941,7 +5077,8 @@
         "Space",
         "Thermometer"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Constellation",
@@ -4950,7 +5087,8 @@
         "Star",
         "Star"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Corpse",
@@ -4982,16 +5120,9 @@
       [
         "Human",
         "Arrow"
-      ],
-      [
-        "Jiangshi",
-        "Mirror"
-      ],
-      [
-        "Jiangshi",
-        "Peach of immortality"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Crystal ball",
@@ -5020,7 +5151,8 @@
         "Snow globe",
         "Magic"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Cyborg",
@@ -5073,7 +5205,8 @@
         "Robot",
         "Electrician"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Dew",
@@ -5114,7 +5247,8 @@
         "Fog",
         "Dawn"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Domestication",
@@ -5135,7 +5269,8 @@
         "Farmer",
         "Science"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Dynamite",
@@ -5152,7 +5287,8 @@
         "Gunpowder",
         "Container"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Egg",
@@ -5297,7 +5433,8 @@
         "Tyrannosaurus rex",
         "Tyrannosaurus rex"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Electrician",
@@ -5310,7 +5447,8 @@
         "Human",
         "Wire"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Family",
@@ -5327,7 +5465,8 @@
         "Love",
         "Container"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Farmer",
@@ -5360,7 +5499,8 @@
         "Human",
         "Orchard"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Firefighter",
@@ -5377,7 +5517,8 @@
         "Human",
         "Fire extinguisher"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Fish",
@@ -5414,7 +5555,8 @@
         "Egg",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Force knight",
@@ -5431,7 +5573,8 @@
         "Knight",
         "Light sword"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Frog",
@@ -5452,7 +5595,8 @@
         "Egg",
         "Puddle"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Glacier",
@@ -5477,7 +5621,8 @@
         "Time",
         "Ice"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Gravestone",
@@ -5506,7 +5651,8 @@
         "Graveyard",
         "Rock"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Hacker",
@@ -5527,7 +5673,8 @@
         "Human",
         "Internet"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Hero",
@@ -5548,7 +5695,8 @@
         "Human",
         "Lightning"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Horse",
@@ -5585,7 +5733,8 @@
         "Livestock",
         "Saddle"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Idea",
@@ -5714,7 +5863,8 @@
         "Alchemist",
         "Alchemist"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Igloo",
@@ -5735,7 +5885,8 @@
         "House",
         "Snowman"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Lamp",
@@ -5748,7 +5899,8 @@
         "Light bulb",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Light",
@@ -5761,7 +5913,8 @@
         "Electricity",
         "Flashlight"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Livestock",
@@ -5782,7 +5935,8 @@
         "Animal",
         "Domestication"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Lizard",
@@ -5823,7 +5977,8 @@
         "Blood",
         "Cold"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Love",
@@ -5831,16 +5986,9 @@
       [
         "Human",
         "Human"
-      ],
-      [
-        "Cupid",
-        "Bow"
-      ],
-      [
-        "Cupid",
-        "Arrow"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Meat",
@@ -6009,7 +6157,8 @@
         "Net",
         "Flying fish"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Microscope",
@@ -6034,7 +6183,8 @@
         "Tool",
         "Lens"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Monarch",
@@ -6047,7 +6197,8 @@
         "Human",
         "Excalibur"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Mummy",
@@ -6067,16 +6218,9 @@
       [
         "Corpse",
         "Fabric"
-      ],
-      [
-        "Corpse",
-        "Book of the dead"
-      ],
-      [
-        "Human",
-        "Book of the dead"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Organic matter",
@@ -6097,7 +6241,8 @@
         "Corpse",
         "Science"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Painter",
@@ -6114,7 +6259,8 @@
         "Human",
         "Painting"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Pig",
@@ -6131,7 +6277,8 @@
         "Mud",
         "Cow"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Plant",
@@ -6176,7 +6323,8 @@
         "Rain",
         "Soil"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Potter",
@@ -6189,7 +6337,8 @@
         "Human",
         "Pottery"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Sailor",
@@ -6218,7 +6367,8 @@
         "Human",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Samurai",
@@ -6227,7 +6377,8 @@
         "Human",
         "Katana"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Science",
@@ -6244,7 +6395,8 @@
         "Human",
         "Universe"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Scorpion",
@@ -6269,7 +6421,8 @@
         "Spider",
         "Desert"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Shuriken",
@@ -6294,7 +6447,8 @@
         "Ninja",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Sickness",
@@ -6311,7 +6465,8 @@
         "Human",
         "Sickness"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Ski goggles",
@@ -6348,7 +6503,8 @@
         "Skier",
         "Sunglasses"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Skier",
@@ -6365,7 +6521,8 @@
         "Human",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Sloth",
@@ -6378,7 +6535,8 @@
         "Tree",
         "Manatee"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Snake",
@@ -6395,7 +6553,8 @@
         "Electric eel",
         "Land"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Snow globe",
@@ -6472,7 +6631,8 @@
         "Glass",
         "Blizzard"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Snowball",
@@ -6493,7 +6653,8 @@
         "Snow",
         "Earth"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Snowman",
@@ -6522,7 +6683,8 @@
         "Snowball",
         "Snowball"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Starfish",
@@ -6539,7 +6701,8 @@
         "Star",
         "Sea"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Sundial",
@@ -6584,7 +6747,8 @@
         "Day",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Surfer",
@@ -6597,7 +6761,8 @@
         "Human",
         "Beach"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Swimmer",
@@ -6618,7 +6783,8 @@
         "Human",
         "Swimming pool"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Tool",
@@ -6659,7 +6825,8 @@
         "Wood",
         "Rock"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Turtle",
@@ -6676,7 +6843,8 @@
         "Animal",
         "Beach"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Ufo",
@@ -6705,7 +6873,8 @@
         "Alien",
         "Container"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Warrior",
@@ -6718,7 +6887,8 @@
         "Human",
         "Bow"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Watch",
@@ -6731,7 +6901,8 @@
         "Clock",
         "Small"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Wizard",
@@ -6752,7 +6923,8 @@
         "Human",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Wolf",
@@ -6773,7 +6945,8 @@
         "Dog",
         "Blood"
       ]
-    ]
+    ],
+    "tier": 8
   },
   {
     "name": "Airplane",
@@ -6930,7 +7103,8 @@
         "Pilot",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Algae",
@@ -6951,7 +7125,8 @@
         "Grass",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Alligator",
@@ -6968,7 +7143,8 @@
         "Lizard",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Angel",
@@ -6980,24 +7156,9 @@
       [
         "Human",
         "Light"
-      ],
-      [
-        "Human",
-        "Heaven"
-      ],
-      [
-        "Human",
-        "Good"
-      ],
-      [
-        "Good",
-        "Demon"
-      ],
-      [
-        "Good",
-        "Deity"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Arctic",
@@ -7010,7 +7171,8 @@
         "Cold",
         "Ocean"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ash",
@@ -7058,16 +7220,9 @@
       [
         "Vampire",
         "Dawn"
-      ],
-      [
-        "Vampire",
-        "Holy grail"
-      ],
-      [
-        "Vampire",
-        "Holy water"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Bacon",
@@ -7088,7 +7243,8 @@
         "Ham",
         "Campfire"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Birdcage",
@@ -7109,7 +7265,8 @@
         "Bird",
         "Cage"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Birdhouse",
@@ -7126,7 +7283,8 @@
         "Egg",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Bone",
@@ -7151,7 +7309,8 @@
         "Wolf",
         "Meat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Butcher",
@@ -7164,7 +7323,8 @@
         "Human",
         "Ham"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cactus",
@@ -7185,7 +7345,8 @@
         "Desert",
         "Tree"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cage",
@@ -7238,7 +7399,8 @@
         "Hamster",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Carbon dioxide",
@@ -7271,7 +7433,8 @@
         "Grass",
         "Night"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Carrot",
@@ -7292,7 +7455,8 @@
         "Snowman",
         "Sun"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Castle",
@@ -7344,24 +7508,9 @@
       [
         "Monarch",
         "Wall"
-      ],
-      [
-        "Paladin",
-        "Stone"
-      ],
-      [
-        "Paladin",
-        "Wall"
-      ],
-      [
-        "Paladin",
-        "House"
-      ],
-      [
-        "Paladin",
-        "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Catnip",
@@ -7377,12 +7526,9 @@
       [
         "Cat",
         "Flower"
-      ],
-      [
-        "Baast",
-        "Plant"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cave",
@@ -7419,7 +7565,8 @@
         "Container",
         "Bat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Centaur",
@@ -7432,7 +7579,8 @@
         "Horse",
         "Story"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Chameleon",
@@ -7461,7 +7609,8 @@
         "Turtle",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Charcoal",
@@ -7482,7 +7631,8 @@
         "Fire",
         "Organic matter"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Chicken",
@@ -7527,7 +7677,8 @@
         "Egg",
         "Farm"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Chill",
@@ -7544,7 +7695,8 @@
         "Human",
         "Ice"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Coal",
@@ -7573,7 +7725,8 @@
         "Pressure",
         "Peat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Computer",
@@ -7598,7 +7751,8 @@
         "Email",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cotton",
@@ -7623,7 +7777,8 @@
         "Plant",
         "Sheep"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cow",
@@ -7644,7 +7799,8 @@
         "Livestock",
         "Grass"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Crow",
@@ -7681,7 +7837,8 @@
         "Hummingbird",
         "Field"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Cuckoo",
@@ -7710,7 +7867,8 @@
         "Hummingbird",
         "Alarm clock"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Dinosaur",
@@ -7723,7 +7881,8 @@
         "Lizard",
         "Big"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Dog",
@@ -7756,7 +7915,8 @@
         "Wolf",
         "Campfire"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Don quixote",
@@ -7777,7 +7937,8 @@
         "Windmill",
         "Hero"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Dragon",
@@ -7805,12 +7966,9 @@
       [
         "Lizard",
         "Legend"
-      ],
-      [
-        "Dinosaur",
-        "Monster"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Duck",
@@ -7871,7 +8029,8 @@
         "Chicken",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Eagle",
@@ -7884,7 +8043,8 @@
         "Bird",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Egg timer",
@@ -7901,7 +8061,8 @@
         "Egg",
         "Watch"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Electric eel",
@@ -7910,7 +8071,8 @@
         "Fish",
         "Electricity"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Family tree",
@@ -7927,7 +8089,8 @@
         "Time",
         "Family"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Firestation",
@@ -7952,7 +8115,8 @@
         "Firefighter",
         "City"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Fishing rod",
@@ -8005,7 +8169,8 @@
         "Piranha",
         "Thread"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Flashlight",
@@ -8026,7 +8191,8 @@
         "Human",
         "Lamp"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Flower",
@@ -8063,7 +8229,8 @@
         "Garden",
         "Seed"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Flying fish",
@@ -8080,7 +8247,8 @@
         "Fish",
         "Air"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Fossil",
@@ -8145,7 +8313,8 @@
         "Skeleton",
         "Time"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Frankenstein's monster",
@@ -8173,16 +8342,9 @@
       [
         "Zombie",
         "Lightning"
-      ],
-      [
-        "Monster",
-        "Story"
-      ],
-      [
-        "Monster",
-        "Corpse"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Fridge",
@@ -8223,7 +8385,8 @@
         "Ice cream",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Garden",
@@ -8264,7 +8427,8 @@
         "Flower",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Gas",
@@ -8281,7 +8445,8 @@
         "Energy",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ghost",
@@ -8299,10 +8464,6 @@
         "Legend"
       ],
       [
-        "Graveyard",
-        "Curse"
-      ],
-      [
         "Grave",
         "Night"
       ],
@@ -8313,10 +8474,6 @@
       [
         "Grave",
         "Legend"
-      ],
-      [
-        "Grave",
-        "Curse"
       ],
       [
         "Gravestone",
@@ -8342,7 +8499,8 @@
         "Night",
         "Legend"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Goat",
@@ -8371,7 +8529,8 @@
         "Cow",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Grass",
@@ -8384,7 +8543,8 @@
         "Plant",
         "Land"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Grave",
@@ -8425,7 +8585,8 @@
         "Coffin",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Graveyard",
@@ -8458,7 +8619,8 @@
         "Gravestone",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Greenhouse",
@@ -8495,7 +8657,8 @@
         "Plant",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ham",
@@ -8508,7 +8671,8 @@
         "Smoke",
         "Pig"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Hammer",
@@ -8533,7 +8697,8 @@
         "Tool",
         "Woodpecker"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Hedge",
@@ -8562,7 +8727,8 @@
         "Garden",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Hippo",
@@ -8583,7 +8749,8 @@
         "Cow",
         "Water"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Horseshoe",
@@ -8596,7 +8763,8 @@
         "Horse",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Hospital",
@@ -8629,7 +8797,8 @@
         "Doctor",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Hummingbird",
@@ -8678,7 +8847,8 @@
         "Garden",
         "Seagull"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ice",
@@ -8699,7 +8869,8 @@
         "Puddle",
         "Solid"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Iceberg",
@@ -8728,7 +8899,8 @@
         "Ocean",
         "Arctic"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ivy",
@@ -8741,7 +8913,8 @@
         "Grass",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Jerky",
@@ -8762,7 +8935,8 @@
         "Steak",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Knight",
@@ -8783,7 +8957,8 @@
         "Warrior",
         "Horse"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Lava lamp",
@@ -8800,7 +8975,8 @@
         "Lamp",
         "Volcano"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Leather",
@@ -8841,7 +9017,8 @@
         "Tool",
         "Sheep"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Lens",
@@ -8854,7 +9031,8 @@
         "Glass",
         "Engineer"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Lighthouse",
@@ -8891,7 +9069,8 @@
         "Spotlight",
         "Beach"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Lion",
@@ -8912,7 +9091,8 @@
         "Cat",
         "Monarch"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Liquid",
@@ -8929,7 +9109,8 @@
         "Energy",
         "Solid"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Machine",
@@ -8962,7 +9143,8 @@
         "Boiler",
         "Chain"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Magma",
@@ -8975,7 +9157,8 @@
         "Volcano",
         "Science"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Medusa",
@@ -8996,7 +9179,8 @@
         "Snake",
         "Hero"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Mermaid",
@@ -9018,14 +9202,11 @@
         "Swimmer"
       ],
       [
-        "Fish",
-        "Selkie"
-      ],
-      [
         "Swimmer",
         "Magic"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Mineral",
@@ -9054,7 +9235,8 @@
         "Organic matter",
         "Mountain"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Moss",
@@ -9095,7 +9277,8 @@
         "Boulder",
         "Algae"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Moth",
@@ -9124,7 +9307,8 @@
         "Butterfly",
         "Flashlight"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Motion",
@@ -9165,7 +9349,8 @@
         "River",
         "Philosophy"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Nest",
@@ -9202,7 +9387,8 @@
         "Egg",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ninja",
@@ -9211,7 +9397,8 @@
         "Human",
         "Shuriken"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ninja turtle",
@@ -9228,7 +9415,8 @@
         "Turtle",
         "Katana"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Omelette",
@@ -9245,7 +9433,8 @@
         "Egg",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Optical fiber",
@@ -9262,7 +9451,8 @@
         "Light",
         "Internet"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ostrich",
@@ -9279,7 +9469,8 @@
         "Bird",
         "Big"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Owl",
@@ -9300,7 +9491,8 @@
         "Bird",
         "Twilight"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Oxygen",
@@ -9337,7 +9529,8 @@
         "Carbon dioxide",
         "Algae"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Peacock",
@@ -9354,7 +9547,8 @@
         "Bird",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Pegasus",
@@ -9375,7 +9569,8 @@
         "Unicorn",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Penguin",
@@ -9400,7 +9595,8 @@
         "Animal",
         "Antarctica"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Philosophy",
@@ -9417,7 +9613,8 @@
         "Egg",
         "Chicken"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Pigeon",
@@ -9442,7 +9639,8 @@
         "Bird",
         "Village"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Piggy bank",
@@ -9459,7 +9657,8 @@
         "Pig",
         "Gold"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Piranha",
@@ -9472,7 +9671,8 @@
         "Fish",
         "Wolf"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Pirate",
@@ -9493,7 +9693,8 @@
         "Sailor",
         "Gun"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Platypus",
@@ -9510,7 +9711,8 @@
         "Beaver",
         "Seagull"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Pollen",
@@ -9531,7 +9733,8 @@
         "Flower",
         "Wind"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Pottery",
@@ -9544,7 +9747,8 @@
         "Clay",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Reed",
@@ -9581,7 +9785,8 @@
         "Grass",
         "River"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Ring",
@@ -9614,7 +9819,8 @@
         "Love",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Roe",
@@ -9643,7 +9849,8 @@
         "Egg",
         "Flying fish"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Rope",
@@ -9672,7 +9879,8 @@
         "Tool",
         "Pirate ship"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Rose",
@@ -9693,7 +9901,8 @@
         "Blade",
         "Flower"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Saddle",
@@ -9710,7 +9919,8 @@
         "Horse",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Seagull",
@@ -9751,7 +9961,8 @@
         "Rat",
         "Beach"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Seahorse",
@@ -9776,7 +9987,8 @@
         "Horse",
         "Fish"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Seasickness",
@@ -9805,7 +10017,8 @@
         "Sickness",
         "Steamboat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Seaweed",
@@ -9830,7 +10043,8 @@
         "Grass",
         "Ocean"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Shark",
@@ -9859,7 +10073,8 @@
         "Blood",
         "Fish"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Sheep",
@@ -9888,7 +10103,8 @@
         "Mountain goat",
         "Domestication"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Skeleton",
@@ -9905,7 +10121,8 @@
         "Bone",
         "Corpse"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Snowboard",
@@ -9934,7 +10151,8 @@
         "Surfer",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Solid",
@@ -9947,7 +10165,8 @@
         "Earth",
         "Science"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Spotlight",
@@ -9964,7 +10183,8 @@
         "Light",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Steak",
@@ -9985,7 +10205,8 @@
         "Cow",
         "Fire"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Stethoscope",
@@ -10010,7 +10231,8 @@
         "Tool",
         "Hospital"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Story",
@@ -10023,7 +10245,8 @@
         "Human",
         "Hero"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Sunflower",
@@ -10036,7 +10259,8 @@
         "Sun",
         "Flower"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Swordfish",
@@ -10057,7 +10281,8 @@
         "Shark",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Tobacco",
@@ -10074,7 +10299,8 @@
         "Grass",
         "Smoke"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Toolbox",
@@ -10123,7 +10349,8 @@
         "Chain",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Toucan",
@@ -10152,7 +10379,8 @@
         "Palm",
         "Pigeon"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Tree",
@@ -10173,7 +10401,8 @@
         "Nest",
         "Container"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Umbrella",
@@ -10194,7 +10423,8 @@
         "Storm",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Unicorn",
@@ -10219,7 +10449,8 @@
         "Horse",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Vampire",
@@ -10236,7 +10467,8 @@
         "Human",
         "Bat"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Vegetable",
@@ -10261,7 +10493,8 @@
         "Plant",
         "Domestication"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Vulture",
@@ -10326,7 +10559,8 @@
         "Desert",
         "Duck"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Wand",
@@ -10347,7 +10581,8 @@
         "Wizard",
         "Pencil"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Werewolf",
@@ -10359,12 +10594,9 @@
       [
         "Human",
         "Werewolf"
-      ],
-      [
-        "Wolf",
-        "Monster"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Wheel",
@@ -10397,7 +10629,8 @@
         "Tool",
         "River"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Wild boar",
@@ -10414,7 +10647,8 @@
         "Pig",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Windsurfer",
@@ -10423,7 +10657,8 @@
         "Wind",
         "Surfer"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Zombie",
@@ -10443,12 +10678,9 @@
       [
         "Human",
         "Zombie"
-      ],
-      [
-        "Corpse",
-        "Necromancer"
       ]
-    ]
+    ],
+    "tier": 9
   },
   {
     "name": "Alpaca",
@@ -10465,7 +10697,8 @@
         "Sheep",
         "Mountain goat"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Angler",
@@ -10478,7 +10711,8 @@
         "Sailor",
         "Fishing rod"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Ant",
@@ -10491,7 +10725,8 @@
         "Grass",
         "Spider"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Battery",
@@ -10512,7 +10747,8 @@
         "Electricity",
         "Ore"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Bee",
@@ -10525,7 +10761,8 @@
         "Animal",
         "Garden"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Bicycle",
@@ -10542,7 +10779,8 @@
         "Wheel",
         "Machine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Big",
@@ -10571,7 +10809,8 @@
         "Planet",
         "Philosophy"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Bonsai tree",
@@ -10592,7 +10831,8 @@
         "Tree",
         "Small"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Cannon",
@@ -10613,7 +10853,8 @@
         "Gun",
         "Castle"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Car",
@@ -10654,7 +10895,8 @@
         "Cart",
         "Combustion engine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Cauldron",
@@ -10683,7 +10925,8 @@
         "Pottery",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Caviar",
@@ -10696,7 +10939,8 @@
         "Roe",
         "Cook"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Chicken coop",
@@ -10716,20 +10960,9 @@
       [
         "Chicken",
         "Container"
-      ],
-      [
-        "Cockatrice",
-        "House"
-      ],
-      [
-        "Cockatrice",
-        "Barn"
-      ],
-      [
-        "Cockatrice",
-        "Container"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Chicken soup",
@@ -10750,7 +10983,8 @@
         "Chicken wing",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Chicken wing",
@@ -10763,7 +10997,8 @@
         "Chicken",
         "Bbq"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Christmas tree",
@@ -10788,7 +11023,8 @@
         "Tree",
         "Gift"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Coconut",
@@ -10817,7 +11053,8 @@
         "Beach",
         "Vegetable"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Combustion engine",
@@ -10842,7 +11079,8 @@
         "Explosion",
         "Steam engine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Computer mouse",
@@ -10855,7 +11093,8 @@
         "Computer",
         "Animal"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Container",
@@ -10884,7 +11123,8 @@
         "Philosophy",
         "Bucket"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Cook",
@@ -10905,7 +11145,8 @@
         "Human",
         "Nuts"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Coral",
@@ -10934,7 +11175,8 @@
         "Bone",
         "Ocean"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Cyclist",
@@ -10947,7 +11189,8 @@
         "Human",
         "Bicycle"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Diamond",
@@ -10956,7 +11199,8 @@
         "Coal",
         "Pressure"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Doctor",
@@ -10969,7 +11213,8 @@
         "Human",
         "Stethoscope"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Doge",
@@ -10982,7 +11227,8 @@
         "Dog",
         "Computer"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Doghouse",
@@ -11011,7 +11257,8 @@
         "Husky",
         "Container"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Drone",
@@ -11032,7 +11279,8 @@
         "Robot",
         "Seaplane"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Dry ice",
@@ -11045,7 +11293,8 @@
         "Carbon dioxide",
         "Ice"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Duckling",
@@ -11054,7 +11303,8 @@
         "Egg",
         "Duck"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Engineer",
@@ -11067,7 +11317,8 @@
         "Human",
         "Steam engine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Fairy tale",
@@ -11091,16 +11342,9 @@
       [
         "Story",
         "Unicorn"
-      ],
-      [
-        "Story",
-        "Faerie"
-      ],
-      [
-        "Story",
-        "Elf"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Faun",
@@ -11137,7 +11381,8 @@
         "Magic",
         "Mountain goat"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Fire extinguisher",
@@ -11162,7 +11407,8 @@
         "Carbon dioxide",
         "Boiler"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Forest",
@@ -11183,7 +11429,8 @@
         "Tree",
         "Container"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Fox",
@@ -11212,7 +11459,8 @@
         "Chicken coop",
         "Dog"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Fruit",
@@ -11241,7 +11489,8 @@
         "Farmer",
         "Orchard"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Gardener",
@@ -11254,7 +11503,8 @@
         "Farmer",
         "Garden"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Gnome",
@@ -11275,7 +11525,8 @@
         "Garden",
         "Fairy tale"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Golem",
@@ -11300,7 +11551,8 @@
         "Statue",
         "Legend"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Hail",
@@ -11329,7 +11581,8 @@
         "Ice",
         "Sky"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Harp",
@@ -11350,7 +11603,8 @@
         "Wire",
         "Music"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Hay",
@@ -11395,7 +11649,8 @@
         "Pitchfork",
         "Farmer"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Helicopter",
@@ -11424,7 +11679,8 @@
         "Seaplane",
         "Wind turbine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Husky",
@@ -11453,7 +11709,8 @@
         "Dog",
         "Glacier"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Internet",
@@ -11474,7 +11731,8 @@
         "Computer",
         "Net"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Jack-o'-lantern",
@@ -11515,7 +11773,8 @@
         "Vegetable",
         "Night"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Juice",
@@ -11564,7 +11823,8 @@
         "Vegetable",
         "Water"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Kaiju",
@@ -11584,16 +11844,9 @@
       [
         "Dinosaur",
         "Story"
-      ],
-      [
-        "Monster",
-        "City"
-      ],
-      [
-        "Monster",
-        "Skyscraper"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Lasso",
@@ -11622,7 +11875,8 @@
         "Rope",
         "Goat"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Lawn",
@@ -11643,7 +11897,8 @@
         "Field",
         "Lawn mower"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Lawn mower",
@@ -11684,7 +11939,8 @@
         "Helicopter",
         "Field"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Leaf",
@@ -11705,7 +11961,8 @@
         "Forest",
         "Wind"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Legend",
@@ -11734,7 +11991,8 @@
         "Fairy tale",
         "Big"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Lumberjack",
@@ -11755,7 +12013,8 @@
         "Human",
         "Tree"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Manatee",
@@ -11780,7 +12039,8 @@
         "Cow",
         "River"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Milk",
@@ -11817,7 +12077,8 @@
         "Goat",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Minotaur",
@@ -11837,12 +12098,9 @@
       [
         "Cow",
         "Legend"
-      ],
-      [
-        "Cow",
-        "Monster"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Mold",
@@ -11871,7 +12129,8 @@
         "Vegetable",
         "Bacteria"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Monkey",
@@ -11880,7 +12139,8 @@
         "Animal",
         "Tree"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Mountain goat",
@@ -11893,7 +12153,8 @@
         "Goat",
         "Mountain range"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Narwhal",
@@ -11926,7 +12187,8 @@
         "Unicorn",
         "Flying fish"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Nessie",
@@ -11947,7 +12209,8 @@
         "Dinosaur",
         "Story"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Net",
@@ -11972,7 +12235,8 @@
         "Flying fish",
         "Rope"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Nuts",
@@ -11989,7 +12253,8 @@
         "Tree",
         "Domestication"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Oil",
@@ -12010,7 +12275,8 @@
         "Sunflower",
         "Windmill"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Ore",
@@ -12039,7 +12305,8 @@
         "Hammer",
         "Mountain"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Paleontologist",
@@ -12060,7 +12327,8 @@
         "Science",
         "Fossil"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Palm",
@@ -12077,7 +12345,8 @@
         "Tree",
         "Sand"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Parachute",
@@ -12106,7 +12375,8 @@
         "Umbrella",
         "Atmosphere"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Parrot",
@@ -12127,7 +12397,8 @@
         "Pigeon",
         "Pirate ship"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Peat",
@@ -12148,7 +12419,8 @@
         "Time",
         "Grass"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Perfume",
@@ -12189,7 +12461,8 @@
         "Sunflower",
         "Alcohol"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Petroleum",
@@ -12210,7 +12483,8 @@
         "Fossil",
         "Water"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Pilot",
@@ -12223,7 +12497,8 @@
         "Human",
         "Seaplane"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Pipe",
@@ -12236,7 +12511,8 @@
         "Tobacco",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Pirate ship",
@@ -12261,7 +12537,8 @@
         "Pirate",
         "House"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Polar bear",
@@ -12274,7 +12551,8 @@
         "Animal",
         "Arctic"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Potato",
@@ -12283,7 +12561,8 @@
         "Earth",
         "Vegetable"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Pterodactyl",
@@ -12312,7 +12591,8 @@
         "Dinosaur",
         "Airplane"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Pumpkin",
@@ -12333,7 +12613,8 @@
         "Plant",
         "Jack-o'-lantern"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Quicksilver",
@@ -12342,7 +12623,8 @@
         "Metal",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Rabbit",
@@ -12355,7 +12637,8 @@
         "Rabbit",
         "Rabbit"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Rivulet",
@@ -12368,7 +12651,8 @@
         "Puddle",
         "Motion"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Sand castle",
@@ -12389,7 +12673,8 @@
         "Castle",
         "Dune"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Sap",
@@ -12398,7 +12683,8 @@
         "Tree",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Saturn",
@@ -12411,7 +12697,8 @@
         "Jupiter",
         "Small"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Scalpel",
@@ -12440,7 +12727,8 @@
         "Sword",
         "Ambulance"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Scythe",
@@ -12469,7 +12757,8 @@
         "Axe",
         "Wheat"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Seal",
@@ -12494,7 +12783,8 @@
         "Dog",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Seaplane",
@@ -12515,7 +12805,8 @@
         "Airplane",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Seed",
@@ -12532,7 +12823,8 @@
         "Time",
         "Flower"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Skateboard",
@@ -12549,7 +12841,8 @@
         "Wheel",
         "Ski goggles"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Small",
@@ -12602,7 +12895,8 @@
         "Philosophy",
         "Seahorse"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Snowboarder",
@@ -12611,7 +12905,8 @@
         "Human",
         "Snowboard"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Soda",
@@ -12628,7 +12923,8 @@
         "Carbon dioxide",
         "Tea"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Sphinx",
@@ -12649,7 +12945,8 @@
         "Lion",
         "Stone"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Statue",
@@ -12721,76 +13018,9 @@
       [
         "Medusa",
         "Mirror"
-      ],
-      [
-        "Troll",
-        "Sun"
-      ],
-      [
-        "Troll",
-        "Dawn"
-      ],
-      [
-        "Cockatrice",
-        "Human"
-      ],
-      [
-        "Cockatrice",
-        "Hacker"
-      ],
-      [
-        "Cockatrice",
-        "Engineer"
-      ],
-      [
-        "Cockatrice",
-        "Lumberjack"
-      ],
-      [
-        "Cockatrice",
-        "Pilot"
-      ],
-      [
-        "Cockatrice",
-        "Sailor"
-      ],
-      [
-        "Cockatrice",
-        "Farmer"
-      ],
-      [
-        "Cockatrice",
-        "Firefighter"
-      ],
-      [
-        "Cockatrice",
-        "Surfer"
-      ],
-      [
-        "Cockatrice",
-        "Astronaut"
-      ],
-      [
-        "Cockatrice",
-        "Butcher"
-      ],
-      [
-        "Cockatrice",
-        "Doctor"
-      ],
-      [
-        "Cockatrice",
-        "Baker"
-      ],
-      [
-        "Cockatrice",
-        "Drunk"
-      ],
-      [
-        "Cockatrice",
-        "Mirror"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Steam engine",
@@ -12807,7 +13037,8 @@
         "Boiler",
         "Wheel"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Steel",
@@ -12828,7 +13059,8 @@
         "Metal",
         "Ash"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Stream",
@@ -12845,7 +13077,8 @@
         "River",
         "Small"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Sushi",
@@ -12858,7 +13091,8 @@
         "Caviar",
         "Seaweed"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Swamp",
@@ -12895,7 +13129,8 @@
         "Reed",
         "Mud"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "The one ring",
@@ -12908,7 +13143,8 @@
         "Ring",
         "Magic"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Thread",
@@ -12929,7 +13165,8 @@
         "Cotton",
         "Machine"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Treehouse",
@@ -12942,7 +13179,8 @@
         "Tree",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Trojan horse",
@@ -12959,7 +13197,8 @@
         "Horse",
         "Statue"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Tunnel",
@@ -13000,7 +13239,8 @@
         "Cave",
         "Hill"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Tyrannosaurus rex",
@@ -13017,7 +13257,8 @@
         "Dinosaur",
         "Monarch"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Vase",
@@ -13054,7 +13295,8 @@
         "Bottle",
         "Rose"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Water lily",
@@ -13075,7 +13317,8 @@
         "Flower",
         "Stream"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Wheat",
@@ -13092,7 +13335,8 @@
         "Grass",
         "Field"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Wood",
@@ -13136,16 +13380,9 @@
       [
         "Forest",
         "Lumberjack"
-      ],
-      [
-        "Tree",
-        "Paul bunyan"
-      ],
-      [
-        "Forest",
-        "Paul bunyan"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Woodpecker",
@@ -13162,7 +13399,8 @@
         "Bird",
         "Forest"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Wool",
@@ -13179,7 +13417,8 @@
         "Sheep",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Yeti",
@@ -13215,24 +13454,9 @@
       [
         "Antarctica",
         "Legend"
-      ],
-      [
-        "Monster",
-        "Mountain"
-      ],
-      [
-        "Monster",
-        "Mountain range"
-      ],
-      [
-        "Monster",
-        "Glacier"
-      ],
-      [
-        "Monster",
-        "Antarctica"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Zoo",
@@ -13245,7 +13469,8 @@
         "Animal",
         "Cage"
       ]
-    ]
+    ],
+    "tier": 10
   },
   {
     "name": "Alcohol",
@@ -13266,7 +13491,8 @@
         "Fruit",
         "Sun"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Ambulance",
@@ -13279,7 +13505,8 @@
         "Car",
         "Doctor"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Ant farm",
@@ -13304,7 +13531,8 @@
         "Anthill",
         "Jar"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Anthill",
@@ -13333,7 +13561,8 @@
         "Ant",
         "Soil"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Arrow",
@@ -13346,7 +13575,8 @@
         "Wood",
         "Bow"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Aviary",
@@ -13355,7 +13585,8 @@
         "Big",
         "Birdcage"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Axe",
@@ -13375,12 +13606,9 @@
       [
         "Tool",
         "Lumberjack"
-      ],
-      [
-        "Tool",
-        "Paul bunyan"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Banana",
@@ -13389,7 +13617,8 @@
         "Fruit",
         "Monkey"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Beehive",
@@ -13418,7 +13647,8 @@
         "Container",
         "Bee"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Beekeeper",
@@ -13439,7 +13669,8 @@
         "Farmer",
         "Bee"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Blood bag",
@@ -13456,7 +13687,8 @@
         "Blood",
         "Bottle"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Boat",
@@ -13481,7 +13713,8 @@
         "Wood",
         "River"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Book",
@@ -13514,7 +13747,8 @@
         "Container",
         "Idea"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Bottle",
@@ -13567,7 +13801,8 @@
         "Container",
         "Liquid"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Boulder",
@@ -13596,7 +13831,8 @@
         "Rock",
         "Earth"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Bow",
@@ -13608,16 +13844,9 @@
       [
         "Wood",
         "Wire"
-      ],
-      [
-        "Tool",
-        "Elf"
-      ],
-      [
-        "Tool",
-        "Cupid"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Broom",
@@ -13625,12 +13854,9 @@
       [
         "Wood",
         "Hay"
-      ],
-      [
-        "Tool",
-        "Baba yaga"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Bucket",
@@ -13663,7 +13889,8 @@
         "Chicken wing",
         "Box"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Bus",
@@ -13684,7 +13911,8 @@
         "Car",
         "Big"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Butter",
@@ -13705,7 +13933,8 @@
         "Milk",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Butterfly net",
@@ -13718,7 +13947,8 @@
         "Bee",
         "Net"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Campfire",
@@ -13727,7 +13957,8 @@
         "Fire",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Cart",
@@ -13736,7 +13967,8 @@
         "Wheel",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Cashmere",
@@ -13761,7 +13993,8 @@
         "Mountain goat",
         "Wool"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Cereal",
@@ -13778,7 +14011,8 @@
         "Wheat",
         "Coconut milk"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Chainsaw",
@@ -13803,7 +14037,8 @@
         "Lumberjack",
         "Electricity"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Cheese",
@@ -13824,7 +14059,8 @@
         "Milk",
         "Bacteria"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Christmas stocking",
@@ -13845,7 +14081,8 @@
         "Santa",
         "Wool"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Closet",
@@ -13870,7 +14107,8 @@
         "Container",
         "Vacuum cleaner"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Coconut milk",
@@ -13899,7 +14137,8 @@
         "Coconut",
         "Axe"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Coffin",
@@ -13916,7 +14155,8 @@
         "Container",
         "Vampire"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Cutting board",
@@ -13925,7 +14165,8 @@
         "Wood",
         "Cook"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Drum",
@@ -13942,7 +14183,8 @@
         "Wood",
         "Music"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Electric car",
@@ -13971,7 +14213,8 @@
         "Solar cell",
         "Wagon"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Fabric",
@@ -13988,7 +14231,8 @@
         "Thread",
         "Wheel"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Fireplace",
@@ -14013,7 +14257,8 @@
         "Wood",
         "Container"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Firetruck",
@@ -14042,7 +14287,8 @@
         "Fire extinguisher",
         "Wagon"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Flour",
@@ -14067,7 +14313,8 @@
         "Wheat",
         "Rock"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Flute",
@@ -14080,7 +14327,8 @@
         "Wood",
         "Air"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Fountain",
@@ -14093,7 +14341,8 @@
         "Statue",
         "Stream"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "French fries",
@@ -14110,7 +14359,8 @@
         "Fire",
         "Potato"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Fruit tree",
@@ -14127,7 +14377,8 @@
         "Fruit",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Garage",
@@ -14292,7 +14543,8 @@
         "Ice cream truck",
         "Barn"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Grim reaper",
@@ -14320,12 +14572,9 @@
       [
         "River",
         "Scythe"
-      ],
-      [
-        "Scythe",
-        "Deity"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Gust",
@@ -14338,7 +14587,8 @@
         "Air",
         "Small"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Hay bale",
@@ -14359,7 +14609,8 @@
         "Hay",
         "Machine"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Hill",
@@ -14384,7 +14635,8 @@
         "Mountain",
         "Small"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Honey",
@@ -14409,7 +14661,8 @@
         "Beehive",
         "Beekeeper"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Ice cream",
@@ -14426,7 +14679,8 @@
         "Milk",
         "Snow"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Ice sculpture",
@@ -14435,7 +14689,8 @@
         "Ice",
         "Statue"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Jam",
@@ -14460,7 +14715,8 @@
         "Fruit",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Knife",
@@ -14473,7 +14729,8 @@
         "Sword",
         "Cook"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Laptop",
@@ -14482,7 +14739,8 @@
         "Computer",
         "Small"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Little alchemy (element)",
@@ -14491,7 +14749,8 @@
         "Small",
         "Alchemist"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Log cabin",
@@ -14500,7 +14759,8 @@
         "Wood",
         "House"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Maple syrup",
@@ -14513,7 +14773,8 @@
         "Sap",
         "Sugar"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Mayonnaise",
@@ -14522,7 +14783,8 @@
         "Egg",
         "Oil"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Moon rover",
@@ -14535,7 +14797,8 @@
         "Moon",
         "Electric car"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Motorcycle",
@@ -14560,7 +14823,8 @@
         "Bicycle",
         "Combustion engine"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Needle",
@@ -14577,7 +14841,8 @@
         "Thread",
         "Tool"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Paper",
@@ -14598,7 +14863,8 @@
         "Wood",
         "Machine"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Peanut butter",
@@ -14611,7 +14877,8 @@
         "Nuts",
         "Pressure"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Pebble",
@@ -14628,7 +14895,8 @@
         "Small",
         "Rock"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Pencil",
@@ -14641,7 +14909,8 @@
         "Wood",
         "Charcoal"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Penicillin",
@@ -14662,7 +14931,8 @@
         "Mold",
         "Hospital"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Pinocchio",
@@ -14679,7 +14949,8 @@
         "Golem",
         "Story"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Pitchfork",
@@ -14695,12 +14966,9 @@
       [
         "Hay",
         "Steel"
-      ],
-      [
-        "Tool",
-        "Demon"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Popsicle",
@@ -14721,7 +14989,8 @@
         "Juice",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Quicksand",
@@ -14730,7 +14999,8 @@
         "Sand",
         "Swamp"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Rainforest",
@@ -14739,7 +15009,8 @@
         "Rain",
         "Forest"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Rat",
@@ -14776,7 +15047,8 @@
         "Mouse",
         "Big"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Reindeer",
@@ -14801,7 +15073,8 @@
         "Animal",
         "Christmas stocking"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Restaurant",
@@ -14810,7 +15083,8 @@
         "House",
         "Cook"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Roller coaster",
@@ -14831,7 +15105,8 @@
         "Park",
         "Wagon"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Rv",
@@ -14844,7 +15119,8 @@
         "House",
         "Bus"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Sack",
@@ -14861,7 +15137,8 @@
         "Container",
         "Letter"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Santa",
@@ -14890,7 +15167,8 @@
         "Christmas stocking",
         "Story"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Scarecrow",
@@ -14927,7 +15205,8 @@
         "Jack-o'-lantern",
         "Sack"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Scuba tank",
@@ -14944,7 +15223,8 @@
         "Container",
         "Oxygen"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Sewing machine",
@@ -14973,7 +15253,8 @@
         "Thread",
         "Robot"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Shovel",
@@ -14982,7 +15263,8 @@
         "Tool",
         "Gardener"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Silo",
@@ -15015,7 +15297,8 @@
         "Wheat",
         "Bank"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Smoothie",
@@ -15032,7 +15315,8 @@
         "Fruit",
         "Cold"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Snowmobile",
@@ -15061,7 +15345,8 @@
         "Ice",
         "Car"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Soap",
@@ -15086,7 +15371,8 @@
         "Wax",
         "Clay"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Spider",
@@ -15103,7 +15389,8 @@
         "Animal",
         "Net"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Squirrel",
@@ -15124,7 +15411,8 @@
         "Animal",
         "Nuts"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Steamboat",
@@ -15149,7 +15437,8 @@
         "Steam engine",
         "Sea"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Steel wool",
@@ -15166,7 +15455,8 @@
         "Wool",
         "Wire"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Sugar",
@@ -15211,7 +15501,8 @@
         "Wine",
         "Energy"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Sweater",
@@ -15224,7 +15515,8 @@
         "Wool",
         "Human"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Tailor",
@@ -15241,7 +15533,8 @@
         "Human",
         "Thread"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Tank",
@@ -15262,7 +15555,8 @@
         "Car",
         "Steel"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Tea",
@@ -15279,7 +15573,8 @@
         "Leaf",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Thermometer",
@@ -15296,7 +15591,8 @@
         "Quicksilver",
         "Engineer"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Titanic",
@@ -15317,7 +15613,8 @@
         "Steamboat",
         "Legend"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Tractor",
@@ -15346,7 +15643,8 @@
         "Wagon",
         "Cow"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Train",
@@ -15367,7 +15665,8 @@
         "Steam engine",
         "Wagon"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Vault",
@@ -15376,7 +15675,8 @@
         "Safe",
         "Big"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Water pipe",
@@ -15385,7 +15685,8 @@
         "Water",
         "Pipe"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Witch",
@@ -15422,7 +15723,8 @@
         "Cauldron",
         "Legend"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Yogurt",
@@ -15435,7 +15737,8 @@
         "Bacteria",
         "Ice cream"
       ]
-    ]
+    ],
+    "tier": 11
   },
   {
     "name": "Apron",
@@ -15448,7 +15751,8 @@
         "Fabric",
         "Baker"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Armor",
@@ -15461,7 +15765,8 @@
         "Steel",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Bandage",
@@ -15478,7 +15783,8 @@
         "Fabric",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Batter",
@@ -15491,7 +15797,8 @@
         "Coconut milk",
         "Flour"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Bbq",
@@ -15516,7 +15823,8 @@
         "Campfire",
         "Meat"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Beer",
@@ -15525,7 +15833,8 @@
         "Alcohol",
         "Wheat"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Box",
@@ -15558,7 +15867,8 @@
         "Container",
         "Crayon"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Candy cane",
@@ -15579,7 +15889,8 @@
         "Sugar",
         "Reindeer"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Canvas",
@@ -15588,7 +15899,8 @@
         "Fabric",
         "Paint"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Caramel",
@@ -15597,7 +15909,8 @@
         "Sugar",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Chocolate",
@@ -15618,7 +15931,8 @@
         "Sugar",
         "Seed"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Cigarette",
@@ -15627,7 +15941,8 @@
         "Tobacco",
         "Paper"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Confetti",
@@ -15640,7 +15955,8 @@
         "Paper",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Cookbook",
@@ -15653,7 +15969,8 @@
         "Book",
         "Cook"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Cotton candy",
@@ -15670,7 +15987,8 @@
         "Sugar",
         "Cloud"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Crayon",
@@ -15699,7 +16017,8 @@
         "Wax",
         "Paint"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Cup",
@@ -15728,7 +16047,8 @@
         "Bottle",
         "Milk shake"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Diver",
@@ -15753,7 +16073,8 @@
         "Scuba tank",
         "Lake"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Dough",
@@ -15770,7 +16091,8 @@
         "Flour",
         "Rain"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Drunk",
@@ -15787,7 +16109,8 @@
         "Human",
         "Wine"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Excavator",
@@ -15800,7 +16123,8 @@
         "Shovel",
         "Car"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Flying squirrel",
@@ -15837,7 +16161,8 @@
         "Squirrel",
         "Helicopter"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Fork",
@@ -15846,7 +16171,8 @@
         "Pitchfork",
         "Small"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Frozen yogurt",
@@ -15859,7 +16185,8 @@
         "Yogurt",
         "Ice"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Gift",
@@ -15904,7 +16231,8 @@
         "Fireplace",
         "Wrapping paper"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Hamburger",
@@ -15917,7 +16245,8 @@
         "Meat",
         "Cheese"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Hamster",
@@ -15938,7 +16267,8 @@
         "Rat",
         "Domestication"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Hedgehog",
@@ -15955,7 +16285,8 @@
         "Rat",
         "Needle"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Ice cream truck",
@@ -15972,7 +16303,8 @@
         "Ice cream",
         "Wagon"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Iced tea",
@@ -15985,7 +16317,8 @@
         "Tea",
         "Cold"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Jar",
@@ -16006,7 +16339,8 @@
         "Jam",
         "Bucket"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Kite",
@@ -16023,7 +16357,8 @@
         "Paper",
         "Air"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Letter",
@@ -16032,7 +16367,8 @@
         "Paper",
         "Pencil"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Library",
@@ -16045,7 +16381,8 @@
         "Book",
         "House"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Map",
@@ -16094,7 +16431,8 @@
         "Paper",
         "Village"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Marshmallows",
@@ -16103,7 +16441,8 @@
         "Sugar",
         "Campfire"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Milk shake",
@@ -16120,7 +16459,8 @@
         "Ice cream",
         "Water"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Money",
@@ -16137,7 +16477,8 @@
         "Paper",
         "Bank"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Mouse",
@@ -16162,7 +16503,8 @@
         "Cheese",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Mousetrap",
@@ -16183,7 +16525,8 @@
         "Mouse",
         "Blade"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Musician",
@@ -16208,7 +16551,8 @@
         "Human",
         "Pan flute"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Newspaper",
@@ -16225,7 +16569,8 @@
         "Letter",
         "Letter"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Orchard",
@@ -16258,7 +16603,8 @@
         "Fruit tree",
         "Container"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Origami",
@@ -16327,7 +16673,8 @@
         "Paper",
         "Vulture"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Pan flute",
@@ -16336,7 +16683,8 @@
         "Flute",
         "Flute"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Paper airplane",
@@ -16345,7 +16693,8 @@
         "Airplane",
         "Paper"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Pasta",
@@ -16354,7 +16703,8 @@
         "Flour",
         "Egg"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Pencil sharpener",
@@ -16371,7 +16721,8 @@
         "Pencil",
         "Sword"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Pizza",
@@ -16388,7 +16739,8 @@
         "Cheese",
         "Wheel"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Printer",
@@ -16401,7 +16753,8 @@
         "Computer",
         "Newspaper"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Recipe",
@@ -16458,7 +16811,8 @@
         "Newspaper",
         "Fruit"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Robot vacuum",
@@ -16479,7 +16833,8 @@
         "Computer",
         "Broom"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Rock",
@@ -16496,7 +16851,8 @@
         "Boulder",
         "Small"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Ruler",
@@ -16505,7 +16861,8 @@
         "Wood",
         "Pencil"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Sailboat",
@@ -16526,7 +16883,8 @@
         "Steamboat",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Sandpaper",
@@ -16539,7 +16897,8 @@
         "Sand",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Sleigh",
@@ -16576,7 +16935,8 @@
         "Wagon",
         "Antarctica"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Smoke signal",
@@ -16593,7 +16953,8 @@
         "Smoke",
         "Letter"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Spoon",
@@ -16602,7 +16963,8 @@
         "Shovel",
         "Small"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Sprinkles",
@@ -16623,7 +16985,8 @@
         "Sugar",
         "Double rainbow!"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Syringe",
@@ -16636,7 +16999,8 @@
         "Tool",
         "Needle"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Tablet",
@@ -16645,7 +17009,8 @@
         "Laptop",
         "Small"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Tent",
@@ -16666,7 +17031,8 @@
         "Fabric",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Trainyard",
@@ -16687,7 +17053,8 @@
         "Train",
         "Garage"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Vacuum cleaner",
@@ -16700,7 +17067,8 @@
         "Broom",
         "Machine"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Vine",
@@ -16717,7 +17085,8 @@
         "Rainforest",
         "Wire"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Wagon",
@@ -16742,7 +17111,8 @@
         "Cart",
         "Cow"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Wax",
@@ -16771,7 +17141,8 @@
         "Beehive",
         "Beekeeper"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Web",
@@ -16792,7 +17163,8 @@
         "Spider",
         "Net"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Wine",
@@ -16804,12 +17176,9 @@
       [
         "Alcohol",
         "Juice"
-      ],
-      [
-        "Tool",
-        "Dionysus"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Wrapping paper",
@@ -16830,7 +17199,8 @@
         "Paper",
         "Santa"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Writer",
@@ -16843,7 +17213,8 @@
         "Human",
         "Pencil"
       ]
-    ]
+    ],
+    "tier": 12
   },
   {
     "name": "Armadillo",
@@ -16860,7 +17231,8 @@
         "Armor",
         "Cat"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Baker",
@@ -16909,7 +17281,8 @@
         "Human",
         "Dough"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Banana bread",
@@ -16922,7 +17295,8 @@
         "Dough",
         "Banana"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Barrel",
@@ -16935,7 +17309,8 @@
         "Wine",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Bat",
@@ -16960,7 +17335,8 @@
         "Mouse",
         "Atmosphere"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Bread",
@@ -16973,7 +17349,8 @@
         "Dough",
         "Energy"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Bulletproof vest",
@@ -16986,7 +17363,8 @@
         "Gun",
         "Armor"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Candle",
@@ -17011,7 +17389,8 @@
         "Wax",
         "Lamp"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Cheeseburger",
@@ -17024,7 +17403,8 @@
         "Cheese",
         "Sandwich"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Chocolate milk",
@@ -17037,7 +17417,8 @@
         "Chocolate",
         "Coconut milk"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Circus",
@@ -17050,7 +17431,8 @@
         "Tent",
         "Animal"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Cookie cutter",
@@ -17063,7 +17445,8 @@
         "Blade",
         "Cookie dough"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Cookie dough",
@@ -17080,7 +17463,8 @@
         "Dough",
         "Chocolate"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Donut",
@@ -17101,7 +17485,8 @@
         "Cookie dough",
         "Wheel"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Email",
@@ -17122,7 +17507,8 @@
         "Letter",
         "Electricity"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Gingerbread house",
@@ -17151,7 +17537,8 @@
         "House",
         "Cake"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Gingerbread man",
@@ -17192,7 +17579,8 @@
         "Cookie dough",
         "Story"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Hot chocolate",
@@ -17205,7 +17593,8 @@
         "Chocolate",
         "Heat"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Librarian",
@@ -17214,7 +17603,8 @@
         "Human",
         "Library"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Mac and cheese",
@@ -17223,7 +17613,8 @@
         "Cheese",
         "Pasta"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Mail truck",
@@ -17240,7 +17631,8 @@
         "Car",
         "Post office"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Mailbox",
@@ -17277,7 +17669,8 @@
         "Mailman",
         "Wood"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Mailman",
@@ -17294,7 +17687,8 @@
         "Letter",
         "Mailbox"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Music",
@@ -17315,7 +17709,8 @@
         "Musician",
         "Pan flute"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Painting",
@@ -17328,7 +17723,8 @@
         "Canvas",
         "Painter"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Paper cup",
@@ -17337,7 +17733,8 @@
         "Cup",
         "Paper"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Paraglider",
@@ -17346,7 +17743,8 @@
         "Kite",
         "Big"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Pie",
@@ -17371,7 +17769,8 @@
         "Fruit",
         "Bakery"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Post office",
@@ -17404,7 +17803,8 @@
         "Letter",
         "Wall"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Smartphone",
@@ -17413,7 +17813,8 @@
         "Small",
         "Tablet"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Spaghetti",
@@ -17430,7 +17831,8 @@
         "Pasta",
         "Rope"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "String phone",
@@ -17451,7 +17853,8 @@
         "Cup",
         "Thread"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Treasure map",
@@ -17472,7 +17875,8 @@
         "Map",
         "Island"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Vinegar",
@@ -17489,7 +17893,8 @@
         "Wine",
         "Oxygen"
       ]
-    ]
+    ],
+    "tier": 13
   },
   {
     "name": "Bakery",
@@ -17546,7 +17951,8 @@
         "Baker",
         "Container"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Cake",
@@ -17563,7 +17969,8 @@
         "Bread",
         "Sugar"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Cookie",
@@ -17588,7 +17995,8 @@
         "Dough",
         "Cookie cutter"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Fortune cookie",
@@ -17605,7 +18013,8 @@
         "Paper",
         "Gingerbread man"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Sandwich",
@@ -17630,7 +18039,8 @@
         "Bread",
         "Vegetable"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Sheet music",
@@ -17643,7 +18053,8 @@
         "Music",
         "Book"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Toast",
@@ -17656,7 +18067,8 @@
         "Bread",
         "Fire"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Treasure",
@@ -17677,7 +18089,8 @@
         "Treasure map",
         "Sailor"
       ]
-    ]
+    ],
+    "tier": 14
   },
   {
     "name": "Grilled cheese",
@@ -17686,7 +18099,8 @@
         "Cheese",
         "Toast"
       ]
-    ]
+    ],
+    "tier": 15
   },
   {
     "name": "Picnic",
@@ -17711,6 +18125,7 @@
         "Sandwich",
         "Fabric"
       ]
-    ]
+    ],
+    "tier": 15
   }
 ]
