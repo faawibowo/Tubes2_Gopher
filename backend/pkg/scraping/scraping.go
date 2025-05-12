@@ -75,6 +75,9 @@ func ScrapeDatafromWeb() ([]Element, error) {
 		}
 	})
 
+	elements = filterElements(elements)
+	elements = removeInvalidRecipes(elements)
+	elements = filterElements(elements)
 	elements = removeInvalidRecipes(elements)
 	elements = filterElements(elements)
 
