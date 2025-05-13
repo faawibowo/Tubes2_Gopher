@@ -34,7 +34,6 @@ func ScrapeDatafromWeb() ([]Element, error) {
 	var elements []Element
 	tier := 0
 
-	// Proses semua elemen langsung dari konten utama
 	doc.Find(".mw-parser-output").Children().Each(func(i int, s *goquery.Selection) {
 		if goquery.NodeName(s) == "h3" {
 			headerText := strings.TrimSpace(s.Text())
@@ -81,16 +80,6 @@ func ScrapeDatafromWeb() ([]Element, error) {
 	elements = removeInvalidRecipes(elements)
 	elements = filterElements(elements)
 
-	// file, _ := os.Create("../../configs/elements.json")
-	// defer file.Close()
-
-	// encoder := json.NewEncoder(file)
-	// encoder.SetIndent("", "  ")
-	// if err := encoder.Encode(elements); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// fmt.Println("Scraping completed. Data saved to elements.json")
 	return elements, nil
 }
 

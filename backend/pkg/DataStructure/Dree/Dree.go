@@ -16,14 +16,14 @@ type Dree struct {
 type DreeNodeElement struct {
 	Name        string           `json:"name"`
 	Children    []DreeNodeRecipe `json:"children"`
-	Parent      *DreeNodeRecipe  `json:"-"` // to avoid circular reference in JSON
+	Parent      *DreeNodeRecipe  `json:"-"`
 	BranchCount int              `json:"-"`
 }
 
 type DreeNodeRecipe struct {
 	FirstElement  *DreeNodeElement `json:"firstElement"`
 	SecondElement *DreeNodeElement `json:"secondElement"`
-	ResultElement *DreeNodeElement `json:"-"` // removed from JSON
+	ResultElement *DreeNodeElement `json:"-"`
 }
 
 var basicCache sync.Map
@@ -148,7 +148,7 @@ func cutChildren(node *DreeNodeElement, totalCut int) int {
 			rc.SecondElement = nil
 			rc.ResultElement = nil
 
-			*rc = DreeNodeRecipe{} // overwrite to blank
+			*rc = DreeNodeRecipe{}
 			continue
 		}
 

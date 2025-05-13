@@ -3,10 +3,10 @@ package Graph
 import "fmt"
 
 type ElementGraph struct {
-	Name    string   // element name
-	UsedIn  []Recipe // which recipes this element is a part of
-	Recipes []Recipe // the recipes of this element
-	Tier    int      // tier of this element
+	Name    string
+	UsedIn  []Recipe
+	Recipes []Recipe
+	Tier    int
 }
 
 type Recipe struct {

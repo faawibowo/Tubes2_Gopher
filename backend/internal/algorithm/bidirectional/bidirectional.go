@@ -24,7 +24,7 @@ func BuildRecipeTreeBFSConcurrent(
 	target *Graph.ElementGraph,
 	maxPaths int,
 	delay time.Duration,
-	updates chan<- *TreeUpdate, // NEW: channel-based streaming
+	updates chan<- *TreeUpdate,
 	_ map[string]*Graph.ElementGraph,
 ) *Tree.Tree {
 
@@ -109,12 +109,11 @@ func BuildRecipeTreeBFSConcurrent(
 
 					parent.Children = append(parent.Children, step)
 
-					// ✨ Send the step live over the channel
 					if updates != nil {
 						cloned := Tree.CopyTree(tree)
 						updates <- &TreeUpdate{
 							Done: false,
-							Tree: cloned, // if needed
+							Tree: cloned,
 						}
 					}
 
