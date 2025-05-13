@@ -28,10 +28,9 @@ func FindMultiplePathDree(
 ) DFSResult {
 	start := time.Now()
 
-	// Build the internal Dree tree.
 	rootDree := &Tree.TreeNodeElement{Name: target.Name}
 	tree := &Tree.Tree{First: rootDree}
-	var nodeCount int = 0
+	var nodeCount int32 = 0
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
@@ -40,8 +39,8 @@ func FindMultiplePathDree(
 
 	return DFSResult{
 		Tree:            tree,
-		NodeCount:       nodeCount,
-		CompletePaths:   1,
+		NodeCount:       int(atomic.LoadInt32(&nodeCount)),
+		CompletePaths:   tree.First.BranchCount,
 		ExecutionTimeMs: time.Since(start).Milliseconds(),
 		Done:            true,
 	}
@@ -55,16 +54,14 @@ func dfsMultiThreadingDree(
 	graphMap map[string]*Graph.ElementGraph,
 	maxPaths int,
 	updates chan<- DFSResult,
-	nodeCountPtr *int,
+	nodeCountPtr *int32,
 	delay time.Duration,
 	mu *sync.Mutex,
 	wg *sync.WaitGroup,
 	start time.Time,
 	tree *Tree.Tree,
 ) int {
-	mu.Lock()
-	*nodeCountPtr++
-	mu.Unlock()
+	atomic.AddInt32(nodeCountPtr, 1)
 
 	if Tree.IsBasic(elem.Name) || len(elem.Recipes) == 0 {
 		if val, ok := basicCache.Load(elem.Name); ok {
@@ -119,33 +116,71 @@ func dfsMultiThreadingDree(
 			prod := leftCnt * rightCnt
 			atomic.AddInt64(&total, int64(prod))
 
-			if delay > 0 {
-				time.Sleep(delay)
-			}
-
-			if updates != nil {
-				cloned := Tree.CopyTree(tree)
-				updates <- DFSResult{
-					Tree:            cloned,
-					NodeCount:       *nodeCountPtr,
-					CompletePaths:   node.BranchCount,
-					ExecutionTimeMs: time.Since(start).Milliseconds(),
-					Done:            false,
-				}
-			}
+			// if updates != nil {
+			// 	cloned := Tree.CopyTree(tree)
+			// 	updates <- DFSResult{
+			// 		Tree:            cloned,
+			// 		NodeCount:       *nodeCountPtr,
+			// 		CompletePaths:   node.BranchCount,
+			// 		ExecutionTimeMs: time.Since(start).Milliseconds(),
+			// 		Done:            false,
+			// 	}
+			// }
 		}(rc)
 	}
 
 	localWg.Wait()
-	node.BranchCount = int(total)
 
+	node.BranchCount = int(total)
 	if node.BranchCount > maxPaths {
 		for node.BranchCount > maxPaths {
 			node.BranchCount = cutChildren(node, node.BranchCount-maxPaths)
 		}
 	}
 
+	if delay > 0 {
+		time.Sleep(delay)
+	}
+
+	if updates != nil {
+		snapshot := func() *Tree.Tree {
+			mu.Lock()
+			defer mu.Unlock()
+			return &Tree.Tree{
+				First: CopySubtree(node), // 👈 only copy the subtree under `node`
+			}
+		}()
+
+		updates <- DFSResult{
+			Tree:            snapshot,
+			NodeCount:       int(atomic.LoadInt32(nodeCountPtr)),
+			CompletePaths:   node.BranchCount,
+			ExecutionTimeMs: time.Since(start).Milliseconds(),
+			Done:            false,
+		}
+	}
+
 	return node.BranchCount
+}
+
+func CopySubtree(node *Tree.TreeNodeElement) *Tree.TreeNodeElement {
+	if node == nil {
+		return nil
+	}
+	clone := &Tree.TreeNodeElement{
+		Name:        node.Name,
+		BranchCount: node.BranchCount,
+	}
+	for _, rc := range node.Children {
+		newLeft := CopySubtree(rc.FirstElement)
+		newRight := CopySubtree(rc.SecondElement)
+		clone.Children = append(clone.Children, Tree.TreeNodeRecipe{
+			FirstElement:  newLeft,
+			SecondElement: newRight,
+			ResultElement: clone, // 👈 point back to itself
+		})
+	}
+	return clone
 }
 
 func cutChildren(node *Tree.TreeNodeElement, totalCut int) int {
