@@ -157,37 +157,6 @@ func PrintTree(node *TreeNodeElement, depth int, printName bool, prefixStack []b
 	}
 }
 
-func PruneTreeToBasicPaths(n *TreeNodeElement) bool {
-	if n == nil {
-		return false
-	}
-
-	if len(n.Children) == 0 {
-		if IsBasic(n.Name) {
-			return true
-		} else {
-			return false
-		}
-	}
-
-	valid := make([]TreeNodeRecipe, 0, len(n.Children))
-
-	for _, rc := range n.Children {
-
-		leftValid := PruneTreeToBasicPaths(rc.FirstElement)
-		rightValid := PruneTreeToBasicPaths(rc.SecondElement)
-
-		if leftValid && rightValid {
-
-			valid = append(valid, rc)
-		}
-	}
-
-	n.Children = valid
-
-	return len(valid) > 0
-}
-
 func IsBasic(name string) bool {
 	return name == "Air" || name == "Water" || name == "Earth" || name == "Fire"
 }

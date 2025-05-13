@@ -144,15 +144,7 @@ func FindMultiplePath(
 		wg.Wait()
 		queue = next
 	}
-
-	Tree.PruneTreeToBasicPaths(tree.First)
-	return BFSResult{
-		Tree:            tree,
-		NodeCount:       nodeCount,
-		CompletePaths:   pathCount,
-		ExecutionTimeMs: time.Since(start).Milliseconds(),
-		Done:            true,
-	}
+	return BFSResult{}
 }
 
 // =====================================BFS First Recipe=======================================
@@ -166,7 +158,7 @@ func FindFirstPath(target *Graph.ElementGraph, delay time.Duration, updates chan
 	found := false
 
 	pureBfS(target, root, &nodeCount, &found, delay, updates, tree)
-	Tree.PruneTreeToBasicPaths(root)
+	prunePath(root)
 
 	execTimeMs := time.Since(start).Milliseconds()
 	if !found {
@@ -265,11 +257,11 @@ func checkFullPath(r *Tree.TreeNodeRecipe) bool {
 			return false
 		}
 		if curr.ResultElement.Parent == nil {
-			return true
+			break
 		}
 		curr = curr.ResultElement.Parent
 	}
-	return false
+	return true
 }
 
 func isRecipeSolved(r *Tree.TreeNodeRecipe) bool {
@@ -277,13 +269,43 @@ func isRecipeSolved(r *Tree.TreeNodeRecipe) bool {
 }
 
 func isSolvedElem(n *Tree.TreeNodeElement) bool {
-	if len(n.Children) == 0 {
-		return Graph.IsLeafName(n.Name)
+
+	if n == nil {
+		return false
 	}
+
+	if Graph.IsLeafName((n.Name)) {
+		return true
+	}
+
 	for _, c := range n.Children {
 		if isRecipeSolved(&c) {
 			return true
 		}
 	}
 	return false
+}
+
+func prunePath(r *Tree.TreeNodeElement) {
+	if r == nil {
+		return
+	}
+
+	var queue []*Tree.TreeNodeElement
+	queue = append(queue, r)
+
+	for len(queue) > 0 {
+		nodeElement := queue[0]
+		queue = queue[1:]
+
+		if len(nodeElement.Children) > 0 {
+			nodeElement.Children = nodeElement.Children[:1]
+			if nodeElement.Children[0].FirstElement != nil {
+				queue = append(queue, nodeElement.Children[0].FirstElement)
+			}
+			if nodeElement.Children[0].SecondElement != nil {
+				queue = append(queue, nodeElement.Children[0].SecondElement)
+			}
+		}
+	}
 }

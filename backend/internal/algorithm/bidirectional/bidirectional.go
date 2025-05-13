@@ -139,7 +139,7 @@ func BuildRecipeTreeBFSConcurrent(
 		queue = next
 	}
 
-	Tree.PruneTreeToBasicPaths(tree.First)
+	PruneTreeToBasicPaths(tree.First)
 	return tree
 }
 
@@ -161,4 +161,31 @@ func isSolvedElem(n *Tree.TreeNodeElement) bool {
 
 func IsLeafName(name string) bool {
 	return name == "Air" || name == "Earth" || name == "Water" || name == "Fire"
+}
+
+func PruneTreeToBasicPaths(n *Tree.TreeNodeElement) bool {
+	if n == nil {
+		return false
+	}
+
+	if Tree.IsBasic(n.Name) {
+		return true
+	}
+
+	valid := make([]Tree.TreeNodeRecipe, 0, len(n.Children))
+
+	for _, rc := range n.Children {
+
+		leftValid := PruneTreeToBasicPaths(rc.FirstElement)
+		rightValid := PruneTreeToBasicPaths(rc.SecondElement)
+
+		if leftValid && rightValid {
+
+			valid = append(valid, rc)
+		}
+	}
+
+	n.Children = valid
+
+	return len(valid) > 0
 }
