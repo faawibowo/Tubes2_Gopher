@@ -17,8 +17,6 @@ RUN apk add --no-cache tzdata
 
 COPY --from=builder /backend-build/api-server .
 
-COPY ./configs/elements.json ./configs/elements.json
-
 EXPOSE 8080
 
 ENTRYPOINT ["./api-server"]
