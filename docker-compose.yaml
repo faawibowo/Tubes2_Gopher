@@ -1,27 +1,29 @@
 services:
   app-backend:
     container_name: app-backend
-    image: app-backend:1.0.0
+    image: lynaten/app-backend:latest
     build: ./backend
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
     environment:
       BACKEND_PORT: ${BACKEND_PORT}
       TZ: ${TZ}
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN}
+
   app-web:
     container_name: app-web
-    image: app-web:1.0.0
+    image: lynaten/app-web:latest
     build:
       context: ./web
       args:
-        NEXT_PUBLIC_BACKEND_HTTP: http://localhost:${BACKEND_PORT}
-        NEXT_PUBLIC_BACKEND_WS: ws://localhost:${BACKEND_PORT}
+        NEXT_PUBLIC_BACKEND_HTTP: ${NEXT_PUBLIC_BACKEND_HTTP}
+        NEXT_PUBLIC_BACKEND_WS: ${NEXT_PUBLIC_BACKEND_WS}
     ports:
       - ${WEB_PORT}:${WEB_PORT}
     environment:
       TZ: ${TZ}
       PORT: ${WEB_PORT}
-      BACKEND_URL: http://app-backend:${BACKEND_PORT}
-      NEXT_PUBLIC_BACKEND_HTTP: http://localhost:${BACKEND_PORT}
-      NEXT_PUBLIC_BACKEND_WS: ws://localhost:${BACKEND_PORT}
-      SITE_URL: http://localhost:${WEB_PORT}
+      SITE_URL: ${SITE_URL}
+      BACKEND_URL: ${BACKEND_URL}
+      NEXT_PUBLIC_BACKEND_HTTP: ${NEXT_PUBLIC_BACKEND_HTTP}
+      NEXT_PUBLIC_BACKEND_WS: ${NEXT_PUBLIC_BACKEND_WS}

@@ -3,6 +3,7 @@ package dfs
 import (
 	"sort"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
@@ -18,246 +19,217 @@ type DFSResult struct {
 	Done            bool       `json:"done"`
 }
 
-// Dree and its nodes represent the DFS tree structure.
-type Dree struct {
-	First *DreeNodeElement `json:"first"`
-}
-
-type DreeNodeElement struct {
-	Name        string           `json:"name"`
-	Children    []DreeNodeRecipe `json:"children"`
-	Parent      *DreeNodeRecipe  `json:"-"` // do not include in JSON to avoid circular refs
-	BranchCount int
-}
-
-type DreeNodeRecipe struct {
-	FirstElement  *DreeNodeElement `json:"firstElement"`
-	SecondElement *DreeNodeElement `json:"secondElement"`
-	ResultElement *DreeNodeElement `json:"-"` // removed from JSON
-}
-
 func FindMultiplePathDree(
 	target *Graph.ElementGraph,
 	maxPaths int,
-	graphMap map[string]*Graph.ElementGraph,
 	delay time.Duration,
-) *DFSResult {
+	updates chan<- DFSResult,
+	graphMap map[string]*Graph.ElementGraph,
+) DFSResult {
 	start := time.Now()
 
 	// Build the internal Dree tree.
-	rootDree := &DreeNodeElement{Name: target.Name, BranchCount: 1}
+	rootDree := &Tree.TreeNodeElement{Name: target.Name}
+	tree := &Tree.Tree{First: rootDree}
 	var nodeCount int = 0
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	dfsMultiThreadingDree(target, rootDree, graphMap, &nodeCount, maxPaths, delay, &mu, &wg)
+	_ = dfsMultiThreadingDree(rootDree, target, graphMap, maxPaths, updates, &nodeCount, delay, &mu, &wg, start, tree)
 	wg.Wait()
 
-	// Apply branch cutting if the branch count exceeds maxPaths.
-	if rootDree.BranchCount > maxPaths {
-		cutChildren(rootDree, rootDree.BranchCount-maxPaths)
-	}
-
-	// Convert the Dree tree into a standard Tree.
-	tree := convertDreeToTree(&Dree{First: rootDree})
-
-	return &DFSResult{
+	return DFSResult{
 		Tree:            tree,
 		NodeCount:       nodeCount,
-		CompletePaths:   1, // For DFS, if at least one path is found.
+		CompletePaths:   1,
 		ExecutionTimeMs: time.Since(start).Milliseconds(),
 		Done:            true,
 	}
 }
 
-// dfsMultiThreadingDree concurrently builds the internal Dree tree.
-// It spawns a goroutine for each recipe, updates nodeCount, and sets BranchCount
-// as the product of its children’s branch counts. (For leaf nodes, BranchCount remains 1.)
+var basicCache sync.Map
+
 func dfsMultiThreadingDree(
-	current *Graph.ElementGraph,
-	node *DreeNodeElement,
+	node *Tree.TreeNodeElement,
+	elem *Graph.ElementGraph,
 	graphMap map[string]*Graph.ElementGraph,
-	nodeCountPtr *int,
 	maxPaths int,
+	updates chan<- DFSResult,
+	nodeCountPtr *int,
 	delay time.Duration,
 	mu *sync.Mutex,
 	wg *sync.WaitGroup,
-) {
+	start time.Time,
+	tree *Tree.Tree,
+) int {
 	mu.Lock()
 	*nodeCountPtr++
 	mu.Unlock()
 
-	// If there are no recipes, the node is a leaf.
-	if len(current.Recipes) == 0 || Graph.IsLeafNode(current) {
-		node.BranchCount = 1
-		return
-	}
-
-	// For each recipe, spawn concurrent routines.
-	for _, recipe := range current.Recipes {
-		wg.Add(1)
-		time.Sleep(delay)
-		go func(r Graph.Recipe) {
-			defer wg.Done()
-
-			// Create left and right Dree nodes.
-			left := &DreeNodeElement{Name: r.FirstElement.Name, BranchCount: 1}
-			right := &DreeNodeElement{Name: r.SecondElement.Name, BranchCount: 1}
-			recipeNode := DreeNodeRecipe{
-				FirstElement:  left,
-				SecondElement: right,
-				ResultElement: node,
-			}
-
-			// Append the recipe (thread-safe).
-			mu.Lock()
-			node.Children = append(node.Children, recipeNode)
-			mu.Unlock()
-
-			// Set parent pointers.
-			left.Parent = &recipeNode
-			right.Parent = &recipeNode
-
-			// Recurse concurrently into subtrees.
-			dfsMultiThreadingDree(r.FirstElement, left, graphMap, nodeCountPtr, maxPaths, delay, mu, wg)
-			dfsMultiThreadingDree(r.SecondElement, right, graphMap, nodeCountPtr, maxPaths, delay, mu, wg)
-
-			// Update the BranchCount for this recipe.
-			branchProd := left.BranchCount * right.BranchCount
-
-			// Safely update the current node's BranchCount.
-			mu.Lock()
-			node.BranchCount += branchProd
-			mu.Unlock()
-		}(recipe)
-	}
-}
-
-// ----------------------------------------------------------------------------
-// CUT CHILDREN & CONVERSION (UNCHANGED)
-// ----------------------------------------------------------------------------
-
-// cutChildren reduces children branch counts so that node.BranchCount becomes ≤ originalTotal - sisaToCut.
-// sisaToCut is the amount that needs to be eliminated.
-func cutChildren(node *DreeNodeElement, sisaToCut int) int {
-	if node == nil || sisaToCut <= 0 {
-		return node.BranchCount
-	}
-
-	// prodInfo holds the product and index for each child recipe.
-	type prodInfo struct {
-		idx int
-		val int
-	}
-	var infos []prodInfo
-
-	// Calculate product for each recipe.
-	for i, rc := range node.Children {
-		prod := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
-		infos = append(infos, prodInfo{idx: i, val: prod})
-	}
-
-	// Sort recipes from highest product to lowest.
-	sort.Slice(infos, func(i, j int) bool {
-		return infos[i].val > infos[j].val
-	})
-
-	total := node.BranchCount
-
-	// Iterate over sorted recipes, reducing branch counts until sisaToCut is removed.
-	for _, info := range infos {
-		if sisaToCut <= 0 {
-			break
+	if Tree.IsBasic(elem.Name) || len(elem.Recipes) == 0 {
+		if val, ok := basicCache.Load(elem.Name); ok {
+			shared := val.(*Tree.TreeNodeElement)
+			*node = *shared
+		} else {
+			node.BranchCount = 1
+			node.Name = elem.Name
+			basicCache.Store(elem.Name, &Tree.TreeNodeElement{
+				Name:        elem.Name,
+				BranchCount: 1,
+			})
 		}
-		rc := &node.Children[info.idx]
-		oldProd := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
+		return 1
+	}
 
-		// Remove whole recipe if its product is less than or equal to needed cut.
-		if oldProd <= sisaToCut {
-			sisaToCut -= oldProd
-			total -= oldProd
-			rc.FirstElement = nil
-			rc.SecondElement = nil
+	node.Children = []Tree.TreeNodeRecipe{}
+
+	var total int64
+	var localWg sync.WaitGroup
+
+	for _, rc := range elem.Recipes {
+		if rc.FirstElement.Tier >= elem.Tier || rc.SecondElement.Tier >= elem.Tier {
 			continue
 		}
 
-		// Partial cut: reduce the side with the larger branch count.
-		need := sisaToCut
-		if rc.FirstElement.BranchCount >= rc.SecondElement.BranchCount {
-			needLeft := min(rc.FirstElement.BranchCount-1, (need+rc.SecondElement.BranchCount-1)/rc.SecondElement.BranchCount)
-			newLeft := cutChildren(rc.FirstElement, needLeft)
-			rc.FirstElement.BranchCount = newLeft
-		} else {
-			needRight := min(rc.SecondElement.BranchCount-1, (need+rc.FirstElement.BranchCount-1)/rc.FirstElement.BranchCount)
-			newRight := cutChildren(rc.SecondElement, needRight)
-			rc.SecondElement.BranchCount = newRight
-		}
+		wg.Add(1)
+		localWg.Add(1)
 
-		newProd := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
-		diff := oldProd - newProd
-		sisaToCut -= diff
-		total -= diff
+		go func(r Graph.Recipe) {
+			defer wg.Done()
+			defer localWg.Done()
+
+			left := &Tree.TreeNodeElement{Name: r.FirstElement.Name}
+			right := &Tree.TreeNodeElement{Name: r.SecondElement.Name}
+
+			leftCnt := dfsMultiThreadingDree(left, r.FirstElement, graphMap, maxPaths, updates, nodeCountPtr, delay, mu, wg, start, tree)
+			rightCnt := dfsMultiThreadingDree(right, r.SecondElement, graphMap, maxPaths, updates, nodeCountPtr, delay, mu, wg, start, tree)
+
+			// recipeNode :=
+			mu.Lock()
+			node.Children = append(node.Children, Tree.TreeNodeRecipe{
+				FirstElement:  left,
+				SecondElement: right,
+				ResultElement: node,
+			})
+			mu.Unlock()
+
+			left.BranchCount = leftCnt
+			right.BranchCount = rightCnt
+
+			prod := leftCnt * rightCnt
+			atomic.AddInt64(&total, int64(prod))
+
+			if delay > 0 {
+				time.Sleep(delay)
+			}
+
+			if updates != nil {
+				cloned := Tree.CopyTree(tree)
+				updates <- DFSResult{
+					Tree:            cloned,
+					NodeCount:       *nodeCountPtr,
+					CompletePaths:   node.BranchCount,
+					ExecutionTimeMs: time.Since(start).Milliseconds(),
+					Done:            false,
+				}
+			}
+		}(rc)
 	}
 
-	// Remove completely cut (deleted) recipes.
-	var pruned []DreeNodeRecipe
-	for _, rc := range node.Children {
-		if rc.FirstElement != nil && rc.SecondElement != nil {
-			pruned = append(pruned, rc)
-		}
-	}
-	node.Children = pruned
+	localWg.Wait()
+	node.BranchCount = int(total)
 
-	// Recalculate node's branch count.
-	if len(node.Children) == 0 {
-		node.BranchCount = 1
-	} else {
-		subTotal := 0
-		for _, rc := range node.Children {
-			subTotal += rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
+	if node.BranchCount > maxPaths {
+		for node.BranchCount > maxPaths {
+			node.BranchCount = cutChildren(node, node.BranchCount-maxPaths)
 		}
-		node.BranchCount = subTotal
 	}
 
 	return node.BranchCount
 }
 
-// min returns the smaller of a and b.
+func cutChildren(node *Tree.TreeNodeElement, totalCut int) int {
+	if totalCut <= 0 || len(node.Children) == 0 {
+		return node.BranchCount
+	}
+
+	type prodInfo struct {
+		idx int
+		val int
+	}
+	infos := make([]prodInfo, len(node.Children))
+	for i, rc := range node.Children {
+		if rc.FirstElement == nil || rc.SecondElement == nil {
+			continue
+		}
+		infos[i] = prodInfo{
+			idx: i,
+			val: rc.FirstElement.BranchCount * rc.SecondElement.BranchCount,
+		}
+	}
+
+	sort.Slice(infos, func(i, j int) bool { return infos[i].val > infos[j].val })
+
+	currTotal := node.BranchCount
+
+	for _, info := range infos {
+		if totalCut <= 0 {
+			break
+		}
+		rc := &node.Children[info.idx]
+
+		if info.val <= totalCut {
+
+			totalCut -= info.val
+			currTotal -= info.val
+			rc.FirstElement = nil
+			rc.SecondElement = nil
+			rc.ResultElement = nil
+			*rc = Tree.TreeNodeRecipe{}
+			continue
+		}
+
+		need := totalCut
+		if rc.FirstElement.BranchCount >= rc.SecondElement.BranchCount {
+			maxDel := rc.FirstElement.BranchCount - 1
+			wantDel := min(maxDel, (need+rc.SecondElement.BranchCount-1)/rc.SecondElement.BranchCount)
+
+			cutChildren(rc.FirstElement, wantDel)
+		} else {
+			maxDel := rc.SecondElement.BranchCount - 1
+			wantDel := min(maxDel, (need+rc.FirstElement.BranchCount-1)/rc.FirstElement.BranchCount)
+
+			cutChildren(rc.SecondElement, wantDel)
+		}
+
+		newProd := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
+		diff := info.val - newProd
+
+		totalCut -= diff
+		currTotal -= diff
+	}
+
+	valid := node.Children[:0]
+	for _, c := range node.Children {
+		if c.FirstElement != nil && c.SecondElement != nil &&
+			c.FirstElement.BranchCount > 0 && c.SecondElement.BranchCount > 0 {
+			valid = append(valid, c)
+		}
+	}
+	for i := len(valid); i < len(node.Children); i++ {
+		node.Children[i] = Tree.TreeNodeRecipe{}
+	}
+	node.Children = valid
+
+	node.BranchCount = currTotal
+	return currTotal
+}
+
 func min(a, b int) int {
 	if a < b {
 		return a
 	}
 	return b
-}
-
-// convertDreeToTree converts the internal Dree structure into a standard Tree.
-func convertDreeToTree(d *Dree) *Tree.Tree {
-	if d == nil || d.First == nil {
-		return nil
-	}
-	return &Tree.Tree{First: convertDreeNode(d.First)}
-}
-
-func convertDreeNode(dn *DreeNodeElement) *Tree.TreeNodeElement {
-	if dn == nil {
-		return nil
-	}
-	newNode := &Tree.TreeNodeElement{Name: dn.Name}
-	for _, dr := range dn.Children {
-		recipe := Tree.TreeNodeRecipe{
-			FirstElement:  convertDreeNode(dr.FirstElement),
-			SecondElement: convertDreeNode(dr.SecondElement),
-			ResultElement: newNode,
-		}
-		if recipe.FirstElement != nil {
-			recipe.FirstElement.Parent = &recipe
-		}
-		if recipe.SecondElement != nil {
-			recipe.SecondElement.Parent = &recipe
-		}
-		newNode.Children = append(newNode.Children, recipe)
-	}
-	return newNode
 }
 
 //// page break//////

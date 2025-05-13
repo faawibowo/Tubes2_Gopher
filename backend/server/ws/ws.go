@@ -3,6 +3,7 @@ package ws
 import (
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -22,9 +23,17 @@ type Request struct {
 
 var (
 	graphMap map[string]*Graph.ElementGraph
-	upgrader = websocket.Upgrader{CheckOrigin: func(r *http.Request) bool {
-		return r.Header.Get("Origin") == "http://localhost:3000"
-	}}
+	upgrader = websocket.Upgrader{
+		CheckOrigin: func(r *http.Request) bool {
+			origin := r.Header.Get("Origin")
+			allowed := os.Getenv("FRONTEND_ORIGIN")
+			if allowed == "" {
+				allowed = "http://localhost:3000" // fallback default
+			}
+			log.Println("WebSocket upgrade requested from:", origin)
+			return origin == allowed
+		},
+	}
 )
 
 func InjectGraph(m map[string]*Graph.ElementGraph) { graphMap = m }
@@ -141,7 +150,7 @@ func HandleDFS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	updates := make(chan *dfs.DFSResult, 1)
+	updates := make(chan dfs.DFSResult, 1)
 	done := make(chan struct{})
 	var wg sync.WaitGroup
 
@@ -166,9 +175,9 @@ func HandleDFS(w http.ResponseWriter, r *http.Request) {
 	result := dfs.FindMultiplePathDree(
 		target,
 		req.MaxPaths,
-		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
-		// updates,
+		updates,
+		graphMap,
 	)
 
 	if updates != nil {

@@ -28,6 +28,7 @@ export default function Home() {
   });
 
   useEffect(() => {
+    console.log("Trying to fetch from: ", env.NEXT_PUBLIC_BACKEND_HTTP);
     fetch(`${env.NEXT_PUBLIC_BACKEND_HTTP}/api/config`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -215,7 +216,7 @@ export default function Home() {
   };
 
   return (
-    <Shell className="md:pb-10">
+    <Shell className="md:pb-10 w-screen max-w-screen">
       <PageHeader>
         <PageHeaderHeading>Tubes Stima</PageHeaderHeading>
         <PageHeaderDescription>
@@ -223,8 +224,8 @@ export default function Home() {
         </PageHeaderDescription>
       </PageHeader>
 
-      <div className="mt-6 space-y-4">
-        <div className="flex gap-3 items-center flex-wrap">
+      <div className="mt-6 space-y-4 w-full max-w-full">
+        <div className="flex gap-3 items-center flex-wrap w-full max-w-full">
           <select
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
@@ -304,7 +305,9 @@ export default function Home() {
         )}
 
         {treeData ? (
-          <TreantDiagram data={treeData} />
+          <div className="w-full max-w-full h-96 max-h-96">
+            <TreantDiagram data={treeData} />
+          </div>
         ) : loading ? (
           <p className="text-sm text-gray-500">Loading tree...</p>
         ) : (

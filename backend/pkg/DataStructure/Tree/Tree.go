@@ -11,9 +11,10 @@ type Tree struct {
 }
 
 type TreeNodeElement struct {
-	Name     string           `json:"name"`
-	Children []TreeNodeRecipe `json:"children"`
-	Parent   *TreeNodeRecipe  `json:"-"` // ← ini JANGAN ikut json biar gak circular
+	Name        string           `json:"name"`
+	Children    []TreeNodeRecipe `json:"children"`
+	Parent      *TreeNodeRecipe  `json:"-"` // ← ini JANGAN ikut json biar gak circular
+	BranchCount int              `json:"-"`
 }
 
 type TreeNodeRecipe struct {

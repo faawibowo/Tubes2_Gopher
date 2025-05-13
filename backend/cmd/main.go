@@ -62,7 +62,7 @@ func main() {
 		handlers.AllowCredentials(),
 	)
 
-	log.Printf("▶ server running on http://localhost%s\n", serverPort)
+	log.Printf("▶ server started listening to %s\n", origin)
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+serverPort, cors(http.DefaultServeMux)))
 
 }
@@ -146,9 +146,9 @@ func dfsHandler(w http.ResponseWriter, r *http.Request) {
 	result := dfs.FindMultiplePathDree(
 		target,
 		req.MaxPaths,
-		graphMap,
 		time.Duration(req.DelayMs)*time.Millisecond,
-		// nil,
+		nil,
+		graphMap,
 	)
 
 	respondJSON(w, result)
