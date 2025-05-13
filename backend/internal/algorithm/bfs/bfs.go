@@ -2,7 +2,9 @@ package bfs
 
 import (
 	"runtime"
+	"sort"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/faawibowo/Tubes2_Gopher/pkg/DataStructure/Graph"
@@ -28,8 +30,8 @@ func FindMultiplePath(
 	_ map[string]*Graph.ElementGraph,
 ) BFSResult {
 	start := time.Now()
-
 	root := &Tree.TreeNodeElement{Name: target.Name}
+	root.BranchCount = 0
 	tree := &Tree.Tree{First: root}
 
 	type bfsItem struct {
@@ -42,8 +44,7 @@ func FindMultiplePath(
 	var (
 		wg        sync.WaitGroup
 		mu        sync.Mutex
-		nodeCount int
-		pathCount int
+		nodeCount int32
 		done      bool
 	)
 
@@ -61,15 +62,14 @@ func FindMultiplePath(
 		return false
 	}
 
-	queue := []bfsItem{{target, root}}
+	queue := []bfsItem{{elem: target, node: root}}
 
 	for len(queue) > 0 && !done {
 		var next []bfsItem
+		var nextMu sync.Mutex
 
 		for _, itm := range queue {
-			mu.Lock()
-			nodeCount++
-			mu.Unlock()
+			atomic.AddInt32(&nodeCount, 1)
 
 			parentTier := itm.elem.Tier
 			if len(itm.elem.Recipes) == 0 {
@@ -104,11 +104,8 @@ func FindMultiplePath(
 
 					mu.Lock()
 					parent.Children = append(parent.Children, step)
-
 					if checkFullPath(&step) {
-						pathCount++
 					}
-
 					left.Parent = &step
 					right.Parent = &step
 
@@ -117,13 +114,12 @@ func FindMultiplePath(
 						updates <- BFSResult{
 							Done:            false,
 							Tree:            cloned,
-							NodeCount:       nodeCount,
-							CompletePaths:   pathCount,
+							NodeCount:       int(atomic.LoadInt32(&nodeCount)),
+							CompletePaths:   0,
 							ExecutionTimeMs: time.Since(start).Milliseconds(),
 						}
 					}
-
-					if pathCount == maxPaths {
+					if false {
 						done = true
 						mu.Unlock()
 						return
@@ -131,20 +127,35 @@ func FindMultiplePath(
 					mu.Unlock()
 
 					if !Graph.IsLeafNode(rc.FirstElement) {
-						next = append(next, bfsItem{rc.FirstElement, left})
+						nextMu.Lock()
+						next = append(next, bfsItem{elem: rc.FirstElement, node: left})
+						nextMu.Unlock()
 					}
 					if !Graph.IsLeafNode(rc.SecondElement) {
-						next = append(next, bfsItem{rc.SecondElement, right})
+						nextMu.Lock()
+						next = append(next, bfsItem{elem: rc.SecondElement, node: right})
+						nextMu.Unlock()
 					}
-
 				}(recipe, itm.node)
 			}
 		}
-
 		wg.Wait()
 		queue = next
 	}
-	return BFSResult{}
+
+	completePaths := recalcBranchCount(root)
+	for root.BranchCount > maxPaths {
+		root.BranchCount = cutChildren(root, root.BranchCount-maxPaths)
+		completePaths = recalcBranchCount(root)
+	}
+
+	return BFSResult{
+		Tree:            tree,
+		NodeCount:       int(atomic.LoadInt32(&nodeCount)),
+		CompletePaths:   completePaths,
+		ExecutionTimeMs: time.Since(start).Milliseconds(),
+		Done:            true,
+	}
 }
 
 // =====================================BFS First Recipe=======================================
@@ -308,4 +319,101 @@ func prunePath(r *Tree.TreeNodeElement) {
 			}
 		}
 	}
+}
+
+func recalcBranchCount(n *Tree.TreeNodeElement) int {
+	if n == nil {
+		return 0
+	}
+	if len(n.Children) == 0 {
+		n.BranchCount = 1
+		return 1
+	}
+	total := 0
+	for i := range n.Children {
+		r := &n.Children[i]
+		left := recalcBranchCount(r.FirstElement)
+		right := recalcBranchCount(r.SecondElement)
+		total += left * right
+	}
+	n.BranchCount = total
+	return total
+}
+
+func cutChildren(node *Tree.TreeNodeElement, totalCut int) int {
+	if totalCut <= 0 || len(node.Children) == 0 {
+		return node.BranchCount
+	}
+
+	type prodInfo struct {
+		idx int
+		val int
+	}
+	infos := make([]prodInfo, 0, len(node.Children))
+	for i, rc := range node.Children {
+		// Only consider valid children.
+		if rc.FirstElement == nil || rc.SecondElement == nil {
+			continue
+		}
+		p := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
+		infos = append(infos, prodInfo{idx: i, val: p})
+	}
+
+	sort.Slice(infos, func(i, j int) bool { return infos[i].val > infos[j].val })
+
+	currTotal := node.BranchCount
+
+	for _, info := range infos {
+		if totalCut <= 0 {
+			break
+		}
+		rc := &node.Children[info.idx]
+		if info.val <= totalCut {
+			totalCut -= info.val
+			currTotal -= info.val
+			rc.FirstElement = nil
+			rc.SecondElement = nil
+			rc.ResultElement = nil
+			*rc = Tree.TreeNodeRecipe{}
+			continue
+		}
+
+		need := totalCut
+		if rc.FirstElement.BranchCount >= rc.SecondElement.BranchCount {
+			maxDel := rc.FirstElement.BranchCount - 1
+			wantDel := min(maxDel, (need+rc.SecondElement.BranchCount-1)/rc.SecondElement.BranchCount)
+			cutChildren(rc.FirstElement, wantDel)
+		} else {
+			maxDel := rc.SecondElement.BranchCount - 1
+			wantDel := min(maxDel, (need+rc.FirstElement.BranchCount-1)/rc.FirstElement.BranchCount)
+			cutChildren(rc.SecondElement, wantDel)
+		}
+
+		newProd := rc.FirstElement.BranchCount * rc.SecondElement.BranchCount
+		diff := info.val - newProd
+		totalCut -= diff
+		currTotal -= diff
+	}
+
+	valid := node.Children[:0]
+	for _, c := range node.Children {
+		if c.FirstElement != nil && c.SecondElement != nil &&
+			c.FirstElement.BranchCount > 0 && c.SecondElement.BranchCount > 0 {
+			valid = append(valid, c)
+		}
+	}
+	for i := len(valid); i < len(node.Children); i++ {
+		node.Children[i] = Tree.TreeNodeRecipe{}
+	}
+	node.Children = valid
+
+	node.BranchCount = currTotal
+	return currTotal
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
