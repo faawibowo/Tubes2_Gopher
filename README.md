@@ -27,7 +27,7 @@
   - Node.js dan npm.
   - Untuk panduan instalasi Node.js dan npm: https://nodejs.org/en/download/
 
-Catatan: Persyaratan hanya diperlukan jika ingin dikompilasi secara lokal dan tidak diperlukan jika mnengakses melalui web.
+Catatan: Persyaratan hanya diperlukan jika ingin dikompilasi secara lokal dan tidak diperlukan jika mengakses melalui web.
 
 ## 🛠️ Langkah-Langkah Build dan Menjalankan Aplikasi
 
@@ -76,8 +76,8 @@ Catatan: Pastikan Docker dan npm telah diinstal dan dikonfigurasi dengan benar s
 
 ## 👤 Author
 
-| Nama                   | NIM      |
-| ---------------------- | -------- |
-| Brian Ricardo Tamin    | 13523126 |
-| Nathanael Rachmat      | 13523142 |
-| Muhammad Farrel Wibowo | 13523153 |
+| Nama                   | NIM      | Kelas |
+| ---------------------- | -------- | ----- |
+| Brian Ricardo Tamin    | 13523126 | K-3   |
+| Nathanael Rachmat      | 13523142 | K-3   |
+| Muhammad Farrel Wibowo | 13523153 | K-3   |
