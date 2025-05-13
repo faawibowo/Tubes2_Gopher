@@ -1,31 +1,22 @@
-FROM golang:1.21 AS builder
+FROM golang:1.24 as builder
 
 WORKDIR /backend-build
 
-COPY . .
-
+COPY go.mod go.sum ./
 RUN go mod download
 
-RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0  go build -o api-server ./cmd/main.go
+COPY . .
 
-# Create a minimal image
-# Make workspace for the final image
-FROM alpine:latest AS monolithic
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o api-server ./cmd/main.go
 
-WORKDIR /usr/local/rest-api
+FROM alpine:latest
+
+WORKDIR /usr/local/backend
 
 RUN apk add --no-cache tzdata
 
-# EXPOSE 8080
+COPY --from=builder /backend-build/api-server .
 
-COPY --from=builder /backend-build/api-server /usr/local/rest-api
+EXPOSE 8080
 
-# Copy example config
-COPY --from=builder /backend-build/configs/config.yml.example /usr/local/rest-api/config.yml
-# Copy db migration files
-COPY --from=builder /backend-build/db /usr/local/rest-api/db
-# Copy start script
-COPY --from=builder /backend-build/scripts /usr/local/rest-api/scripts
-RUN chmod +x /usr/local/rest-api/scripts/startup/*
-
-ENTRYPOINT ["/usr/local/rest-api/api-server"]
+ENTRYPOINT ["./api-server"]

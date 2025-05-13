@@ -24,26 +24,25 @@ export interface NavItemWithOptionalChildren extends NavItem {
 export type MainNavItem = NavItemWithOptionalChildren;
 export type SidebarNavItem = NavItemWithChildren;
 
-
 export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   mainNav: [
     {
-      id: "Articles",
+      id: "Kocak",
       title: "Articles",
       items: [
         {
           id: "ArticleList",
-          href: "/article/all",
-          title: "All Articles",
-          description: "All articles on this site",
+          href: "",
+          title: "Farrel ganteng",
+          description: "omg 😎",
           items: [],
         },
         {
           id: "ArticleTags",
-          href: "/article/tags",
-          title: "Tags",
-          description: "All tags used in articles",
+          href: "",
+          title: "Brian Tamin ganteng",
+          description: "aku sayang kamu deh 😍",
           items: [],
         },
       ],
@@ -51,7 +50,7 @@ export const siteConfig = {
     {
       id: "About",
       title: "About",
-      href: "/page/about",
+      href: "",
     },
   ] satisfies MainNavItem[],
 };

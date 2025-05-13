@@ -6,8 +6,9 @@ import { cn } from "@/lib/utils";
 
 import { fontMono, fontSans, fontSerif } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/providers";
-import TailwindIndicator from "@/components/tailwind-indicator";
+// import TailwindIndicator from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
+import "./styles/Treant.css";
 
 import { env } from "@/env";
 
@@ -42,7 +43,13 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <Analytics></Analytics>
+        <Analytics />
+        <script src="/treant/vendor/raphael.js" defer />
+        <script src="/treant/Treant.min.js" defer />
+        {/* <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Fira+Mono:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap"
+        /> */}
       </head>
       <body
         className={cn(
@@ -52,10 +59,10 @@ export default function RootLayout({
           fontSerif.variable
         )}
       >
-        <TailwindIndicator />
+        {/* <TailwindIndicator /> */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
