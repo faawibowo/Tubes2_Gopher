@@ -224,7 +224,7 @@ export default function Home() {
         </PageHeaderDescription>
       </PageHeader>
 
-      <div className="mt-6 space-y-4 w-full max-w-full">
+      <div className=" space-y-0 w-full max-w-full">
         <div className="flex gap-3 items-center flex-wrap w-full max-w-full">
           <select
             value={searchType}
@@ -264,6 +264,19 @@ export default function Home() {
           >
             Generate Tree
           </button>
+          {treeData && (
+            <div className="mt-4 text-sm text-gray-600">
+              <p>
+                🧠 Nodes Explored: <strong>{stats.nodeCount}</strong>
+              </p>
+              <p>
+                🌱 Complete Paths: <strong>{stats.completePaths}</strong>
+              </p>
+              <p>
+                ⏱️ Execution Time: <strong>{stats.executionTimeMs} ms</strong>
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-3">
@@ -289,20 +302,6 @@ export default function Home() {
             />
           )}
         </div>
-
-        {treeData && (
-          <div className="mt-4 text-sm text-gray-600">
-            <p>
-              🧠 Nodes Explored: <strong>{stats.nodeCount}</strong>
-            </p>
-            <p>
-              🌱 Complete Paths: <strong>{stats.completePaths}</strong>
-            </p>
-            <p>
-              ⏱️ Execution Time: <strong>{stats.executionTimeMs} ms</strong>
-            </p>
-          </div>
-        )}
 
         {treeData ? (
           <div className="w-full max-w-full h-96 max-h-96">
